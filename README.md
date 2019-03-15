@@ -16,6 +16,7 @@ npm install
 npm run client-install
 
 # Run the client & server with concurrently
+# SVARBIAUSIA!! paleidzia reacta ir node serveri
 npm run dev
 
 # Run the Express server only

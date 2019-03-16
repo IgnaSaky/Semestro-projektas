@@ -4,7 +4,7 @@ import './Login.css';
 export default class Login extends Component {
   render() {
     return (
-      <div>
+      <React.Fragment>
           <div className="container">
                 <div className="row mt-5 mb-5">
                     <div className="col-lg-6 m-auto">
@@ -26,7 +26,7 @@ export default class Login extends Component {
                     </div>
                 </div>
             </div>
-      </div>
+      </React.Fragment>
     )
   }
 }

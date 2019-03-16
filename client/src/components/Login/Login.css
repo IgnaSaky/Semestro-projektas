@@ -10,3 +10,18 @@
     background-color: rgb(255, 0, 13);
     border-color: rgb(255, 0, 13);
 }
+.user-logo {
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    transform: translateY(-100px);
+    width: 190px;
+    height: 160px;
+    margin: 0;
+    display: flex;
+    align-self: center;
+    margin-bottom: -80px;
+}
+.fix-logo-translate {
+    margin-top: 100px;
+}
+

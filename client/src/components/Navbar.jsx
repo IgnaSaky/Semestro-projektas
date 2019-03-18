@@ -20,11 +20,20 @@ class NavBar extends Component{
                         <Link className="nav-link" to="/">Link</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link disabled" to="/" tabindex="-1" aria-disabled="true">Disabled</Link>
+                        <Link className="nav-link" to="/">Link</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/">Link</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/">Link</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link disabled" to="/" tabIndex="-1" aria-disabled="true">Disabled</Link>
                     </li>
                     </ul>
 
-                    <Link class="btn btn-outline-light" to="/" role="button">Login</Link>
+                    <Link className="btn btn-outline-light" to="/" role="button">Login</Link>
 
                 </div>
                 </nav>

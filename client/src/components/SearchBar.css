@@ -1,0 +1,14 @@
+.active-pink-4 input[type=text]:focus:not([readonly]) {
+    border: 1px solid #d71820;
+    box-shadow: 0 0 0 1px #d71820;
+}
+.active-pink-3 input[type=text] {
+    border: 1px solid #d71820;
+    box-shadow: 0 0 0 1px #d71820;
+}
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited{
+    background-color:#d71820 !important;
+    border-color: #d71820 !important;
+    border: 1px solid #d71820 !important;
+    box-shadow: 0 0 0 1px #d71820;
+}

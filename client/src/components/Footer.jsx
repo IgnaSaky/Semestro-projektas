@@ -1,10 +1,18 @@
 import React from 'react';
 import './Footer.css';
-const Footer = (props) => {
+const Footer = () => {
     return(
-    <footer className="footer mt-auto">
-    <div className="container">
-        <span className="text-muted">Footer</span>
+    <footer className="footer pt-4">
+    <div className="container pr-5 pl-5">
+        <form>
+            <div className="form-group">
+                <label for="subscribeInput" className="col-form-label col-form-label-lg text-light">Subscribe for updates</label>
+                <input type="email" className="form-control border border-white" id="subscribeInput" placeholder="Your email address"/>
+                <button className="btn btn-outline-light my-0 w-100" type="button">Sign up</button>
+            </div>
+
+
+        </form>
     </div>
     </footer>
     );

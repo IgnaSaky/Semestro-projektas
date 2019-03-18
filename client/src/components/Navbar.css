@@ -1,14 +1,14 @@
 .navbar-brand{
-    color:green;
+    color:#DADDD8;
 }
 a{
-    color: green;
+    color: #DADDD8;
 }
 a:hover{
-    color:white;
+    color:#546A76;
 }
 .bg-custom{
-    background-color: #333333;
+    background-color: #2A4057;
 }
 .custom-toggler.navbar-toggler {
     border-color: rgb(255,102,203);

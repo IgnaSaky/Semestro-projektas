@@ -23,9 +23,9 @@ class NavBar extends Component{
                         <Link className="nav-link disabled" to="/" tabindex="-1" aria-disabled="true">Disabled</Link>
                     </li>
                     </ul>
-                    <form className="form-inline mt-2 mt-md-0">
-                    <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
-                    </form>
+
+                    <Link class="btn btn-outline-light" to="/" role="button">Login</Link>
+
                 </div>
                 </nav>
             </div>

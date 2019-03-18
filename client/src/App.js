@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Customers from './components/customers';
 import Login from './components/Login/Login';
-import Modal from './components/Modal/Modal';
+
 
 class App extends Component {
   render() {
@@ -15,11 +15,7 @@ class App extends Component {
         </header>
         <Customers />
 
-        
-        <button>Prisijunkti</button>
-        <Modal>
-          <Login />
-        </Modal>
+        <Login />
       </div>
     );
   }

@@ -20,22 +20,22 @@ class MapContainer extends Component{
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="-300 0 1270 1000" preserveAspectRatio="xMidYMin" >
                     <image width="635" height="500" href={image} />
                         <g className="hover_group" opacity="0">
-                            <a href="https://example.com/link1.html">
+                            <a href="/">
                                 <circle cx="311" cy="302" r="13" opacity="0.2" fill="#FFFFFF"></circle>{/*kaunas */}
                             </a>
                         </g>
                         <g className="hover_group" opacity="0">
-                            <a href="https://example.com/link2.html">
+                            <a href="/">
                                 <circle cx="462" cy="343" r="13" opacity="0.2" fill="#FFFFFF"></circle>{/*vilnius */}
                             </a>
                         </g>
                         <g className="hover_group" opacity="0">
-                            <a href="https://example.com/link2.html">
+                            <a href="/">
                                 <circle cx="246" cy="103" r="13" opacity="0.2" fill="#FFFFFF"></circle>{/*siauliai */}
                             </a>
                         </g>
                         <g className="hover_group" opacity="0">
-                            <a href="https://example.com/link2.html">
+                            <a href="/">
                                 <circle cx="15" cy="140" r="13" opacity="0.2" fill="#FFFFFF"></circle>{/*klaipeda */}
                             </a>
                         </g>

@@ -33,7 +33,7 @@ class NavBar extends Component{
                     </li>
                     </ul>
 
-                    <Link className="btn btn-outline-light" to="/" role="button">Login</Link>
+                    <Link className="btn btn-outline-light" to="/login" role="button">Login</Link>
 
                 </div>
                 </nav>

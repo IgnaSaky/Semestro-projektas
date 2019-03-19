@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './Login.css';
 import avatar from './man.png';
+import {Link} from 'react-router-dom';
 export default class Login extends Component {
   render() {
     return (
@@ -26,7 +27,7 @@ export default class Login extends Component {
                             </div>
                             <button type="submit" className="btn btn-danger btn-block">Prisijungti</button>
                         </form>
-                        <p style={{textAlign: "left"}} className="lead mt-4">Neprisiregistravai?<a style={{textDecoration: 'none'}} href="/users/register"> Registruokis!</a></p>
+                        <p style={{textAlign: "left"}} className="lead mt-4">Neprisiregistravai?<Link style={{textDecoration: 'none'}} to="/register"> Registruokis!</Link></p>
                     </div>
                 </div>
             </div>

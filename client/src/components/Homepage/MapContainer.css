@@ -1,0 +1,20 @@
+.imageLt{
+    padding-top: 1em;
+}
+.hover_group:hover {
+    opacity: 1;
+  }
+  #projectsvg {
+    position: relative;
+    width: 100%;
+    padding-bottom: 40%;
+    vertical-align: middle;
+    margin: 0;
+    overflow: hidden;
+  }
+  #projectsvg svg {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }

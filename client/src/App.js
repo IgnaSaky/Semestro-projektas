@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import home from './pages/home.jsx';
+import LoginPage from './pages/LoginPage.jsx';
+import RegisterPage from './pages/RegisterPage.jsx';
 import './App.css';
-
-import Customers from './components/customers';
-import Login from './components/Login/Login';
-import Register from './components/Register/Register';
-
 
 class App extends Component {
   render() {

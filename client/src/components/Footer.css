@@ -1,0 +1,16 @@
+.footer{
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    height: 15rem;
+    line-height: 5rem;
+    background-color: #3b5249;
+    display: block;
+    box-shadow: 0 50vh 0 50vh #3b5249;
+}
+
+@media (min-width: 760px) {
+    .containerFooter{
+        width:50% !important;
+    }
+}

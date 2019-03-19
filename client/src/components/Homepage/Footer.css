@@ -4,9 +4,9 @@
     width: 100%;
     height: 15rem;
     line-height: 5rem;
-    background-color: #3b5249;
+    background-color: #2A4057;
     display: block;
-    box-shadow: 0 50vh 0 50vh #3b5249;
+    box-shadow: 0 50vh 0 50vh #2A4057;
 }
 
 @media (min-width: 760px) {

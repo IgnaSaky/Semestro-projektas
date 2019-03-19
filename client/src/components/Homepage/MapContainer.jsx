@@ -1,6 +1,6 @@
 import React, { Component} from 'react';
 import './MapContainer.css';
-import image from '../images/Lietuva.png';
+import image from '../../images/Lietuva.png';
 
 class MapContainer extends Component{
     render(){

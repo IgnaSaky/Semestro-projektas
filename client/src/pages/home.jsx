@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Navbar from '../components/Navbar.jsx';
-import Footer from '../components/Footer.jsx';
-import MapContainer from '../components/MapContainer.jsx';
-import SearchBar from '../components/SearchBar.jsx';
+import Navbar from '../components/Homepage/Navbar.jsx';
+import Footer from '../components/Homepage/Footer.jsx';
+import MapContainer from '../components/Homepage/MapContainer.jsx';
+import SearchBar from '../components/Homepage/SearchBar.jsx';
 import Background from '../containers/Background.jsx';
 
 class home extends Component{

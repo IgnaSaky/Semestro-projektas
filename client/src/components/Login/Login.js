@@ -2,7 +2,17 @@ import React, { Component } from 'react'
 import './Login.css';
 import avatar from './man.png';
 import {Link} from 'react-router-dom';
+import axios from 'axios';
+
 export default class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+      rememberMe: ''
+    }
+  }
   render() {
     return (
       <React.Fragment>
@@ -11,7 +21,7 @@ export default class Login extends Component {
                 <div className="col-lg-5 m-auto">
                     <div className="card card-body fix-logo-translate">
                         <img className="user-logo" src={avatar} alt='user icon'/>
-                        <h1 className="text-center mb-3"><i class="fas fa-sign-in-alt"></i> Prisijunk!</h1>
+                        <h1 className="text-center mb-3"><i className="fas fa-sign-in-alt"></i> Prisijunk!</h1>
                         <form action="" method="POST">
                             <div className="form-group">
                                 <label htmlFor="email">El. paštas</label>
@@ -21,9 +31,9 @@ export default class Login extends Component {
                                 <label htmlFor="password">Slaptažodis</label>
                                 <input type="password" id="password" name="password" className="form-control" placeholder="Slaptažodis"/>
                             </div>
-                            <div class="form-group form-check">
-                              <input type="checkbox" class="form-check-input" id='rememberMe'/>
-                              <label class="form-check-label" for="rememberMe">Prisiminti mane</label>
+                            <div className="form-group form-check">
+                              <input type="checkbox" className="form-check-input" id='rememberMe'/>
+                              <label className="form-check-label" for="rememberMe">Prisiminti mane</label>
                             </div>
                             <button type="submit" className="btn btn-danger btn-block">Prisijungti</button>
                         </form>

@@ -6,7 +6,7 @@ export default class Register extends Component {
   render() {
     return (
         <div className="container">
-            <div className="row mt-5">
+            <div className="row mt-5 mb-5">
                 <div className="col-lg-5 col-md-8 m-auto">
                     <div className="card card-body fix-logo-translate">
                         <img className='user-logo' src={Avatar} alt="avatar"/>

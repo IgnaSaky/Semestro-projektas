@@ -12,7 +12,7 @@ export default class Register extends Component {
                         <img className='user-logo' src={Avatar}/>
                         <h1 className="text-center mb-3">Registruokis!</h1>
                         <form action="" method="POST">
-                            <div className="form-group">
+                           <div className="form-group">
                                 <label for="name">Vartotojo vardas</label>
                                 <input type="text" name="username" className="form-control" placeholder="Vartotojo vardas"/>
                             </div>

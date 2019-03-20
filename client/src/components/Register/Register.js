@@ -16,6 +16,7 @@ export default class Register extends Component {
         this.handleEmail = this.handleEmail.bind(this);
         this.handlePassword1 = this.handlePassword1.bind(this);
         this.handlePassword2 = this.handlePassword2.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleUsername(e) {
         this.setState({username: e.target.value});
@@ -31,23 +32,25 @@ export default class Register extends Component {
     }
     handleSubmit(e){
         e.preventDefault();
+        
+        const {username, email, password1, password2} = this.state;
         const data = {
-            username: this.state.username,
-            email: this.state.email,
-            password1: this.state.password1,
-            password2: this.state.password2
+            username,
+            email,
+            password1,
+            password2
         }
 
         axios.post('http://localhost:5000/api/auth/register', data)
         .then(res => console.log(res.data))
         .catch(err => console.log(err));
 
-        /*this.setState({
+        this.setState({
             username: '',
             email: '',
             password1: '',
             password2: ''
-        });*/
+        });
     }
     render() {
         return (

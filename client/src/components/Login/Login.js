@@ -9,17 +9,15 @@ export default class Login extends Component {
     super();
 
     this.state = {
-      email: 'kasdasd',
-      password: 'asdasdasd',
+      email: '',
+      password: '',
       rememberMe: false
     };
   }
+
   onChangeEmail(e) {
     this.setState({email:e.target.value});
   }
-  /*onChangeEmail = (e) => {
-    this.setState({email: e.target.value})
-  }*/
   onChangePassword = (e) => {
     this.setState({password:e.target.value});
   }
@@ -32,15 +30,15 @@ export default class Login extends Component {
     axios.post('http://localhost:5000/api/auth/login', data)
     //.then(res => console.log(res.data))
     .catch(err => console.log(err));
-   /* this.setState({
+
+    this.setState({
       email: '',
       password: ''
-    });*/
+    });
   }
   render() {
     return (
-      <React.Fragment>
-          <div className="container">
+        <div className="container">
           <h4>{this.state.email}</h4>
             <div className="row mt-5 mb-5">
                 <div className="col-lg-5 m-auto">
@@ -67,7 +65,6 @@ export default class Login extends Component {
                 </div>
             </div>
         </div>
-      </React.Fragment>
     )
   }
 }

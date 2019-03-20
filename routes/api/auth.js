@@ -8,8 +8,8 @@ router.post('/login', (req,res) => {
 });
 
 router.post('/register', (req, res) => {
-
-    res.send('login post route trigerred');
+    console.log(req.body);
+    res.send('register post route trigerred');
 });
 
 module.exports = router;

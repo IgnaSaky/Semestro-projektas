@@ -18,8 +18,8 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "concurrently": "^3.5.1",
+    "cors": "^2.8.5",
     "express": "^4.16.2",
-    "method-override": "^3.0.0",
-    "react-router-dom": "^4.4.0"
+    "method-override": "^3.0.0"
   }
 }

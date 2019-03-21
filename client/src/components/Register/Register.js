@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Avatar from './images.png';
 import axios from 'axios';
 
@@ -18,18 +18,18 @@ export default class Register extends Component {
         this.handlePassword2 = this.handlePassword2.bind(this);
     }
     handleUsername(e) {
-        this.setState({username: e.target.value});
+        this.setState({ username: e.target.value });
     }
     handleEmail(e) {
-        this.setState({email: e.target.value});
+        this.setState({ email: e.target.value });
     }
     handlePassword1(e) {
-        this.setState({password1: e.target.value});
+        this.setState({ password1: e.target.value });
     }
     handlePassword2(e) {
-        this.setState({password2: e.target.value});
+        this.setState({ password2: e.target.value });
     }
-    handleSubmit(e){
+    handleSubmit = (e) => {
         e.preventDefault();
         const data = {
             username: this.state.username,
@@ -39,49 +39,45 @@ export default class Register extends Component {
         }
 
         axios.post('http://localhost:5000/api/auth/register', data)
-        .then(res => console.log(res.data))
-        .catch(err => console.log(err));
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err));
 
-        /*this.setState({
+        this.setState({
             username: '',
             email: '',
             password1: '',
             password2: ''
-        });*/
+        });
     }
     render() {
         return (
             <div className="container">
-                    <h4>{this.state.username}</h4>
-                    <h4>{this.state.email}</h4>
-                    <h4>{this.state.password1}</h4>
-                    <h4>{this.state.password2}</h4>
                 <div className="row mt-5 mb-5">
                     <div className="col-lg-5 col-md-8 m-auto">
                         <div className="card card-body fix-logo-translate">
-                            <img className='user-logo' src={Avatar} alt="avatar"/>
+                            <img className='user-logo' src={Avatar} alt="avatar" />
                             <h1 className="text-center mb-3">Registruokis!</h1>
                             <form onSubmit={this.handleSubmit} action="" method="POST">
-                            <div className="form-group">
+                                <div className="form-group">
                                     <label htmlFor="name">Vartotojo vardas</label>
-                                    <input onChange={this.handleUsername} type="text" name="username" className="form-control" placeholder="Vartotojo vardas"/>
+                                    <input onChange={this.handleUsername} type="text" name="username" className="form-control" placeholder="Vartotojo vardas" />
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="email">El. pašto adresas</label>
-                                    <input onChange={this.handleEmail} type="email" name="email" className="form-control" placeholder="El. paštas"/>
+                                    <input onChange={this.handleEmail} type="email" name="email" className="form-control" placeholder="El. paštas" />
                                     <small id="emailHelp" className="form-text text-muted">Jūsų el. paštas nebus niekur naudojamas</small>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="password">Slaptažodis</label>
-                                    <input onChange={this.handlePassword1} type="password" name="password" className="form-control" placeholder="Slaptažodis"/>
+                                    <input onChange={this.handlePassword1} type="password" name="password" className="form-control" placeholder="Slaptažodis" />
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="password2">Patvirtinti slaptažodį</label>
-                                    <input onChange={this.handlePassword2} type="password" id="password2" name="password2" className="form-control" placeholder="Pakartokite slaptažodį"/>
+                                    <input onChange={this.handlePassword2} type="password" id="password2" name="password2" className="form-control" placeholder="Pakartokite slaptažodį" />
                                 </div>
                                 <button type="submit" className="btn btn-danger btn-block">Registruotis</button>
                             </form>
-                            <p style={{textAlign: 'left'}} className="lead mt-4">Jau užsiregistravęs? <Link to="/login"> Prisijungti</Link></p>
+                            <p style={{ textAlign: 'left' }} className="lead mt-4">Jau užsiregistravęs? <Link to="/login"> Prisijungti</Link></p>
                         </div>
                     </div>
                 </div>

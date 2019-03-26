@@ -21,9 +21,9 @@ export default class Login extends Component {
                                 <label htmlFor="password">Slaptažodis</label>
                                 <input type="password" id="password" name="password" className="form-control" placeholder="Slaptažodis"/>
                             </div>
-                            <div class="form-group form-check">
-                              <input type="checkbox" class="form-check-input" id='rememberMe'/>
-                              <label class="form-check-label" for="rememberMe">Prisiminti mane</label>
+                            <div className="form-group form-check">
+                              <input type="checkbox" className="form-check-input" id='rememberMe'/>
+                              <label className="form-check-label" for="rememberMe">Prisiminti mane</label>
                             </div>
                             <button type="submit" className="btn btn-danger btn-block">Prisijungti</button>
                         </form>

@@ -36,6 +36,9 @@ export default class Login extends Component {
       password: ''
     });
   }
+  resetForm = () =>{
+    document.getElementById("loginForm").reset();
+  }
   render() {
     return (
       <React.Fragment>
@@ -45,7 +48,7 @@ export default class Login extends Component {
               <div className="card card-body fix-logo-translate">
                 <img className="user-logo" src={avatar} alt='user icon' />
                 <h1 className="text-center mb-3"><i className="fas fa-sign-in-alt"></i> Prisijunk!</h1>
-                <form onSubmit={this.onSubmit} action="" method="POST">
+                <form onSubmit={this.onSubmit} action="" method="POST" id="loginForm">
                   <div className="form-group">
                     <label htmlFor="email">El. paštas</label>
                     <input onChange={this.onChangeEmail} type="email" name="email" className="form-control" placeholder="El. pašto adresas" />
@@ -58,7 +61,7 @@ export default class Login extends Component {
                     <input type="checkbox" className="form-check-input" id='rememberMe' />
                     <label className="form-check-label" htmlFor="rememberMe">Prisiminti mane</label>
                   </div>
-                  <button type="submit" className="btn btn-danger btn-block">Prisijungti</button>
+                  <button type="submit" className="btn btn-danger btn-block" onClick={this.resetForm}>Prisijungti</button>
                 </form>
                 <p style={{ textAlign: "left" }} className="lead mt-4">Neprisiregistravai?<Link style={{ textDecoration: 'none' }} to="/register"> Registruokis!</Link></p>
               </div>

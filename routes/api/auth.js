@@ -24,7 +24,6 @@ router.post('/login', (req, res) => {
 });
 
 
-
 router.post('/register', (req, res) => {
     connection.query("SELECT * FROM purchaser WHERE userName = ? ", [req.body.username], function (err, rows) {
         if (err) {

@@ -49,6 +49,9 @@ export default class Register extends Component {
             password2: ''
         });
     }
+    resetForm = () =>{
+        document.getElementById("registerForm").reset();
+      }
     render() {
         return (
             <div className="container">
@@ -57,7 +60,7 @@ export default class Register extends Component {
                         <div className="card card-body fix-logo-translate">
                             <img className='user-logo' src={Avatar} alt="avatar" />
                             <h1 className="text-center mb-3">Registruokis!</h1>
-                            <form onSubmit={this.handleSubmit} action="" method="POST">
+                            <form onSubmit={this.handleSubmit} action="" method="POST" id="registerForm">
                                 <div className="form-group">
                                     <label htmlFor="name">Vartotojo vardas</label>
                                     <input onChange={this.handleUsername} type="text" name="username" className="form-control" placeholder="Vartotojo vardas" />
@@ -75,7 +78,7 @@ export default class Register extends Component {
                                     <label htmlFor="password2">Patvirtinti slaptažodį</label>
                                     <input onChange={this.handlePassword2} type="password" id="password2" name="password2" className="form-control" placeholder="Pakartokite slaptažodį" />
                                 </div>
-                                <button type="submit" className="btn btn-danger btn-block">Registruotis</button>
+                                <button type="submit" className="btn btn-danger btn-block" onClick={this.resetForm}>Registruotis</button>
                             </form>
                             <p style={{ textAlign: 'left' }} className="lead mt-4">Jau užsiregistravęs? <Link to="/login"> Prisijungti</Link></p>
                         </div>

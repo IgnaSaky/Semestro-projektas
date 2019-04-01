@@ -45,7 +45,7 @@ router.post('/register', (req, res) => {
                 return console.log("Vartotojas sukurtas.");
             })
         }
-    })
+    });
 });
 
 

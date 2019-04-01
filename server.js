@@ -1,3 +1,6 @@
+const db = require('./config/sequelize');
+db.authenticate().then(() => console.log('database connected')).catch((err) => console.log(err))
+
 const express = require('express'); // importina express frameworka
 const app = express();
 const bodyParser = require('body-parser');
@@ -12,6 +15,9 @@ app.use(cors())
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));  // Kad butu galima i ta pati route siusti GET POST PUT ir DELETE requestus
+
+
+
 
 
 

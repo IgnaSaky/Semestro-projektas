@@ -23,11 +23,6 @@ router.post('/login', (req, res) => {
     });
 });
 
-<<<<<<< HEAD
-router.post('/register', (req, res) => {
-    console.log(req.body);
-    res.send('register post route trigerred');
-=======
 
 router.post('/register', (req, res) => {
     connection.query("SELECT * FROM purchaser WHERE userName = ? ", [req.body.username], function (err, rows) {
@@ -47,7 +42,6 @@ router.post('/register', (req, res) => {
             })
         }
     })
->>>>>>> bf281c29301ef8c2499d8e02171a0d4cf3985b0b
 });
 
 

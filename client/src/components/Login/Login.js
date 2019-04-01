@@ -14,14 +14,8 @@ export default class Login extends Component {
       rememberMe: false
     };
   }
-<<<<<<< HEAD
-
-  onChangeEmail(e) {
-    this.setState({email:e.target.value});
-=======
   onChangeEmail = (e) => {
     this.setState({ email: e.target.value });
->>>>>>> bf281c29301ef8c2499d8e02171a0d4cf3985b0b
   }
   onChangePassword = (e) => {
     this.setState({ password: e.target.value });
@@ -33,54 +27,17 @@ export default class Login extends Component {
       password: this.state.password
     }
     axios.post('http://localhost:5000/api/auth/login', data)
-<<<<<<< HEAD
-    //.then(res => console.log(res.data))
-    .catch(err => console.log(err));
-
-=======
     .then(res => console.log(res.data)).catch(err => console.log(err));
->>>>>>> bf281c29301ef8c2499d8e02171a0d4cf3985b0b
     this.setState({
       email: '',
       password: ''
     });
-<<<<<<< HEAD
-  }
-  render() {
-    return (
-        <div className="container">
-          <h4>{this.state.email}</h4>
-            <div className="row mt-5 mb-5">
-                <div className="col-lg-5 m-auto">
-                    <div className="card card-body fix-logo-translate">
-                        <img className="user-logo" src={avatar} alt='user icon'/>
-                        <h1 className="text-center mb-3"><i className="fas fa-sign-in-alt"></i> Prisijunk!</h1>
-                        <form onSubmit={this.onSubmit} action="" method="POST">
-                            <div className="form-group">
-                                <label htmlFor="email">El. paštas</label>
-                                <input onChange={this.onChangeEmail.bind(this)} type="email" name="email" className="form-control" placeholder="El. pašto adresas"/>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="password">Slaptažodis</label>
-                                <input onChange={this.onChangePassword} type="password" id="password" name="password" className="form-control" placeholder="Slaptažodis"/>
-                            </div>
-                            <div className="form-group form-check">
-                              <input type="checkbox" className="form-check-input" id='rememberMe'/>
-                              <label className="form-check-label" htmlFor="rememberMe">Prisiminti mane</label>
-                            </div>
-                            <button type="submit" className="btn btn-danger btn-block">Prisijungti</button>
-                        </form>
-                        <p style={{textAlign: "left"}} className="lead mt-4">Neprisiregistravai?<Link style={{textDecoration: 'none'}} to="/register"> Registruokis!</Link></p>
-                    </div>
-                </div>
-=======
   }
   resetForm = () =>{
     document.getElementById("loginForm").reset();
   }
   render() {
     return (
-      <React.Fragment>
         <div className="container">
           <div className="row mt-5 mb-5">
             <div className="col-lg-5 m-auto">
@@ -104,7 +61,6 @@ export default class Login extends Component {
                 </form>
                 <p style={{ textAlign: "left" }} className="lead mt-4">Neprisiregistravai?<Link style={{ textDecoration: 'none' }} to="/register"> Registruokis!</Link></p>
               </div>
->>>>>>> bf281c29301ef8c2499d8e02171a0d4cf3985b0b
             </div>
           </div>
         </div>

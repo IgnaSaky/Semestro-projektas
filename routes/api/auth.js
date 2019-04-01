@@ -3,8 +3,12 @@ const mysql = require('mysql');
 const router = express.Router({ mergeParams: true });
 const dbconfig = require('../../config/database');
 const connection = mysql.createConnection(dbconfig.connection);
-connection.query('USE ' + dbconfig.database);
-
+//connection.query('USE ' + dbconfig.database); Kodėl reikia?
+connection.connect((err) => {
+    if (err) {
+        console.log(err);
+    }
+})
 
 router.post('/login', (req, res) => {
     connection.query("SELECT * FROM purchaser WHERE email = ? ", [req.body.email], function (err, rows) {
@@ -25,7 +29,7 @@ router.post('/login', (req, res) => {
 
 
 router.post('/register', (req, res) => {
-    connection.query("SELECT * FROM purchaser WHERE userName = ? ", [req.body.username], function (err, rows) {
+    connection.query("SELECT * FROM user WHERE username = ? ", [req.body.username], function (err, rows) {
         if (err) {
             throw err;
         }
@@ -36,7 +40,7 @@ router.post('/register', (req, res) => {
             return console.log("Slaptazodziai neatitinka.");
         } else {
             const today = new Date();
-            connection.query("INSERT INTO purchaser (email, password, userName, created) values (?, ?, ?, ?)", [req.body.email, req.body.password1, req.body.username, today],
+            connection.query("INSERT INTO user (email, password, username, created) values (?, ?, ?, ?)", [req.body.email, req.body.password1, req.body.username, today],
             function (err, rows) {
                 return console.log("Vartotojas sukurtas.");
             })

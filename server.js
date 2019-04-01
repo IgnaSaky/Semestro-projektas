@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const cors = require('cors');
+const mysql = require('mysql');
 const customerRoutes = require('./routes/api/customers') //importina routes is routes/api
 const authRoutes = require('./routes/api/auth');
 

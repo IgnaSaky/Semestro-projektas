@@ -1,9 +1,10 @@
 module.exports = {
-    'connection':{
-     'host':'localhost',
-     'user':'root',
-     'password':''
+    connection:{
+     host:'localhost',
+     user:'root',
+     password:'',
+     database:'semstroprojektas'
     },
-    'database':'semestroprojektas',
-    'user_table':'purchaser'
+    database:'semestroprojektas',
+    user_table:'purchaser'
    }

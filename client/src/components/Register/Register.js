@@ -52,9 +52,9 @@ export default class Register extends Component {
             password2: ''
         });
     }
-    resetForm = () =>{
+   /* resetForm = () =>{
         document.getElementById("registerForm").reset();
-      }
+    }*/
     render() {
         return (
             <div className="container">

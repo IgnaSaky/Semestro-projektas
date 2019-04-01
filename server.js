@@ -1,22 +1,36 @@
-const db = require('./config/sequelize');
-db.authenticate().then(() => console.log('database connected')).catch((err) => console.log(err))
+
 
 const express = require('express'); // importina express frameworka
 const app = express();
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const cors = require('cors');
-const mysql = require('mysql');
 const customerRoutes = require('./routes/api/customers') //importina routes is routes/api
 const authRoutes = require('./routes/api/auth');
+//const db = require('./config/sequelize');
 
+
+const passport = require('passport');
+const session = require('express-session');
 // Tokiu nesamoniu zinot nereikia. Paimta is express docs. Ju reikia kad butu galima extractint data is formu
 app.use(cors())
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));  // Kad butu galima i ta pati route siusti GET POST PUT ir DELETE requestus
 
-
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+  })
+);  
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(function(req, res, next){
+    res.locals.currentUser = req.user;
+    next();
+});
 
 
 

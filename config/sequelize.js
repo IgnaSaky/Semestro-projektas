@@ -4,6 +4,7 @@ const Sequelize = require('sequelize');
 module.exports = new Sequelize('semstroprojektas', 'root', '', {
   host: 'localhost',
   dialect: 'mysql',
+  
   pool: {
     max: 5,
     min: 0,

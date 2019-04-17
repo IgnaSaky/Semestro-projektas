@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 export default class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       email: '',
@@ -22,12 +22,16 @@ export default class Login extends Component {
   }
   onSubmit = (e) => {
     e.preventDefault();
+
+    const {email, password} = this.state;
+   
     const data = {
-      email: this.state.email,
-      password: this.state.password
+      email,
+      password
     }
-    axios.post('http://localhost:5000/api/auth/login', data)
-    .then(res => console.log(res.data)).catch(err => console.log(err));
+    axios.post('/api/auth/login', data)
+      .catch(err => console.log(err));
+    
     this.setState({
       email: '',
       password: ''
@@ -44,7 +48,7 @@ export default class Login extends Component {
               <div className="card card-body fix-logo-translate">
                 <img className="user-logo" src={avatar} alt='user icon' />
                 <h1 className="text-center mb-3"><i className="fas fa-sign-in-alt"></i> Prisijunk!</h1>
-                <form onSubmit={this.onSubmit} action="" method="POST" id="loginForm">
+                <form onSubmit={this.onSubmit} method="POST" id="loginForm">
                   <div className="form-group">
                     <label htmlFor="email">El. paštas</label>
                     <input onChange={this.onChangeEmail} type="email" name="email" className="form-control" placeholder="El. pašto adresas" />

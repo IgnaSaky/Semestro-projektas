@@ -4,7 +4,5 @@ module.exports = {
      user:'root',
      password:'',
      database:'semstroprojektas'
-    },
-    //database:'semstroprojektas',
-    user_table:'purchaser'
+    }
 }

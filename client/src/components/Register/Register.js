@@ -30,7 +30,7 @@ export default class Register extends Component {
     handlePassword2(e) {
         this.setState({ password2: e.target.value });
     }
-    handleSubmit = (e) => {
+    handleSubmit(e) {
         e.preventDefault();
         
         const {username, email, password1, password2} = this.state;
@@ -40,10 +40,9 @@ export default class Register extends Component {
             password1,
             password2
         }
-
-        axios.post('http://localhost:5000/api/auth/register', data)
-            .then(res => console.log(res.data))
-            .catch(err => console.log(err));
+        
+        axios.post('/api/auth/register', data)
+            .catch((err) => console.log(err));
 
         this.setState({
             username: '',

@@ -1,38 +1,38 @@
 const express = require('express');
-//const db = require('../../config/sequelize');
-const User = require('../../models/User');
 const mysql = require('mysql');
 const router = express.Router({ mergeParams: true });
 const dbconfig = require('../../config/database');
 const db = mysql.createConnection(dbconfig.connection);
-
-const bcrypt = require('bcryptjs');
-const passport = require('passport');
-//connection.query('USE ' + dbconfig.database); Kodėl reikia?
 db.connect((err) => {
     if (err) {
         console.log(err);
     }
+    console.log('Connected to DB');
 });
+const bcrypt = require('bcryptjs');
+const passport = require('passport');
+//connection.query('USE ' + dbconfig.database); Kodėl reikia?
 
-
-router.post('/login', (req, res) => {
-    db.query("SELECT * FROM user WHERE email = ? ", [req.body.email], function (err, rows) {
-        if (err) {
-            throw err;
-        }
-        if (!rows.length) {
-            return console.log("Neteisingas emailas");
-        }
-        if (req.body.password != rows[0].password) {
-            console.log("Neteisingas slaptazodis.");
-        }
-        else {
-            console.log("Prisijungta.");
-        }
-    });
+router.get('/getUsers' , (req,res) => {
+  db.query('SELECT * FROM users', (err, values) => {
+    res.json(values);
+  });
+  
 });
-
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local', {
+      //successRedirect: '/',
+      //failureRedirect: '/users/login',
+    })(req, res, next);
+  });
+  
+  router.get('/logout', (req, res) => {
+    req.logout();
+    
+    //res.redirect('/users/login');
+    res.json('Atsijungta');
+  });
+  
 
 router.post('/register', (req, res) => {
     const { username, email, password1, password2 } = req.body;
@@ -50,9 +50,9 @@ router.post('/register', (req, res) => {
     if (errors && errors.length > 0) {
       res.json(errors);   
     } else {
-        const query = 'SELECT * FROM user WHERE email = ? OR username = ?';
+        const query = 'SELECT * FROM users WHERE email = ? OR username = ?';
         db.query(query, [email, username], (err,rows) => {
-            if(rows.length > 0) {
+            if(rows && rows.length > 0) {
                 errors.push({ msg: 'El. pašto adresas arba vartotojo vardas jau naudojamas' });
                 res.json(errors);
             } else {
@@ -67,11 +67,12 @@ router.post('/register', (req, res) => {
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
                     if (err) throw err;
                     newUser.password = hash;
-                    const insertQuery = 'INSERT INTO user SET ?';
+                    const insertQuery = 'INSERT INTO users SET ?';
                     db.query(insertQuery, newUser, (err, rows) => {
                         const msg = [];
                         if(err) {
-                            msg.push('Įvyko klaida. Pabandykite dar kartą');
+                            //msg.push('Įvyko klaida. Pabandykite dar kartą');
+                            msg.push(err.message);
                             res.json(msg);
                         } else {
                             msg.push('Registracija sėkminga');
@@ -79,14 +80,11 @@ router.post('/register', (req, res) => {
                             res.json(msg);
                         }
                     });
-                    
-                    });
                 });
-            }
-        });
-        
-        
-    }
+            });
+        }
+    });      
+}
 });
 
 

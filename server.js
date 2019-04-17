@@ -1,5 +1,3 @@
-
-
 const express = require('express'); // importina express frameworka
 const app = express();
 const bodyParser = require('body-parser');
@@ -7,7 +5,6 @@ const methodOverride = require('method-override');
 const cors = require('cors');
 const customerRoutes = require('./routes/api/customers') //importina routes is routes/api
 const authRoutes = require('./routes/api/auth');
-//const db = require('./config/sequelize');
 
 
 const passport = require('passport');
@@ -18,15 +15,20 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));  // Kad butu galima i ta pati route siusti GET POST PUT ir DELETE requestus
 
+//PASSPORT
+require('./config/passport')(passport);
+
+
 app.use(session({
-    secret: 'secret',
-    resave: true,
-    saveUninitialized: true
-  })
+      secret: 'secret',
+      resave: true,
+      saveUninitialized: true
+    })
 );  
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
     next();

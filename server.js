@@ -2,6 +2,7 @@ const express = require('express'); // importina express frameworka
 const app = express();
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+const morgan = require('morgan');
 const cors = require('cors');
 const customerRoutes = require('./routes/api/customers') //importina routes is routes/api
 const authRoutes = require('./routes/api/auth');
@@ -14,15 +15,15 @@ app.use(cors())
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));  // Kad butu galima i ta pati route siusti GET POST PUT ir DELETE requestus
-
+app.use(morgan('dev')); //logger
 //PASSPORT
 require('./config/passport')(passport);
 
 
 app.use(session({
       secret: 'secret',
-      resave: true,
-      saveUninitialized: true
+      resave: false,
+      saveUninitialized: false
     })
 );  
 // Passport middleware

@@ -11,7 +11,8 @@ export default class Login extends Component {
     this.state = {
       email: '',
       password: '',
-      rememberMe: false
+      rememberMe: false,
+      redirectTo: ''
     };
   }
   onChangeEmail = (e) => {
@@ -24,13 +25,21 @@ export default class Login extends Component {
     e.preventDefault();
 
     const {email, password} = this.state;
-   
-    const data = {
-      email,
-      password
-    }
-    axios.post('/api/auth/login', data)
-      .catch(err => console.log(err));
+  
+    axios.post('/api/auth/login', {
+      email: email,
+      password: password
+    })
+    .then(response => {
+      console.log(response);
+      if (response.data) {
+        console.log("successful sign in");
+        this.setState({redirectTo: '/'})
+      } else {
+        console.log("sign in error");
+      }
+    })
+    .catch(err => console.log(err));
     
     this.setState({
       email: '',

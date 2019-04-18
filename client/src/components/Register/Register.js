@@ -75,7 +75,7 @@ export default class Register extends Component {
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="password">Slaptažodis</label>
-                                    <input onChange={this.handlePassword1} type="password" name="password" className="form-control" placeholder="Slaptažodis" />
+                                    <input onChange={this.handlePassword1} type="password" name="password1" className="form-control" placeholder="Slaptažodis" />
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="password2">Patvirtinti slaptažodį</label>

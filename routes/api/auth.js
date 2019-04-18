@@ -3,35 +3,44 @@ const mysql = require('mysql');
 const router = express.Router({ mergeParams: true });
 const dbconfig = require('../../config/database');
 const db = mysql.createConnection(dbconfig.connection);
-db.connect((err) => {
+/*db.connect((err) => {
     if (err) {
         console.log(err);
     }
     console.log('Connected to DB');
-});
+});*/
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 //connection.query('USE ' + dbconfig.database); Kodėl reikia?
 
-router.get('/getUsers' , (req,res) => {
-  db.query('SELECT * FROM users', (err, values) => {
-    res.json(values);
-  });
-  
+router.get('/user', (req, res, next) => {
+	if (req.user) {
+		return res.json({ user: req.user })
+	} else {
+		return res.json({ user: null })
+	}
 });
-router.post('/login', (req, res, next) => {
-    passport.authenticate('local', {
-      //successRedirect: '/',
-      //failureRedirect: '/users/login',
-    })(req, res, next);
-  });
+router.post('/login', passport.authenticate('local'),(req, res) => {
+		console.log('POST to /login')
+		const user = JSON.parse(JSON.stringify(req.user)) // hack
+		const cleanUser = Object.assign({}, user)
+		if (cleanUser.local) {
+			console.log(`Deleting ${cleanUser.local.password}`)
+			delete cleanUser.local.password
+		}
+		res.json({ user: cleanUser })
+	}
+)
   
-  router.get('/logout', (req, res) => {
-    req.logout();
-    
-    //res.redirect('/users/login');
-    res.json('Atsijungta');
-  });
+router.post('/logout', (req, res) => {
+	if (req.user) {
+		req.session.destroy()
+		res.clearCookie('connect.sid') // clean up!
+		return res.json({ msg: 'Atsijsungėte' })
+	} else {
+		return res.json({ msg: 'Jūs nesate prisijungęs' })
+	}
+})
   
 
 router.post('/register', (req, res) => {

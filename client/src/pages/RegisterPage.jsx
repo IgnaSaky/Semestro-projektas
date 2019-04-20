@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Register from '../components/Register/Register';
+import Register from '../components/Register/Register.jsx';
 import NavBar from '../components/Homepage/Navbar';
 
 class RegisterPage extends Component{

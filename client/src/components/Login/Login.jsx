@@ -12,7 +12,7 @@ export default class Login extends Component {
       email: '',
       password: '',
       rememberMe: false,
-      redirectTo: ''
+      redirectTo: null
     };
   }
   onChangeEmail = (e) => {

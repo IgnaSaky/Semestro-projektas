@@ -21,12 +21,11 @@ router.get('/user', (req, res, next) => {
 	}
 });
 router.post('/login', passport.authenticate('local'),(req, res) => {
-		console.log('POST to /login')
 		const user = JSON.parse(JSON.stringify(req.user)) // hack
 		const cleanUser = Object.assign({}, user)
-		if (cleanUser.local) {
-			console.log(`Deleting ${cleanUser.local.password}`)
-			delete cleanUser.local.password
+		if (cleanUser.password) {
+			console.log(`Deleting ${cleanUser.password}`)
+			delete cleanUser.password
 		}
 		res.json({ user: cleanUser })
 	}
@@ -57,7 +56,7 @@ router.post('/register', (req, res) => {
       errors.push({ msg: 'Password must be at least 6 characters' });
     }
     if (errors && errors.length > 0) {
-      res.json(errors);   
+      res.status(400).json(errors);   
     } else {
         const query = 'SELECT * FROM users WHERE email = ? OR username = ?';
         db.query(query, [email, username], (err,rows) => {
@@ -78,15 +77,15 @@ router.post('/register', (req, res) => {
                     newUser.password = hash;
                     const insertQuery = 'INSERT INTO users SET ?';
                     db.query(insertQuery, newUser, (err, rows) => {
-                        const msg = [];
+                        //const success = [];
                         if(err) {
-                            //msg.push('Įvyko klaida. Pabandykite dar kartą');
-                            msg.push(err.message);
-                            res.json(msg);
+                            errors.push({msg:'Įvyko klaida. Pabandykite dar kartą'});
+                            
+                            res.json(errors);
                         } else {
-                            msg.push('Registracija sėkminga');
+                           
                             //res.redirect('/login')
-                            res.json(msg);
+                            res.json({success: 'Registracija sėkminga', redirectTo: '/'});
                         }
                     });
                 });

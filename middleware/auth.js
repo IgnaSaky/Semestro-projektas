@@ -6,7 +6,7 @@ auth.isLoggedIn = function (req,res,next) {
     }
     else {
         //res.redirect('/users/login');
-        res.json('Pirmiau turite prisijungti');
+        res.json({authError: 'Pirmiau turite prisijungti'});
     }
 }
 module.exports = auth;

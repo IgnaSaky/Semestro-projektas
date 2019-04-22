@@ -8,22 +8,21 @@ module.exports = function(passport) {
     passport.use(
       new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
         // Match user
-        
+        errors = [];
         db.query('SELECT * FROM users WHERE email = ?', [email], (err, rows) =>{
-            if (!rows[0]) {
+            if (!rows[0]) {     
               console.log('Vartotojas su tokiu el. pašto adresu neegzistuoja');
-              
-              return done(null, false, { message: 'Vartotojas su tokiu el. pašto adresu neegzistuoja' });
+              return done(errors, false, { message: 'Vartotojas su tokiu el. pašto adresu neegzistuoja' });
             } 
             else {
                 bcrypt.compare(password, rows[0].password, (err, isMatch) => {
                     if (err) throw console.log(err.message);
                     if (isMatch) {
-                      console.log('Viskas OK');
-                      console.log(rows[0]);
+                      console.log("viskas OK");
                       return done(null, rows[0]);
                     } else {
                       console.log("blogas passwd");
+                       
                       return done(null, false, { message: 'Klaidingas slaptažodis' });
                     }
                 });
@@ -39,12 +38,12 @@ passport.serializeUser(function(user, done) {
 });
 
   passport.deserializeUser(function(id, done) {
-      db.connect();
+      
       db.query('SELECT * FROM user WHERE id = ?',[id], (err, rows) => {
         if(!err && rows) {
           done(err,rows[0])
         }
       });
-      db.end();
+      
       });
 };

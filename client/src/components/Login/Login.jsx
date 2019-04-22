@@ -3,6 +3,7 @@ import './Login.css';
 import avatar from './man.png';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { setInStorage} from '../../utils/storage';
 
 export default class Login extends Component {
   constructor(props) {
@@ -12,7 +13,6 @@ export default class Login extends Component {
       email: '',
       password: '',
       rememberMe: false,
-      redirectTo: null
     };
   }
   onChangeEmail = (e) => {
@@ -27,28 +27,23 @@ export default class Login extends Component {
     const {email, password} = this.state;
   
     axios.post('/api/auth/login', {
-      email: email,
-      password: password
+      email,
+      password
     })
     .then(response => {
-      console.log(response);
-      if (response.data) {
-        console.log("successful sign in");
-        this.setState({redirectTo: '/'})
-      } else {
-        console.log("sign in error");
-      }
+      setInStorage('user', response.data.user);
+      
     })
-    .catch(err => console.log(err));
-    
-    this.setState({
+    .then(this.setState({
       email: '',
-      password: ''
-    });
+      password: '',
+      rememberMe: false,
+    }))
+    .catch(err => console.log(err));
   }
-  resetForm = () =>{
+  /*resetForm = () =>{
     document.getElementById("loginForm").reset();
-  }
+  }*/
   render() {
     return (
         <div className="container">

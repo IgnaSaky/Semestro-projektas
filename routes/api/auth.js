@@ -3,17 +3,12 @@ const mysql = require('mysql');
 const router = express.Router({ mergeParams: true });
 const dbconfig = require('../../config/database');
 const db = mysql.createConnection(dbconfig.connection);
-/*db.connect((err) => {
-    if (err) {
-        console.log(err);
-    }
-    console.log('Connected to DB');
-});*/
+
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 //connection.query('USE ' + dbconfig.database); Kodėl reikia?
 
-router.get('/user', (req, res, next) => {
+router.get('/user', (req, res) => {
 	if (req.user) {
 		return res.json({ user: req.user })
 	} else {
@@ -24,12 +19,11 @@ router.post('/login', passport.authenticate('local'),(req, res) => {
 		const user = JSON.parse(JSON.stringify(req.user)) // hack
 		const cleanUser = Object.assign({}, user)
 		if (cleanUser.password) {
-			console.log(`Deleting ${cleanUser.password}`)
 			delete cleanUser.password
-		}
+        }
 		res.json({ user: cleanUser })
 	}
-)
+);
   
 router.post('/logout', (req, res) => {
 	if (req.user) {
@@ -44,24 +38,24 @@ router.post('/logout', (req, res) => {
 
 router.post('/register', (req, res) => {
     const { username, email, password1, password2 } = req.body;
+    
     let errors = [];
-
     if (!username || !email || !password1 || !password2) {
-      errors.push({ msg: 'Please enter all fields' });
+      errors.push('Please enter all fields' );
     } 
     if (password1 != password2) {
-      errors.push({ msg: 'Passwords do not match' });
+      errors.push('Passwords do not match');
     }  
     if (password1.length < 6) {
-      errors.push({ msg: 'Password must be at least 6 characters' });
+      errors.push('Password must be at least 6 characters');
     }
     if (errors && errors.length > 0) {
-      res.status(400).json(errors);   
+      res.json({errors:errors, success: false})
     } else {
         const query = 'SELECT * FROM users WHERE email = ? OR username = ?';
         db.query(query, [email, username], (err,rows) => {
             if(rows && rows.length > 0) {
-                errors.push({ msg: 'El. pašto adresas arba vartotojo vardas jau naudojamas' });
+                errors.push('El. pašto adresas arba vartotojo vardas jau naudojamas');
                 res.json(errors);
             } else {
                 const today = new Date();
@@ -79,13 +73,13 @@ router.post('/register', (req, res) => {
                     db.query(insertQuery, newUser, (err, rows) => {
                         //const success = [];
                         if(err) {
-                            errors.push({msg:'Įvyko klaida. Pabandykite dar kartą'});
+                            errors.push('Įvyko klaida. Pabandykite dar kartą');
                             
-                            res.json(errors);
+                            return res.json(errors);
                         } else {
                            
                             //res.redirect('/login')
-                            res.json({success: 'Registracija sėkminga', redirectTo: '/'});
+                            return res.status(200).json({success: true, errors:errors});
                         }
                     });
                 });

@@ -15,6 +15,9 @@ export default class Login extends Component {
       rememberMe: false,
     };
   }
+  handleCheckbox = (e) => {
+    this.setState({rememberMe: !this.state.rememberMe})
+  }
   onChangeEmail = (e) => {
     this.setState({ email: e.target.value });
   }
@@ -31,14 +34,13 @@ export default class Login extends Component {
       password
     })
     .then(response => {
-      setInStorage('user', response.data.user);
-      
+        setInStorage(response.data.user);
+        this.setState({
+          email: '',
+          password: '',
+          rememberMe: false,
+        });
     })
-    .then(this.setState({
-      email: '',
-      password: '',
-      rememberMe: false,
-    }))
     .catch(err => console.log(err));
   }
   /*resetForm = () =>{
@@ -55,14 +57,34 @@ export default class Login extends Component {
                 <form onSubmit={this.onSubmit} method="POST" id="loginForm">
                   <div className="form-group">
                     <label htmlFor="email">El. paštas</label>
-                    <input onChange={this.onChangeEmail} type="email" name="email" className="form-control" placeholder="El. pašto adresas" />
+                    <input 
+                      value={this.state.email}
+                      onChange={this.onChangeEmail} 
+                      type="email" 
+                      name="email" 
+                      className="form-control" 
+                      placeholder="El. pašto adresas" 
+                    />
                   </div>
                   <div className="form-group">
                     <label htmlFor="password">Slaptažodis</label>
-                    <input onChange={this.onChangePassword} type="password" id="password" name="password" className="form-control" placeholder="Slaptažodis" />
+                    <input 
+                      value={this.state.password}
+                      onChange={this.onChangePassword} 
+                      type="password" 
+                      id="password" 
+                      name="password" 
+                      className="form-control" 
+                      placeholder="Slaptažodis" 
+                    />
                   </div>
                   <div className="form-group form-check">
-                    <input type="checkbox" className="form-check-input" id='rememberMe' />
+                    <input 
+                      checked={this.state.rememberMe}
+                      onChange={this.handleCheckbox}
+                      type="checkbox" 
+                      className="form-check-input" 
+                      id='rememberMe' />
                     <label className="form-check-label" htmlFor="rememberMe">Prisiminti mane</label>
                   </div>
                   <button type="submit" className="btn btn-danger btn-block" onClick={this.resetForm}>Prisijungti</button>

@@ -24,18 +24,21 @@ class NavBar extends Component{
         }
     }
     onLogoutClick(e) {
-        axios.post('/api/auth/logout',{})
-        .then(removeFromStorage('user'))
-        .then(this.setState({
-            user: {},
-            isLoggedIn: false
-        }))
+        e.preventDefault();
+        axios.get('/api/auth/logout')
+        .then(response => {
+            console.log(response.data)
+            removeFromStorage('user');
+            this.setState({
+                user: {},
+                isLoggedIn: false
+            })
+        })
         .catch(error => console.log(error));
     }
     render(){
         return(
-            <div className="">
-            The user is <b>{this.state.isLoggedIn ? 'currently' : 'not'}</b> logged in.
+            <React.Fragment>
                 <nav className="navbar navbar-expand-md bg-custom">
                 <Link className="navbar-brand" to="/">Web Pavadinimas</Link>
                 <button className="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,13 +66,17 @@ class NavBar extends Component{
                     </li>
                     </ul>
 
-                    <Link to='/' className='nav-link'>{this.state.user.username}</Link>
-                    {this.state.isLoggedIn? (<button onClick={this.onLogoutClick} className='btn btn-outline-light'>Logout</button>) :
-                    (<Link className="btn btn-outline-light" to="/login" role="button">Login</Link>)}
+                    
+                    {this.state.isLoggedIn
+                    ? <React.Fragment>
+                        <Link to='/' className='nav-link'>{this.state.user.username}</Link>
+                        <button type="submit" onClick={this.onLogoutClick} className='btn btn-outline-light'>Logout</button>
+                      </React.Fragment>
+                    : (<Link className="btn btn-outline-light" to="/login" role="button">Login</Link>)}
 
                 </div>
                 </nav>
-            </div>
+            </React.Fragment>
         );
     }
 }

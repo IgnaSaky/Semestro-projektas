@@ -8,34 +8,20 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 //connection.query('USE ' + dbconfig.database); Kodėl reikia?
 
-router.get('/user', (req, res) => {
-	if (req.user) {
-		return res.json({ user: req.user })
-	} else {
-		return res.json({ user: null })
-	}
+router.get('/user', (req, res) => {	
+	return res.status(200).json({ user: req.user })	
 });
-router.post('/login', passport.authenticate('local'),(req, res) => {
-		const user = JSON.parse(JSON.stringify(req.user)) // hack
-		const cleanUser = Object.assign({}, user)
-		if (cleanUser.password) {
-			delete cleanUser.password
-        }
-		res.json({ user: cleanUser })
-	}
-);
-  
-router.post('/logout', (req, res) => {
-	if (req.user) {
-		req.session.destroy()
-		res.clearCookie('connect.sid') // clean up!
-		return res.json({ msg: 'Atsijsungėte' })
-	} else {
-		return res.json({ msg: 'Jūs nesate prisijungęs' })
-	}
-})
-  
 
+router.post('/login', passport.authenticate('local'), (req, res) => {
+    // If this function gets called, authentication was successful.
+    // `req.user` contains the authenticated user
+    delete req.user.password;
+    res.status(200).json({user: req.user});
+  });
+router.get('/logout', (req, res) => {
+    req.logout();
+    res.status(200).json({message: 'Atsijungėte'})
+});
 router.post('/register', (req, res) => {
     const { username, email, password1, password2 } = req.body;
     
@@ -56,7 +42,7 @@ router.post('/register', (req, res) => {
         db.query(query, [email, username], (err,rows) => {
             if(rows && rows.length > 0) {
                 errors.push('El. pašto adresas arba vartotojo vardas jau naudojamas');
-                res.json(errors);
+                res.status(400).json(errors);
             } else {
                 const today = new Date();
                 const newUser = {
@@ -75,7 +61,7 @@ router.post('/register', (req, res) => {
                         if(err) {
                             errors.push('Įvyko klaida. Pabandykite dar kartą');
                             
-                            return res.json(errors);
+                            return res.status(400).json(errors);
                         } else {
                            
                             //res.redirect('/login')
@@ -88,7 +74,4 @@ router.post('/register', (req, res) => {
     });      
 }
 });
-
-
-
 module.exports = router;

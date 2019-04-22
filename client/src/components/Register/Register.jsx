@@ -95,6 +95,7 @@ export default class Register extends Component {
                                 <div className="form-group">
                                     <label htmlFor="username">Vartotojo vardas</label>
                                     <input
+                                        value={this.state.user.username}
                                         onChange={this.handleUsername} 
                                         type="text" 
                                         className="form-control" 
@@ -105,6 +106,7 @@ export default class Register extends Component {
                                 <div className="form-group">
                                     <label htmlFor="email">El. pašto adresas</label>
                                     <input 
+                                        value={this.state.user.email}
                                         onChange={this.handleEmail} 
                                         type="email" 
                                         className="form-control" 
@@ -116,6 +118,7 @@ export default class Register extends Component {
                                 <div className="form-group">
                                     <label htmlFor="password">Slaptažodis</label>
                                     <input 
+                                        value={this.state.user.password1}
                                         onChange={this.handlePassword1} 
                                         type="password"
                                         className="form-control"
@@ -126,6 +129,7 @@ export default class Register extends Component {
                                 <div className="form-group">
                                     <label htmlFor="password2">Patvirtinti slaptažodį</label>
                                     <input 
+                                        value={this.state.user.password2}
                                         onChange={this.handlePassword2} 
                                         type="password" 
                                         id="password2"  

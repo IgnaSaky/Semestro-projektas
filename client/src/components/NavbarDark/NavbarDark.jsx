@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import './Navbar.css';
+import './NavbarDark.css';
 
-class NavBar extends Component{
+class NavbarDark extends Component{
     render(){
         return(
             <div className="">
-                <nav className="navbar navbar-expand-md bg-custom">
+                <nav className="navbar navbar-expand-md bg-customDark">
                 <Link className="navbar-brand" to="/">Web Pavadinimas</Link>
                 <button className="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
@@ -41,4 +41,4 @@ class NavBar extends Component{
         );
     }
 }
-export default NavBar;
+export default NavbarDark;

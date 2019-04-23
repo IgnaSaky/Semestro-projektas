@@ -10,8 +10,7 @@ const Footer = () => {
                 <input type="email" className="form-control border border-white" id="subscribeInput" placeholder="Your email address"/>
                 <button className="btn btn-outline-light my-0 w-100" type="button">Sign up</button>
             </div>
-            <div>test
-            </div>
+
 
         </form>
     </div>

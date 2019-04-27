@@ -3,6 +3,7 @@ import NavBar from '../components/Homepage/Navbar';
 import Jumbotron from '../components/Profile/Jumbtron'
 import { getFromStorage } from '../utils/storage';
 import Modal from '../components/Profile/Modal';
+import Footer from '../components/Homepage/Footer';
 
 export class ProfilePage extends Component {
     constructor(props){
@@ -26,6 +27,10 @@ export class ProfilePage extends Component {
         <NavBar/>
         <Jumbotron user={this.state.user}/>
         <Modal/>
+        <div style={{height:'500px'}}>
+            SOME MORE CONTENT
+        </div>
+        <Footer/>
       </div>
     )
   }

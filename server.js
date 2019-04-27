@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const customerRoutes = require('./routes/api/customers') //importina routes is routes/api
 const authRoutes = require('./routes/api/auth');
-
+const userRoutes = require('./routes/api/users');
 
 const passport = require('passport');
 const session = require('express-session');
@@ -19,7 +19,6 @@ app.use(morgan('dev')); //logger
 //PASSPORT
 require('./config/passport')(passport);
 
-
 app.use(session({
       secret: 'secret',
       resave: true,
@@ -30,15 +29,9 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-
-
-
 app.use('/api/customers', customerRoutes);   // naudoja routes
 app.use('/api/auth', authRoutes);   // naudoja routes
-
-
-
+app.use('/api/users', userRoutes);
 
 // Serveris
 const port = 5000;

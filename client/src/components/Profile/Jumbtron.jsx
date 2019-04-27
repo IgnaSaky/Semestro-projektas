@@ -1,11 +1,12 @@
 import React from 'react'
+import './css/Jumbotron.css';
 
 
 function Jumbtron(props) {
   return (
     <div>
       <div className="container-fluid">
-        <div className="jumbotron">
+        <div className="jumbotron blue">
             <h1 className="display-4">Sveiki, {props.user.username}</h1>
             <p className="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
             <hr className="my-4"></hr>

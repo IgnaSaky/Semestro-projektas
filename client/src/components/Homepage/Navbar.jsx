@@ -74,7 +74,7 @@ class NavBar extends Component{
 
                     {this.state.isLoggedIn
                     ? <React.Fragment>
-                        <Link to='/' className='nav-link'>{this.state.user.username}</Link>
+                        <Link to='/profile' className='nav-link'>{this.state.user.username}</Link>
                         <form onSubmit={this.onLogoutClick}>
                             <button type='submit' className='btn btn-outline-light'>Logout</button>
                         </form>

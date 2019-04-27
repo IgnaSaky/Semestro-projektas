@@ -22,8 +22,8 @@ require('./config/passport')(passport);
 
 app.use(session({
       secret: 'secret',
-      resave: false,
-      saveUninitialized: false
+      resave: true,
+      saveUninitialized: true
     })
 );  
 // Passport middleware

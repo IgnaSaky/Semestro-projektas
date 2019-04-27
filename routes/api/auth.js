@@ -8,19 +8,37 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 //connection.query('USE ' + dbconfig.database); Kodėl reikia?
 
-router.get('/user', (req, res) => {	
-	return res.status(200).json({ user: req.user })	
+router.get('/user', (req, res) => {
+    if(req.user){	
+        return res.status(200).json({ user: req.user })
+    } else {
+        return res.status(200).json({message: 'Neprisijunges'});
+    }	
 });
 
 router.post('/login', passport.authenticate('local'), (req, res) => {
     // If this function gets called, authentication was successful.
     // `req.user` contains the authenticated user
-    delete req.user.password;
-    res.status(200).json({user: req.user});
-  });
+    /*delete req.user.password;
+    res.status(200).json({user: req.user});*/
+    const user = JSON.parse(JSON.stringify(req.user)) // hack
+	const cleanUser = Object.assign({}, user)
+	
+	if (cleanUser.password) {
+		delete cleanUser.password
+	}
+    res.json({ user: cleanUser, success: true });
+});
+
 router.get('/logout', (req, res) => {
-    req.logout();
-    res.status(200).json({message: 'Atsijungėte'})
+    if(req.user) {
+        req.logout();
+        req.session.destroy((err) => {
+            if (!err) {
+                res.status(200).clearCookie('connect.sid', {path: '/'}).json({message: "Atsijungta", success: true});
+            }
+        });
+    } else {return res.json({message: 'Neprisijunges', success: false})}
 });
 router.post('/register', (req, res) => {
     const { username, email, password1, password2 } = req.body;

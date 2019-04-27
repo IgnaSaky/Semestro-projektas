@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import './Login.css';
 import avatar from './man.png';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
-import { setInStorage} from '../../utils/storage';
+//import { setInStorage } from '../../utils/storage';
 
 export default class Login extends Component {
   constructor(props) {
@@ -13,6 +13,7 @@ export default class Login extends Component {
       email: '',
       password: '',
       rememberMe: false,
+      redirect: false
     };
   }
   handleCheckbox = (e) => {
@@ -34,14 +35,23 @@ export default class Login extends Component {
       password
     })
     .then(response => {
-        setInStorage(response.data.user);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+      return response;
+     })
+    .then(response => {
+      if (response.data.success) {       
+        console.log(response);
+        //setInStorage('user', response.data.user);
         this.setState({
           email: '',
           password: '',
-          rememberMe: false,
+          redirect: true
         });
+      } else {
+        console.log('not logged in');
+      }
     })
-    .catch(err => console.log(err));
+    .catch(err => console.log(err) );
   }
   /*resetForm = () =>{
     document.getElementById("loginForm").reset();
@@ -93,6 +103,9 @@ export default class Login extends Component {
               </div>
             </div>
           </div>
+          {this.state.redirect && (
+              <Redirect to={'/'} />
+            )}
         </div>
     )
   }

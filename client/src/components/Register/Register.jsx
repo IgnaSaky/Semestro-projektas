@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Avatar from './images.png';
 import axios from 'axios';
 
@@ -16,6 +16,7 @@ export default class Register extends Component {
             },
             errors: [],
             success: false,
+            redirect: false
         }
         this.handleUsername = this.handleUsername.bind(this);
         this.handleEmail = this.handleEmail.bind(this);
@@ -66,16 +67,23 @@ export default class Register extends Component {
             password2
         })   
         .then((response) => {
-            this.setState({
-                user: {
-                    username: '',
-                    email: '',
-                    password1: '',
-                    password2: ''
-                },
-                errors: response.data.errors,
-                success: response.data.success
-            })
+            console.log(response.status);
+            if (response.data.success) {
+                this.setState({
+                    user: {
+                        username: '',
+                        email: '',
+                        password1: '',
+                        password2: ''
+                    },
+                    redirect:true
+                })
+            } else {
+                this.setState({
+                    errors: response.data.errors,
+                    success: response.data.success
+                })
+            }
         })
         .catch((err) => console.log(err));      
     }
@@ -143,6 +151,9 @@ export default class Register extends Component {
                         </div>
                     </div>
                 </div>
+                {this.state.redirect && (
+                   <Redirect to={'/'} />
+                )}
             </div>
         )
     }

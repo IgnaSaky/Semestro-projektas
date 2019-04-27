@@ -18,7 +18,7 @@ module.exports = function(passport) {
                 bcrypt.compare(password, rows[0].password, (err, isMatch) => {
                     if (err) throw console.log(err.message);
                     if (isMatch) {
-                      console.log("viskas OK");
+                      console.log("Logged In");
                       return done(null, rows[0]);
                     } else {
                       console.log("blogas passwd");

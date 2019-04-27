@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import './Navbar.css';
-
-import { getFromStorage, removeFromStorage } from '../../utils/storage'
 import axios from 'axios';
 
+//import { getFromStorage, removeFromStorage} from '../../utils/storage'
 class NavBar extends Component{
     constructor(props) {
         super(props);
@@ -15,7 +14,7 @@ class NavBar extends Component{
         this.onLogoutClick = this.onLogoutClick.bind(this);
     }
     componentDidMount() {
-        const userStorage = getFromStorage('user');
+        const userStorage = JSON.parse(localStorage.getItem('user'));
         if (userStorage) {
             this.setState({
                 user: userStorage,
@@ -25,16 +24,23 @@ class NavBar extends Component{
     }
     onLogoutClick(e) {
         e.preventDefault();
+        
         axios.get('/api/auth/logout')
+        .then((response) => {
+            localStorage.removeItem('user');
+            return response;
+        }) 
         .then(response => {
-            console.log(response.data)
-            removeFromStorage('user');
-            this.setState({
+            console.log(response)   
+             this.setState({
                 user: {},
                 isLoggedIn: false
-            })
+            });
+            console.log(response.data);
         })
-        .catch(error => console.log(error));
+        .catch(error => console.log(error))
+        
+        
     }
     render(){
         return(
@@ -66,11 +72,13 @@ class NavBar extends Component{
                     </li>
                     </ul>
 
-                    
                     {this.state.isLoggedIn
                     ? <React.Fragment>
                         <Link to='/' className='nav-link'>{this.state.user.username}</Link>
-                        <button type="submit" onClick={this.onLogoutClick} className='btn btn-outline-light'>Logout</button>
+                        <form onSubmit={this.onLogoutClick}>
+                            <button type='submit' className='btn btn-outline-light'>Logout</button>
+                        </form>
+                        
                       </React.Fragment>
                     : (<Link className="btn btn-outline-light" to="/login" role="button">Login</Link>)}
 

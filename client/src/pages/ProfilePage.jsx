@@ -12,9 +12,8 @@ export class ProfilePage extends Component {
             user: {}
         }
     }
-    componentDidMount(){
+    componentDidlMount(){
         const userFromStorage = getFromStorage('user');
-        console.log(userFromStorage);
         if(userFromStorage){
             this.setState({
                 user: userFromStorage
@@ -28,7 +27,7 @@ export class ProfilePage extends Component {
         <Jumbotron user={this.state.user}/>
         <Modal/>
         <div style={{height:'500px'}}>
-            SOME MORE CONTENT
+            Čia gal rodyti savo įkeltą bilietą/-us, kad būtų kažkiek didesnis puslapis ? Nzn ką dar galima
         </div>
         <Footer/>
       </div>

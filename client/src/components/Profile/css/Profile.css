@@ -1,0 +1,9 @@
+.jumbotron.blue {
+    background-color: rgb(198, 228, 255);
+}
+.required:after {
+    content:"*";
+    color:red;
+    display: inline;
+    margin-left: 1px;
+}

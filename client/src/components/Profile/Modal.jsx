@@ -15,8 +15,8 @@ function Modal() {
                 </div>
                 <div className="modal-body">
                     <form  id="passwordEditForm">
-                        <div className="form-group">
-                            <label htmlFor="oldPassword">Senas slaptažodis</label>
+                        <div className="form-group mb-3">
+                            <label className='required' htmlFor="oldPassword">Senas slaptažodis</label>
                             <input
                                 //onChange={this.handleUsername} 
                                 type="password" 
@@ -26,8 +26,8 @@ function Modal() {
                                 required='true'
                             />
                         </div>
-                            <div className="form-group">
-                                <label htmlFor="newPassword1">Naujas slaptažodis</label>
+                            <div className="form-group mb-3">
+                                <label className="required" htmlFor="newPassword1">Naujas slaptažodis</label>
                                 <input   
                                     //onChange={this.handleEmail} 
                                     type="password" 
@@ -38,7 +38,7 @@ function Modal() {
                                 />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="newPassword2">Pakartokite slaptažodį</label>
+                                <label className="required" htmlFor="newPassword2">Pakartokite slaptažodį</label>
                                 <input 
                                     //onChange={this.handlePassword1} 
                                     type="password"
@@ -48,12 +48,10 @@ function Modal() {
                                     required='true'
                                 />
                             </div> 
-
-                            <div className="modal-footer">
+                            <div className="modal-footer w-100 p-0 m-0">
                                 <button type="button" className="btn btn-secondary" data-dismiss="modal">Uždaryti</button>
                                 <button type="submit" className="btn btn-primary">Išsaugoti</button>
                             </div>
-
                         </form>
                     </div>
                     

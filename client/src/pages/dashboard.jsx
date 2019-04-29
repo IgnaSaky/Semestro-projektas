@@ -29,8 +29,11 @@ export class dashboard extends Component {
             <h1 className="text-center font-weight-bold m-5 p-5"style={{color:"White"}}> Renginiai </h1>
           <SearchBar/>
           </Background>
-          <div className="row">
-            <div className="col-11"><CardList events={this.state.events} limit={10}/></div>
+
+          <h3 className="text-center font-weight p-2">Visi renginiai</h3>
+          <hr></hr>
+          <div className="row m-3">
+            <div className="col-12"><CardList events={this.state.events} limit={10}/></div>
           </div>
 
       </div>

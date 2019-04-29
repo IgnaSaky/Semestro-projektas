@@ -1,38 +1,36 @@
 import React, { Component } from 'react'
-import EventCard from '../components/EventCard/EventCard.jsx';
-import Navbar from '../components/NavbarDark/NavbarDark.jsx';
-import image1 from '../images/pic1.jpg';
-import image2 from '../images/pic3.jpg';
+
+import Navbar from '../components/Homepage/Navbar.jsx';
+import Background from '../containers/Background.jsx';
+import CardList from '../components/EventCard/EventCardList';
+import SearchBar from '../components/Homepage/SearchBar.jsx';
+
 
 export class dashboard extends Component {
+  constructor(){
+    super();
+    this.state = 
+    {
+        events: []
+    }
+}
+  componentDidMount(){
+    fetch('http://localhost:5000/api/events')
+    .then(response =>response.json())
+    .then( users =>{
+        this.setState({events: users})
+    })
+}
   render() {
     return (
       <div>
-
-          <Navbar/>
-          <div className="text-center font-weight-bold m-3"> Renginiai </div>
-          <hr></hr>
-          <div className="container-fluid">
-            <div className="row justify-content-center">
-                <EventCard testImage={image1}  />  
-                <EventCard testImage={image2}  />
-                <EventCard testImage={image1}  />  
-                <EventCard testImage={image2}  />
-                <EventCard testImage={image1}  />  
-                <EventCard testImage={image2}  />
-                <EventCard testImage={image1}  />  
-                <EventCard testImage={image2}  />
-                <EventCard testImage={image1}  />  
-                <EventCard testImage={image2}  />
-                <EventCard testImage={image1}  />  
-                <EventCard testImage={image2}  />
-                <EventCard testImage={image1}  />  
-                <EventCard testImage={image2}  />
-                <EventCard testImage={image1}  />  
-                <EventCard testImage={image2}  />
-                <EventCard testImage={image1}  />  
-                <EventCard testImage={image2}  />
-            </div>
+          <Background>
+            <Navbar/>
+            <h1 className="text-center font-weight-bold m-5 p-5"style={{color:"White"}}> Renginiai </h1>
+          <SearchBar/>
+          </Background>
+          <div className="row">
+            <div className="col-11"><CardList events={this.state.events} limit={10}/></div>
           </div>
 
       </div>

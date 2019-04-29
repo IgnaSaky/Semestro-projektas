@@ -1,21 +1,12 @@
-.cardButton{
-    display:block;
-    background-color: white;
-    color:white;
-}
+
 .cardStyle:hover > .overlay {
     width:100%;
     height:100%;
-    position:absolute;
     background-color:rgb(46, 40, 40);
-    opacity:0.8;
     transition: 0.5s;
     color:white;
 }
-
-.cardStyle:hover .cardButton {
-    transition: 0.5s;
-    color:black;
-    display: block;
-  }
-
+.overlay{
+    width: 100%;
+    height:100%;
+}

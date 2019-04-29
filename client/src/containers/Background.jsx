@@ -3,6 +3,7 @@ import './background.css';
 
 const Background = (props) =>{
     return (
+        
         <div className='backgroundImg'>
             {props.children}
         </div>

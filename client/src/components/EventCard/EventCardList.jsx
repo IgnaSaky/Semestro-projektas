@@ -1,6 +1,7 @@
 import React from 'react';
-import eventCard from './eventCard.jsx';
+import EventCard from './EventCard.jsx';
 
+// eslint-disable-next-line
 {/* i props paduodamas events tai eventu objektu listas, sukuriamas cardArray i kuri sudedam eventus*/}
 const CardList = (props) =>{
     const {events} = props; 
@@ -10,12 +11,15 @@ const CardList = (props) =>{
     const cardArray = [];
     for(let i = 0; i<events.length;i++){
         if(i+1 > limit){break;}
-        cardArray.push(<eventCard key={events[i].id} obj={events[i]}/>);
+    cardArray.push(<EventCard title= {events[i].title } description={events[i].description}  key={events[i].id_spectacle}/>);
     }
     return(
-    <div>
-        {cardArray}
-    </div>
+    <div className="container-fluid">
+        <div className="row justify-content-center">
+            {console.log(cardArray)}
+            {cardArray}
+        </div>
+      </div>
     );
 }
 export default CardList;

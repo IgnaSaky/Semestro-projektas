@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import './Navbar.css';
 import axios from 'axios';
+import { removeFromStorage } from '../../utils/storage';
 
 //import { getFromStorage, removeFromStorage} from '../../utils/storage'
 class NavBar extends Component{
@@ -9,7 +11,8 @@ class NavBar extends Component{
         super(props);
         this.state = {
             user: {},
-            isLoggedIn: false
+            isLoggedIn: false,
+            redirect: false
         }
         this.onLogoutClick = this.onLogoutClick.bind(this);
     }
@@ -24,19 +27,10 @@ class NavBar extends Component{
     }
     onLogoutClick(e) {
         e.preventDefault();
-        
-        axios.get('/api/auth/logout')
-        .then((response) => {
-            localStorage.removeItem('user');
-            return response;
-        }) 
-        .then(response => {
-            console.log(response)   
-             this.setState({
-                user: {},
-                isLoggedIn: false
-            });
+        removeFromStorage('user');
+        axios.get('/api/auth/logout').then(response => {
             console.log(response.data);
+            
         })
         .catch(error => console.log(error))
         
@@ -76,13 +70,16 @@ class NavBar extends Component{
                     ? <React.Fragment>
                         <Link to='/profile' className='nav-link'>{this.state.user.username}</Link>
                         <form onSubmit={this.onLogoutClick}>
-                            <button type='submit' className='btn btn-outline-light'>Logout</button>
+                            <input type='submit' value="Atsijungti" className='btn btn-outline-light'/>
                         </form>
                         
                       </React.Fragment>
                     : (<Link className="btn btn-outline-light" to="/login" role="button">Login</Link>)}
 
                 </div>
+                {this.state.redirect && (
+              <Redirect to={'/'} />
+            )}
                 </nav>
             </React.Fragment>
         );

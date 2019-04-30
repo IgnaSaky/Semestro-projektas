@@ -40,7 +40,7 @@ export default class Login extends Component {
      })
     .then(response => {
       if (response.data.success) {       
-        console.log(response);
+        
         //setInStorage('user', response.data.user);
         this.setState({
           email: '',

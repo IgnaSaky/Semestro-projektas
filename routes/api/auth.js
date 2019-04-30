@@ -31,14 +31,16 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-    if(req.user) {
+    req.logout();
+    res.json({message: "Atsijungta"});
+    /*if(req.user) {
         req.logout();
         req.session.destroy((err) => {
             if (!err) {
                 res.status(200).clearCookie('connect.sid', {path: '/'}).json({message: "Atsijungta", success: true});
             }
         });
-    } else {return res.json({message: 'Neprisijunges', success: false})}
+    } else {return res.json({message: 'Neprisijunges', success: false})}*/
 });
 router.post('/register', (req, res) => {
     const { username, email, password1, password2 } = req.body;

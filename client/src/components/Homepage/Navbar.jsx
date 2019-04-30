@@ -56,7 +56,7 @@ class NavBar extends Component{
                         <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/">Link</Link>
+                        <Link className="nav-link" to="/ticketSaving">Įkelti Bilietą</Link>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" to="/">Link</Link>

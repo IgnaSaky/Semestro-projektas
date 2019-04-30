@@ -4,6 +4,7 @@ import home from './pages/home.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
+import TicketSavingPage from './pages/TicketSavingPage.jsx';
 import './App.css';
 
 class App extends Component {
@@ -15,6 +16,7 @@ class App extends Component {
           <Route path="/login" component={LoginPage} />
           <Route path="/register" component={RegisterPage} />
           <Route path="/profile" component={ProfilePage} />
+          <Route path="/ticketSaving" component={TicketSavingPage} />
         </div>
       </Router>
     );

@@ -9,11 +9,11 @@ const passport = require('passport');
 //connection.query('USE ' + dbconfig.database); Kodėl reikia?
 
 router.get('/user', (req, res) => {
-    if(req.user){	
+    if (req.user) {
         return res.status(200).json({ user: req.user })
     } else {
-        return res.status(200).json({message: 'Neprisijunges'});
-    }	
+        return res.status(200).json({ message: 'Neprisijunges' });
+    }
 });
 
 router.post('/login', passport.authenticate('local'), (req, res) => {
@@ -22,43 +22,43 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
     /*delete req.user.password;
     res.status(200).json({user: req.user});*/
     const user = JSON.parse(JSON.stringify(req.user)) // hack
-	const cleanUser = Object.assign({}, user)
-	
-	if (cleanUser.password) {
-		delete cleanUser.password
-	}
+    const cleanUser = Object.assign({}, user)
+
+    if (cleanUser.password) {
+        delete cleanUser.password
+    }
     res.json({ user: cleanUser, success: true });
 });
 
 router.get('/logout', (req, res) => {
-    if(req.user) {
+    if (req.user) {
         req.logout();
         req.session.destroy((err) => {
             if (!err) {
-                res.status(200).clearCookie('connect.sid', {path: '/'}).json({message: "Atsijungta", success: true});
+                res.status(200).clearCookie('connect.sid', { path: '/' }).json({ message: "Atsijungta", success: true });
             }
         });
-    } else {return res.json({message: 'Neprisijunges', success: false})}
+    } else { return res.json({ message: 'Neprisijunges', success: false }) }
 });
 router.post('/register', (req, res) => {
     const { username, email, password1, password2 } = req.body;
-    
+
     let errors = [];
     if (!username || !email || !password1 || !password2) {
-      errors.push('Please enter all fields' );
-    } 
+        errors.push('Please enter all fields');
+    }
     if (password1 != password2) {
-      errors.push('Passwords do not match');
-    }  
+        errors.push('Passwords do not match');
+    }
     if (password1.length < 6) {
-      errors.push('Password must be at least 6 characters');
+        errors.push('Password must be at least 6 characters');
     }
     if (errors && errors.length > 0) {
-      res.json({errors:errors, success: false})
+        res.json({ errors: errors, success: false })
     } else {
         const query = 'SELECT * FROM users WHERE email = ? OR username = ?';
-        db.query(query, [email, username], (err,rows) => {
-            if(rows && rows.length > 0) {
+        db.query(query, [email, username], (err, rows) => {
+            if (rows && rows.length > 0) {
                 errors.push('El. pašto adresas arba vartotojo vardas jau naudojamas');
                 res.status(400).json(errors);
             } else {
@@ -71,25 +71,56 @@ router.post('/register', (req, res) => {
                 }
                 bcrypt.genSalt(10, (err, salt) => {
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
-                    if (err) throw err;
-                    newUser.password = hash;
-                    const insertQuery = 'INSERT INTO users SET ?';
-                    db.query(insertQuery, newUser, (err, rows) => {
-                        //const success = [];
-                        if(err) {
-                            errors.push('Įvyko klaida. Pabandykite dar kartą');
-                            
-                            return res.status(400).json(errors);
-                        } else {
-                           
-                            //res.redirect('/login')
-                            return res.status(200).json({success: true, errors:errors});
-                        }
+                        if (err) throw err;
+                        newUser.password = hash;
+                        const insertQuery = 'INSERT INTO users SET ?';
+                        db.query(insertQuery, newUser, (err, rows) => {
+                            //const success = [];
+                            if (err) {
+                                errors.push('Įvyko klaida. Pabandykite dar kartą');
+
+                                return res.status(400).json(errors);
+                            } else {
+
+                                //res.redirect('/login')
+                                return res.status(200).json({ success: true, errors: errors });
+                            }
+                        });
                     });
                 });
-            });
+            }
+        });
+    }
+});
+
+router.post('/ticketSaving', (req, res) => {
+    const { title, description, x1price, whenPosted, file } = req.body;
+
+    let errors = [];
+    if (!title || !description || !x1price || !whenPosted || !file) {
+        errors.push('Please enter all fields');
+    }
+    const today = new Date();
+    const newTicket = {
+        title,
+        description,
+        x1price,
+        whenPosted,
+        file,
+    }
+    console.log(file);
+    const insertQuery = 'INSERT INTO ticket SET ?';
+    db.query(insertQuery, newTicket, (err, rows) => {
+        //const success = [];
+        if (err) {
+            errors.push('Įvyko klaida. Pabandykite dar kartą');
+
+            return res.status(400).json(errors);
+        } else {
+
+            //res.redirect('/login')
+            return res.status(200).json({ success: true, errors: errors });
         }
-    });      
-}
+    });
 });
 module.exports = router;

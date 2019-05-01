@@ -8,5 +8,9 @@
 }
 .overlay{
     width: 100%;
-    height:100%;
+    height: 100%;
+}
+.cardStyle{
+    padding: 0px;
+    background-color: white;
 }

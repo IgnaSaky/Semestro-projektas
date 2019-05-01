@@ -5,7 +5,7 @@ import './EventCard.css';
 function EventCard(props) {
   const {title, description} = props;
   return (
-    <Link to="/dashboard" className="card shadow m-1 cardStyle" style={{width: '18rem', color:'black'}}>
+    <Link to="/dashboard" className="card shadow m-1 cardStyle col-11" style={{width: '18rem', color:'black'}}>
       <div className="overlay">
         <div className="card-body">
             <h5 className="card-title">{title}</h5>

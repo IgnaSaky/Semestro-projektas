@@ -4,32 +4,32 @@ import './SideGenres.css';
 export class SideGenres extends Component {
   render() {
     return (
-        <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <li class="sidebar-brand">
+        <div id="sidebar-wrapper container-fluid">
+        <ul className="sidebar-nav row justify-content-center">
+            <li className="sidebar-brand card shadow col-12">
                 <a href="#">
                     Start Bootstrap
                 </a>
             </li>
-            <li>
+            <li className=" card shadow col-12">
                 <a href="#">Dashboard</a>
             </li>
-            <li>
+            <li className=" card shadow col-12">
                 <a href="#">Shortcuts</a>
             </li>
-            <li>
+            <li className=" card shadow col-12">
                 <a href="#">Overview</a>
             </li>
-            <li>
+            <li className=" card shadow col-12">
                 <a href="#">Events</a>
             </li>
-            <li>
+            <li className=" card shadow col-12">
                 <a href="#">About</a>
             </li>
-            <li>
+            <li className=" card shadow col-12">
                 <a href="#">Services</a>
             </li>
-            <li>
+            <li className=" card shadow col-12">
                 <a href="#">Contact</a>
             </li>
         </ul>

@@ -37,9 +37,15 @@ class SearchBar extends Component{
         }
         return (
             <ul>
-            {suggestions.map((item) => <li>{item}</li>)}
+            {suggestions.map((item) => <li onClick={() => this.suggestionSelected(item)}>{item}</li>)}
             </ul>    
         );
+    }
+    suggestionSelected(value){
+        this.setState(()=>({
+            text:value,
+            suggestions:[],
+        }));
     }
     render(){
         const {text}=this.state;

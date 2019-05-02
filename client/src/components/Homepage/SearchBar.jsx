@@ -12,10 +12,12 @@ class SearchBar extends Component{
             "Eminemas",
             "Auksiniai svogūnai",
             "Barakiada",
-            "Teatralas"
+            "Teatralas",
+            "Auksinis lietus"
         ];
         this.state={
             suggestions: [],
+            text: '',
         };
     }
 
@@ -26,7 +28,7 @@ class SearchBar extends Component{
             const regex=new RegExp(`^${value}`, 'i');
             suggestions=this.items.sort().filter(v => regex.test(v));
         }
-        this.setState(() => ({suggestions}));
+        this.setState(() => ({suggestions, text:value}));
     }
     renderSuggestions (){
         const {suggestions}=this.state;
@@ -40,10 +42,11 @@ class SearchBar extends Component{
         );
     }
     render(){
+        const {text}=this.state;
         return(
         <div className="container containerFooter pr-5 pl-5">
             <div className="active-pink-3 active-pink-4 pb-5 form-row">
-                <input className="form-control col-10" type="text" placeholder="Search" aria-label="Search" onChange={this.onTextChanged}/>
+                <input value={text} className="form-control col-10" type="text" placeholder="Search" aria-label="Search" onChange={this.onTextChanged}/>
                 <button type="submit" className="search-button btn btn-primary col-2">⌕</button>
                 {this.renderSuggestions()}
             </div>

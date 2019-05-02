@@ -12,7 +12,8 @@ export class dashboard extends Component {
     super();
     this.state = 
     {
-        events: []
+        events: [],
+        
     }
 }
   componentDidMount(){
@@ -20,8 +21,15 @@ export class dashboard extends Component {
     .then(response =>response.json())
     .then( users =>{
         this.setState({events: users})
-    })
-}
+    });
+  }
+  changeGenre = (genre) => {
+    fetch('http://localhost:5000/api/events' + genre)
+    .then(response =>response.json())
+    .then( users =>{
+        this.setState({events: users})
+    }); 
+  }
   render() {
     return (
       <div>
@@ -32,8 +40,8 @@ export class dashboard extends Component {
           </Background>
 
           <div className="row m-2">
-           <div className="col-3"> <SideGenres /></div>
-            <div className="col-9"><CardList events={this.state.events} limit={10}/></div>
+           <div className="col-md-3 col-sm-5 col-12"> <SideGenres genreChange={this.changeGenre} /></div>
+            <div className="col-md-9 col-sm-7 col-12"><CardList events={this.state.events} limit={10}/></div>
           </div>
 
       </div>

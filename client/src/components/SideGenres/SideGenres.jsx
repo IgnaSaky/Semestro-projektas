@@ -4,33 +4,33 @@ import './SideGenres.css';
 export class SideGenres extends Component {
   render() {
     return (
-        <div id="sidebar-wrapper container-fluid">
+        <div id="sidebar-wrapper container-fluid" className="sticky">
         <ul className="sidebar-nav row justify-content-center">
             <li className="sidebar-brand card shadow col-12">
-                <a href="#">
-                    Start Bootstrap
-                </a>
+            <div onClick={ () =>this.props.genreChange("")}>
+                    Visi renginiai
+             </div>
             </li>
             <li className=" card shadow col-12">
-                <a href="#">Dashboard</a>
+                <div onClick={ () =>this.props.genreChange("/genre/lazy")}>Lazy</div>
             </li>
             <li className=" card shadow col-12">
-                <a href="#">Shortcuts</a>
+               <div  onClick={ () => this.props.genreChange("/genre/Test")}>Test</div>
             </li>
             <li className=" card shadow col-12">
-                <a href="#">Overview</a>
+                <div >Overview</div>
             </li>
             <li className=" card shadow col-12">
-                <a href="#">Events</a>
+                <div >Events</div>
             </li>
             <li className=" card shadow col-12">
-                <a href="#">About</a>
+                <div >About</div>
             </li>
             <li className=" card shadow col-12">
-                <a href="#">Services</a>
+                <div >Services</div>
             </li>
             <li className=" card shadow col-12">
-                <a href="#">Contact</a>
+                <div >Contact</div>
             </li>
         </ul>
     </div>

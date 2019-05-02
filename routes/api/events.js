@@ -15,5 +15,15 @@ router.get('/', (req, res) => {
         res.send(rows);
     });
 });
+router.get('/genre/:genreid', (req, res) => {
+    connection.query("SELECT * FROM spectacle WHERE category = ?",req.params.genreid, function (err, rows) {
+        if (err) {
+            console.log("SELECT * FROM spectacle WHERE category=" + req.params.genreid);
+            throw err;
+        }
+        
+        res.send(rows);
+    });
+});
 
 module.exports = router;

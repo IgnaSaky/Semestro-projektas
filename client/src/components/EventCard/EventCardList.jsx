@@ -16,7 +16,6 @@ const CardList = (props) =>{
     return(
     <div className="container-fluid">
         <div className="row justify-content-center">
-            {console.log(cardArray)}
             {cardArray}
         </div>
       </div>

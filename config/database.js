@@ -4,6 +4,6 @@ module.exports = {
      'user':'root',
      'password':''
     },
-    'database':'semestroprojektas',
+    'database':'bilietupardavimas',
     'user_table':'purchaser'
    }

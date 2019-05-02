@@ -26,12 +26,13 @@
 }
 
 
-.sidebar-nav li a:hover {
+.sidebar-nav li div:hover {
     width:100%;
     height:100%;
     background-color:rgb(46, 40, 40);
     transition: 0.5s;
     color:white;
+    cursor: pointer;
 }
 .sticky{
     position: -webkit-sticky; /* Safari */

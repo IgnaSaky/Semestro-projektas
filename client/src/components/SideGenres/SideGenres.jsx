@@ -18,19 +18,19 @@ export class SideGenres extends Component {
                <div  onClick={ () => this.props.genreChange("/genre/Test")}>Test</div>
             </li>
             <li className=" card shadow col-12">
-                <div >Overview</div>
+                <div >Genre</div>
             </li>
             <li className=" card shadow col-12">
-                <div >Events</div>
+                <div >Genre</div>
             </li>
             <li className=" card shadow col-12">
-                <div >About</div>
+                <div >Genre</div>
             </li>
             <li className=" card shadow col-12">
-                <div >Services</div>
+                <div >Genre</div>
             </li>
             <li className=" card shadow col-12">
-                <div >Contact</div>
+                <div >Genre</div>
             </li>
         </ul>
     </div>

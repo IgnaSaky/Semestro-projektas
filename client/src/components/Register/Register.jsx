@@ -1,20 +1,23 @@
 import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom';
 import Avatar from './images.png';
-import axios from 'axios';
+//import axios from 'axios';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux'
+import { register } from '../../actions/authActions';
+import { clearErrors } from '../../actions/errorActions';
+import { Alert } from 'reactstrap';
 
-
-export default class Register extends Component {
+class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: {
-                username: '',
-                email: '',
-                password1: '',
-                password2: ''
-            },
-            errors: [],
+            
+            username: '',
+            email: '',
+            password1: '',
+            password2: '',
+            message: null,
             success: false,
             redirect: false
         }
@@ -26,66 +29,55 @@ export default class Register extends Component {
     }
     handleUsername(e) {
         this.setState({
-            user: {
-                ...this.state.user,
-                username: e.target.value
-            }
+            username: e.target.value
         });
     }
     handleEmail(e) {
         this.setState({
-            user: {
-                ...this.state.user,
-                email: e.target.value
-            }
-        })
+            email: e.target.value
+        });
     }
     handlePassword1(e) {
         this.setState({
-            user: {
-                ...this.state.user,
-                password1: e.target.value
-            }
+            password1: e.target.value
         })
     }
     handlePassword2(e) {
         this.setState({ 
-            user: {
-                ...this.state.user,
-                password2: e.target.value
-            }
+            password2: e.target.value
         });
     }
     
     handleSubmit(e) {
         e.preventDefault();    
-        const {username, email, password1, password2} = this.state.user;       
-        axios.post('/api/auth/register', {
+        const {username, email, password1, password2} = this.state;
+        const newUser = {
             username,
             email,
             password1,
             password2
-        }, {withCredentials:true})   
-        .then((response) => {
-            console.log(response.status);
-            if (response.data.success) {
-                this.setState({
-                    user: {
-                        username: '',
-                        email: '',
-                        password1: '',
-                        password2: ''
-                    },
-                    redirect:true
-                })
+        }
+    
+        // Attempt to register
+        this.props.register(newUser);
+    }
+    static propTypes = {
+        isAuthenticated: PropTypes.bool,
+        error: PropTypes.object.isRequired,
+        register: PropTypes.func.isRequired,
+        clearErrors: PropTypes.func.isRequired
+    };
+    componentDidUpdate(prevProps) {
+        const {error} = this.props;
+        if (error !== prevProps.error) {
+            //check for REgister errors
+            if (error.id === "REGISTER_FAIL") {
+                console.log(error.message);
+                this.setState({message: error.message.message});
             } else {
-                this.setState({
-                    errors: response.data.errors,
-                    success: response.data.success
-                })
+                this.setState({message: null});
             }
-        })
-        .catch((err) => console.log(err));      
+        }
     }
     
     /*resetForm = () =>{
@@ -99,11 +91,12 @@ export default class Register extends Component {
                         <div className="card card-body fix-logo-translate">
                             <img className='user-logo' src={Avatar} alt="avatar" />
                             <h1 className="text-center mb-3">Registruokis!</h1>
+                            {this.state.message ? <Alert color='danger'>{this.state.message}</Alert> : null}
                             <form onSubmit={this.handleSubmit}  method="POST" id="registerForm">
                                 <div className="form-group">
                                     <label htmlFor="username">Vartotojo vardas</label>
                                     <input
-                                        value={this.state.user.username}
+                                        value={this.state.username}
                                         onChange={this.handleUsername} 
                                         type="text" 
                                         className="form-control" 
@@ -114,7 +107,7 @@ export default class Register extends Component {
                                 <div className="form-group">
                                     <label htmlFor="email">El. pašto adresas</label>
                                     <input 
-                                        value={this.state.user.email}
+                                        value={this.state.email}
                                         onChange={this.handleEmail} 
                                         type="email" 
                                         className="form-control" 
@@ -126,7 +119,7 @@ export default class Register extends Component {
                                 <div className="form-group">
                                     <label htmlFor="password">Slaptažodis</label>
                                     <input 
-                                        value={this.state.user.password1}
+                                        value={this.state.password1}
                                         onChange={this.handlePassword1} 
                                         type="password"
                                         className="form-control"
@@ -137,7 +130,7 @@ export default class Register extends Component {
                                 <div className="form-group">
                                     <label htmlFor="password2">Patvirtinti slaptažodį</label>
                                     <input 
-                                        value={this.state.user.password2}
+                                        value={this.state.password2}
                                         onChange={this.handlePassword2} 
                                         type="password" 
                                         id="password2"  
@@ -145,7 +138,7 @@ export default class Register extends Component {
                                         className="form-control" 
                                     />
                                 </div>
-                                <button type="submit" className="btn btn-danger btn-block" onClick={this.resetForm}>Registruotis</button>
+                                <button type="submit" className="btn btn-danger btn-block" onClick={this.handleSubmit}>Registruotis</button>
                             </form>
                             <p style={{ textAlign: 'left' }} className="lead mt-4">Jau užsiregistravęs? <Link to="/login"> Prisijungti</Link></p>
                         </div>
@@ -158,3 +151,13 @@ export default class Register extends Component {
         )
     }
 }
+
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated,
+    error: state.error
+});
+
+export default connect(
+    mapStateToProps,
+    {register, clearErrors}
+)(Register);

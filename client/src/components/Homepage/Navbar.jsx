@@ -3,9 +3,7 @@ import {Link} from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 import './Navbar.css';
 import axios from 'axios';
-import { removeFromStorage } from '../../utils/storage';
 
-//import { getFromStorage, removeFromStorage} from '../../utils/storage'
 class NavBar extends Component{
     constructor(props) {
         super(props);
@@ -16,7 +14,7 @@ class NavBar extends Component{
         }
         this.onLogoutClick = this.onLogoutClick.bind(this);
     }
-    componentDidMount() {
+    /*componentDidMount() {
         axios.get('/api/auth/user', {withCredentials:true})
         .then(response => {
             console.log('user is CDM', response.data.user);
@@ -35,7 +33,7 @@ class NavBar extends Component{
             console.log('errror in componentdidmount in navbar');
             console.log(error);
         })
-    }
+    }*/
     onLogoutClick(e) {
         e.preventDefault();
         axios.get('/api/auth/logout',{withCredentials:true})

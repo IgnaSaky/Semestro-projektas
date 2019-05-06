@@ -3,7 +3,7 @@ import './Login.css';
 import avatar from './man.png';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
-//import { setInStorage } from '../../utils/storage';
+
 
 export default class Login extends Component {
   constructor(props) {

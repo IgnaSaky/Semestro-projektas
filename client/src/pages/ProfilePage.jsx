@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import NavBar from '../components/Homepage/Navbar';
 import Jumbotron from '../components/Profile/Jumbtron'
-import { getFromStorage } from '../utils/storage';
 import Modal from '../components/Profile/Modal';
 import Footer from '../components/Homepage/Footer';
 
@@ -13,12 +12,7 @@ export class ProfilePage extends Component {
         }
     }
     componentDidMount(){
-        const userFromStorage = getFromStorage('user');
-        if(userFromStorage){
-            this.setState({
-                user: userFromStorage
-            });
-        }
+
     }
   render() {
     return (

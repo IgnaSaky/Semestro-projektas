@@ -5,6 +5,7 @@ import Background from '../containers/Background.jsx';
 import CardList from '../components/EventCard/EventCardList';
 import SearchBar from '../components/Homepage/SearchBar.jsx';
 import SideGenres from '../components/SideGenres/SideGenres.jsx';
+import EventCard from '../components/EventCard/EventCard';
 
 
 export class dashboard extends Component {
@@ -13,7 +14,7 @@ export class dashboard extends Component {
     this.state = 
     {
         events: [],
-        
+        limit: 10
     }
 }
   componentDidMount(){
@@ -30,6 +31,10 @@ export class dashboard extends Component {
         this.setState({events: users})
     }); 
   }
+  changeLimit= (limit) => {
+    this.setState({limit: limit});
+    console.log(this.state.limit);
+  }
   render() {
     return (
       <div>
@@ -41,7 +46,15 @@ export class dashboard extends Component {
 
           <div className="row m-2">
            <div className="col-md-3 col-sm-5 col-12"> <SideGenres genreChange={this.changeGenre} /></div>
-            <div className="col-md-9 col-sm-7 col-12"><CardList events={this.state.events} limit={10}/></div>
+            <div className="col-md-9 col-sm-7 col-12">
+              <CardList events={this.state.events} limit={this.state.limit} changeLimit={this.changeLimit}/>
+              <div className="container-fluid">
+                <div className="row justify-content-center">
+                <div onClick={ () =>this.changeLimit(this.state.limit + 10)}><EventCard title="Load more" description="........."/></div>
+                </div>
+              </div>
+             
+            </div>
           </div>
 
       </div>

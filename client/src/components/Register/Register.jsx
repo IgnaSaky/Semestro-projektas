@@ -68,7 +68,7 @@ class Register extends Component {
         clearErrors: PropTypes.func.isRequired
     };
     componentDidUpdate(prevProps) {
-        const {error} = this.props;
+        const {error, isAuthenticated} = this.props;
         if (error !== prevProps.error) {
             //check for REgister errors
             if (error.id === "REGISTER_FAIL") {
@@ -78,6 +78,11 @@ class Register extends Component {
                 this.setState({message: null});
             }
         }
+        // If authenticated, redirect
+        if (isAuthenticated) {
+            this.setState({redirect:true});
+        }
+        
     }
     
     /*resetForm = () =>{

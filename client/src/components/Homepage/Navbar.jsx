@@ -3,6 +3,10 @@ import {Link} from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 import './Navbar.css';
 import axios from 'axios';
+import Logout from '../Logout/Logout';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 
 class NavBar extends Component{
     constructor(props) {
@@ -48,8 +52,11 @@ class NavBar extends Component{
         })
         .catch(error => console.log(error))    
     }
-    
+    static propTypes = {
+        auth: PropTypes.object.isRequired
+    };
     render(){
+        const { isAuthenticated, user } = this.props.auth;
         return(
             <React.Fragment>
                 <nav className="navbar navbar-expand-md bg-custom">
@@ -79,12 +86,13 @@ class NavBar extends Component{
                     </li>
                     </ul>
 
-                    {this.state.isLoggedIn
+                    {isAuthenticated
                     ? <React.Fragment>
-                        <Link to='/profile' className='nav-link'>{this.state.user.username}</Link>
-                        <form onSubmit={this.onLogoutClick}>
+                        <Link to='/profile' className='nav-link'>{user.username}</Link>
+                        {/*<form onSubmit={this.onLogoutClick}>
                             <input type='submit' value="Atsijungti" className='btn btn-outline-light'/>
-                        </form>
+                    </form>*/}
+                        <Logout/>
                         
                       </React.Fragment>
                     : (<Link className="btn btn-outline-light" to="/login" role="button">Login</Link>)}
@@ -98,4 +106,11 @@ class NavBar extends Component{
         );
     }
 }
-export default NavBar;
+const mapStateToProps = state => ({
+    auth: state.auth
+});
+  
+export default connect(
+    mapStateToProps,
+    null
+)(NavBar);

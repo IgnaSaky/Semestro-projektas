@@ -2,10 +2,13 @@ import React, { Component } from 'react'
 import './Login.css';
 import avatar from './man.png';
 import { Link, Redirect } from 'react-router-dom';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { login } from '../../actions/authActions';
+import { clearErrors } from '../../actions/errorActions';
 
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -13,6 +16,7 @@ export default class Login extends Component {
       email: '',
       password: '',
       rememberMe: false,
+      message: null,
       redirect: false
     };
   }
@@ -29,28 +33,37 @@ export default class Login extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const {email, password} = this.state;
-  
-    axios.post('/api/auth/login', {
+    const { email, password } = this.state;
+
+    const user = {
       email,
       password
-    }, {withCredentials:true})
-    .then(response => {
-      if (response.data.success) {
-        console.log('user logged in: ', response.data.user)       
-        console.log('logged in')
-        this.setState({
-          email: '',
-          password: '',
-          redirect: true
-        });
-      } else {
-        console.log('not logged in');
-      }
-     })
+    };
 
-    .catch(err => console.log(err) );
+    // Attempt to login
+    this.props.login(user);
   }
+  componentDidUpdate(prevProps) {
+    const { error, isAuthenticated } = this.props;
+    if (error !== prevProps.error) {
+      // Check for register error
+      if (error.id === 'LOGIN_FAIL') {
+        this.setState({ message: error.message.message });
+      } else {
+        this.setState({ message: null });
+      }
+    }
+    // If authenticated, close modal
+    if (isAuthenticated) {
+      this.setState({redirect:true}); 
+    }
+  }
+  static propTypes = {
+    isAuthenticated: PropTypes.bool,
+    error: PropTypes.object.isRequired,
+    login: PropTypes.func.isRequired,
+    clearErrors: PropTypes.func.isRequired
+  };
   /*resetForm = () =>{
     document.getElementById("loginForm").reset();
   }*/
@@ -108,3 +121,12 @@ export default class Login extends Component {
     )
   }
 }
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  error: state.error
+});
+
+export default connect(
+  mapStateToProps,
+  { login, clearErrors }
+)(Login);

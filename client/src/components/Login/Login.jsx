@@ -25,6 +25,7 @@ export default class Login extends Component {
   onChangePassword = (e) => {
     this.setState({ password: e.target.value });
   }
+
   onSubmit = (e) => {
     e.preventDefault();
 
@@ -33,15 +34,11 @@ export default class Login extends Component {
     axios.post('/api/auth/login', {
       email,
       password
-    })
+    }, {withCredentials:true})
     .then(response => {
-      localStorage.setItem('user', JSON.stringify(response.data.user));
-      return response;
-     })
-    .then(response => {
-      if (response.data.success) {       
-        
-        //setInStorage('user', response.data.user);
+      if (response.data.success) {
+        console.log('user logged in: ', response.data.user)       
+        console.log('logged in')
         this.setState({
           email: '',
           password: '',
@@ -50,7 +47,8 @@ export default class Login extends Component {
       } else {
         console.log('not logged in');
       }
-    })
+     })
+
     .catch(err => console.log(err) );
   }
   /*resetForm = () =>{

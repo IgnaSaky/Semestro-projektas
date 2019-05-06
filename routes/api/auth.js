@@ -3,25 +3,34 @@ const mysql = require('mysql');
 const router = express.Router({ mergeParams: true });
 const dbconfig = require('../../config/database');
 const db = mysql.createConnection(dbconfig.connection);
-
+const jwt = require('jsonwebtoken');
+const jwtKey = require('../../config/auth');
 const bcrypt = require('bcryptjs');
-const passport = require('passport');
+const auth = require('../../middleware/auth');
 //connection.query('USE ' + dbconfig.database); Kodėl reikia?
 
-router.get('/user', (req, res) => {
-    if(req.user){	
-        return res.status(200).json({ user: req.user })
-    } else {
-        return res.status(200).json({message: 'Neprisijunges'});
-    }	
+router.get('/user',auth.authenticate, (req, res) => {
+    const userID = req.user.id;
+    
+    const findByID = 'SELECT id,username,email,created FROM users where id = ?';
+    db.query(findByID,[userID], (err, rows) => {
+        console.log(rows);
+        if (rows && rows.length > 0) {
+            return res.json({user: rows[0]});
+        }
+        else {
+            return res.json({message: "Neprisijunges"});
+        }
+    })	
 });
 
-router.post('/login', passport.authenticate('local'), (req, res) => {
+
+/*router.post('/login', passport.authenticate('local'), (req, res) => {
     // If this function gets called, authentication was successful.
     // `req.user` contains the authenticated user
     /*delete req.user.password;
-    res.status(200).json({user: req.user});*/
-    const user = JSON.parse(JSON.stringify(req.user)) // hack
+    res.status(200).json({user: req.user});
+    const user = req.user
 	const cleanUser = Object.assign({}, user)
 	
 	if (cleanUser.password) {
@@ -30,17 +39,46 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
     res.json({ user: cleanUser, success: true });
 });
 
-router.get('/logout', (req, res) => {
-    req.logout();
-    res.json({message: "Atsijungta"});
-    /*if(req.user) {
-        req.logout();
-        req.session.destroy((err) => {
-            if (!err) {
-                res.status(200).clearCookie('connect.sid', {path: '/'}).json({message: "Atsijungta", success: true});
-            }
-        });
-    } else {return res.json({message: 'Neprisijunges', success: false})}*/
+router.post('/logout', (req, res) => {
+    if (req.user) {
+		req.logout();
+		return res.json({ msg: 'Atsijungta' });
+	} else {
+		return res.json({ msg: 'Nesata prisijungęs' });
+	}
+
+});*/
+router.post('/login', (req,res) => {
+    const {email, password} = req.body;
+    if (!email || !password) {
+        return res.status(400).json('Užpildykite visus laukelius');
+    }
+    const query = 'SELECT * FROM users WHERE email = ?';
+    db.query(query, [email], (err,rows) => {
+        
+        if(!rows || rows.length < 1) {
+            return res.status(400).json({message: 'Vartotojas su tokiu el. paštu neegzistuoja'});
+        }
+        //validate password
+        //console.log('password in login',rows[0].password);
+        bcrypt.compare(password,rows[0].password)
+        .then(isMatch => {
+            if (!isMatch) return res.status(400).json({message: "Neteisingas slaptažodis"});
+            
+            jwt.sign({
+                id: rows[0].id,
+                username: rows[0].username,
+                email: rows[0].email
+            }, jwtKey.secret, {expiresIn: 36000}, (err,token) => {
+                if (err) throw err;
+                //console.log('I got there');
+                 return res.status(200).json({success: true, user: rows[0],token});
+                
+            });
+        })
+
+    });
+    
 });
 router.post('/register', (req, res) => {
     const { username, email, password1, password2 } = req.body;
@@ -65,7 +103,7 @@ router.post('/register', (req, res) => {
                 res.status(400).json(errors);
             } else {
                 const today = new Date();
-                const newUser = {
+                let newUser = {
                     username,
                     password: password1,
                     email,
@@ -77,15 +115,28 @@ router.post('/register', (req, res) => {
                     newUser.password = hash;
                     const insertQuery = 'INSERT INTO users SET ?';
                     db.query(insertQuery, newUser, (err, rows) => {
-                        //const success = [];
+                        
                         if(err) {
                             errors.push('Įvyko klaida. Pabandykite dar kartą');
                             
                             return res.status(400).json(errors);
                         } else {
                            
-                            //res.redirect('/login')
-                            return res.status(200).json({success: true, errors:errors});
+                            const insertedUser = {
+                                username,
+                                email,
+                                id: rows.insertId
+                            }
+                            jwt.sign({
+                                id: insertedUser.id,
+                                username: insertedUser.username,
+                                email: insertedUser.email
+                            }, jwtKey.secret, {expiresIn: 36000}, (err,token) => {
+                                if (err) throw err;
+                                return res.status(200).json({success: true, user: insertedUser,token, errors:errors});
+                            });
+                            //console.log(rows)
+                            
                         }
                     });
                 });

@@ -65,7 +65,7 @@ export default class Register extends Component {
             email,
             password1,
             password2
-        })   
+        }, {withCredentials:true})   
         .then((response) => {
             console.log(response.status);
             if (response.data.success) {

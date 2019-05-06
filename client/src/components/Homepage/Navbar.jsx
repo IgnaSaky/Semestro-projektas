@@ -10,32 +10,47 @@ class NavBar extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            user: {},
+            user: null,
             isLoggedIn: false,
             redirect: false
         }
         this.onLogoutClick = this.onLogoutClick.bind(this);
     }
     componentDidMount() {
-        const userStorage = JSON.parse(localStorage.getItem('user'));
-        if (userStorage) {
-            this.setState({
-                user: userStorage,
-                isLoggedIn: true
-            });
-        }
+        axios.get('/api/auth/user', {withCredentials:true})
+        .then(response => {
+            console.log('user is CDM', response.data.user);
+            if (response.data.success) {
+                this.setState({
+                    user: response.data.user,
+                    isLoggedIn: true,
+ 
+                });
+            }
+            else {
+                console.log(response.data.message);
+            }
+        })
+        .catch(error => {
+            console.log('errror in componentdidmount in navbar');
+            console.log(error);
+        })
     }
     onLogoutClick(e) {
         e.preventDefault();
-        removeFromStorage('user');
-        axios.get('/api/auth/logout').then(response => {
+        axios.get('/api/auth/logout',{withCredentials:true})
+        .then(response => {
             console.log(response.data);
-            
+            if (response.status === 200) {
+				this.setState({
+					isLoggedIn: false,
+					user: null
+				})
+			}
         })
-        .catch(error => console.log(error))
-        
-        
+        .catch(error => console.log(error))    
     }
+    
     render(){
         return(
             <React.Fragment>

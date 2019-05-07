@@ -16,12 +16,12 @@ export class ProfilePage extends Component {
 
   render() {
     const { isAuthenticated,user } = this.props.auth;
-    
+    console.log('profile page props', this.props);
     return (
       <div>
         <NavBar/>
-        <Jumbotron user={user}/>
-        <Modal isAuthenticated={isAuthenticated} user={user}/>
+        <Jumbotron />
+        <Modal />
         <div style={{height:'500px'}}>
             Čia gal rodyti savo įkeltą bilietą/-us, kad būtų kažkiek didesnis puslapis ? Nzn ką dar galima
         </div>

@@ -3,7 +3,7 @@ import './css/Profile.css';
 
 
 function Jumbtron(props) {
-  console.log(props.user);
+  
   return (
     <div>
       <div className="container-fluid">

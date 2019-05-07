@@ -9,20 +9,24 @@ import PropTypes from 'prop-types';
 
 
 class NavBar extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            user: null,
-            isLoggedIn: false,
-            redirect: false
-        }
-    }
 
     static propTypes = {
         auth: PropTypes.object.isRequired
     };
     render(){
         const { isAuthenticated, user } = this.props.auth;
+        console.log('navbar props: ', this.props.auth);
+        const authLinks = (
+            <div>
+                <Link to='/profile' className='nav-link'>{user ? user.name : ''}</Link>
+                <Logout/>
+            </div>      
+        );
+        const guestLinks = (
+            <div>
+                <Link className="btn btn-outline-light" to="/login" role="button">Login</Link>
+            </div>
+        );
         //console.log('navbar', console.log(isAuthenticated));
         return(
             <React.Fragment>
@@ -53,20 +57,12 @@ class NavBar extends Component{
                     </li>
                     </ul>
 
-                    {isAuthenticated
-                    ? <React.Fragment>
-                        <Link to='/profile' className='nav-link'>{user.username}</Link>
-                        <Logout/>
-                        
-                      </React.Fragment>
-                    : (<Link className="btn btn-outline-light" to="/login" role="button">Login</Link>)}
+                    {isAuthenticated ? authLinks : guestLinks}
 
                 </div>
-                {this.state.redirect && (
-              <Redirect to={'/'} />
-            )}
                 </nav>
             </React.Fragment>
+    
         );
     }
 }
@@ -78,4 +74,3 @@ export default connect(
     mapStateToProps,
     null
 )(NavBar);
-

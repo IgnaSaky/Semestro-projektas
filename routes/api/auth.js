@@ -23,7 +23,7 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
     res.status(200).json({user: req.user});*/
     const user = JSON.parse(JSON.stringify(req.user)) // hack
     const cleanUser = Object.assign({}, user)
-    session = JSON.parse(JSON.stringify(req.user));
+    module.exports.session = JSON.parse(JSON.stringify(req.user));
 
     if (cleanUser.password) {
         delete cleanUser.password
@@ -92,39 +92,5 @@ router.post('/register', (req, res) => {
             }
         });
     }
-});
-
-router.post('/ticketSaving', (req, res) => {
-    const { title, description, price, whenPosted, file } = req.body;
-    let errors = [];
-    if (!title || !description || !price || !whenPosted || !file) {
-        errors.push('Please enter all fields');
-    }
-    //Math.floor(Math.random() * (+50 - +0)) + +0; 
-    const today = new Date();
-    const newTicket = {
-        fk_usersid: session.id,
-        title,
-        description,
-        price,
-        posted: today,
-        sold: false,
-        filePath: file,
-    }
-    console.log(newTicket);
-    const insertQuery = 'INSERT INTO tickets SET ?';
-    db.query(insertQuery, newTicket, (err) => {
-        //const success = [];
-        if (err) {
-            console.log(err.message);
-            errors.push('Ivyko klaida. Pabandykite dar karta');
-
-            return res.status(400).json(errors);
-        } else {
-
-            //res.redirect('/login')
-            return res.status(200).json({ success: true, errors: errors });
-        }
-    });
 });
 module.exports = router;

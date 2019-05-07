@@ -37,7 +37,7 @@ export default class TicketSaving extends Component {
             file: this.state.file
         }
 
-        axios.post('http://localhost:5000/api/auth/ticketSaving', data)
+        axios.post('http://localhost:5000/api/tickets/ticketSaving', data)
             .then(res => console.log(res.data))
             .catch(err => console.log(err));
 

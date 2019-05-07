@@ -43,7 +43,6 @@ router.get('/logout', (req, res) => {
 });
 router.post('/register', (req, res) => {
     const { username, email, password1, password2 } = req.body;
-
     let errors = [];
     if (!username || !email || !password1 || !password2) {
         errors.push('Please enter all fields');
@@ -79,10 +78,8 @@ router.post('/register', (req, res) => {
                             //const success = [];
                             if (err) {
                                 errors.push('Įvyko klaida. Pabandykite dar kartą');
-
                                 return res.status(400).json(errors);
                             } else {
-
                                 //res.redirect('/login')
                                 return res.status(200).json({ success: true, errors: errors });
                             }

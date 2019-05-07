@@ -11,7 +11,7 @@ function Jumbtron(props) {
             <p className="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
             <hr className="my-4"></hr>
             <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            <a className="btn btn-primary btn-md ml-3" href="/" role="button">Įkelti Bilietą</a>
+            <a className="btn btn-primary btn-md ml-3" href="/ticketSaving" role="button">Įkelti Bilietą</a>
             
             <button type="button" className="btn btn-primary ml-3" data-toggle="modal" data-target="#exampleModal">
               Keisti Slaptažodį

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2019 at 10:32 AM
+-- Generation Time: May 07, 2019 at 11:54 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -44,9 +44,8 @@ CREATE TABLE `tickets` (
 --
 
 INSERT INTO `tickets` (`id_tickets`, `fk_usersid`, `title`, `description`, `price`, `posted`, `sold`, `filePath`) VALUES
-(1, 0, 'fd', 'df', 0, '2019-05-07', 0, 'C:\\Users\\MASTER\\Desktop\\59376396_2370015096614494_8154698300033859584_n[1].jpg'),
-(2, 0, 'dfdf', 'fdfd', 0, '2019-05-07', 0, 'C:\\Users\\MASTER\\Desktop\\58749322_2370015009947836_8268620572393472000_o[1].jpg'),
-(3, 0, 'dfdf', 'dfdf', 0, '2019-05-07', 0, 'C:\\Users\\MASTER\\Desktop\\59376396_2370015096614494_8154698300033859584_n[1].jpg');
+(1, 9, 'trtr', 'trtr', 0, '2019-05-07', 0, 'C:\\Users\\MASTER\\Desktop\\59376396_2370015096614494_8154698300033859584_n[1].jpg'),
+(2, 9, 'lafdd', 'kfd', 0, '2019-05-07', 0, 'C:\\Users\\MASTER\\Desktop\\59376396_2370015096614494_8154698300033859584_n[1].jpg');
 
 -- --------------------------------------------------------
 
@@ -67,7 +66,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `created`) VALUES
-(0, 'Laurynas', '$2a$10$BDLE5SE4M.FaV5G1LknoCeNSRLzf4cnMxGtiKq7bNG3kLDK0OSos6', 'laurynas@gmail.com', '2019-05-06');
+(9, 'laurynas', '$2a$10$aPfL/soNSHaVb/wVH6e/VuaXkoA6drc.x21HSvfAHU4735aA244Hq', 'laurynas@gmail.com', '2019-05-07');
 
 --
 -- Indexes for dumped tables
@@ -94,7 +93,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id_tickets` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_tickets` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables

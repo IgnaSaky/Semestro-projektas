@@ -1,8 +1,8 @@
+   
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 import './Navbar.css';
-import axios from 'axios';
 import Logout from '../Logout/Logout';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -16,47 +16,14 @@ class NavBar extends Component{
             isLoggedIn: false,
             redirect: false
         }
-        this.onLogoutClick = this.onLogoutClick.bind(this);
     }
-    /*componentDidMount() {
-        axios.get('/api/auth/user', {withCredentials:true})
-        .then(response => {
-            console.log('user is CDM', response.data.user);
-            if (response.data.success) {
-                this.setState({
-                    user: response.data.user,
-                    isLoggedIn: true,
- 
-                });
-            }
-            else {
-                console.log(response.data.message);
-            }
-        })
-        .catch(error => {
-            console.log('errror in componentdidmount in navbar');
-            console.log(error);
-        })
-    }*/
-    onLogoutClick(e) {
-        e.preventDefault();
-        axios.get('/api/auth/logout',{withCredentials:true})
-        .then(response => {
-            console.log(response.data);
-            if (response.status === 200) {
-				this.setState({
-					isLoggedIn: false,
-					user: null
-				})
-			}
-        })
-        .catch(error => console.log(error))    
-    }
+
     static propTypes = {
         auth: PropTypes.object.isRequired
     };
     render(){
         const { isAuthenticated, user } = this.props.auth;
+        //console.log('navbar', console.log(isAuthenticated));
         return(
             <React.Fragment>
                 <nav className="navbar navbar-expand-md bg-custom">
@@ -111,3 +78,4 @@ export default connect(
     mapStateToProps,
     null
 )(NavBar);
+

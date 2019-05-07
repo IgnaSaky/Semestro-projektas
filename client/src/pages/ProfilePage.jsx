@@ -3,23 +3,25 @@ import NavBar from '../components/Homepage/Navbar';
 import Jumbotron from '../components/Profile/Jumbtron'
 import Modal from '../components/Profile/Modal';
 import Footer from '../components/Homepage/Footer';
+//redux 
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 
 export class ProfilePage extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            user: {}
-        }
-    }
-    componentDidMount(){
 
-    }
+  static propTypes = {
+    auth: PropTypes.object.isRequired
+  };
+
   render() {
+    const { isAuthenticated,user } = this.props.auth;
+    
     return (
       <div>
         <NavBar/>
-        <Jumbotron user={this.state.user}/>
-        <Modal user={this.state.user}/>
+        <Jumbotron user={user}/>
+        <Modal isAuthenticated={isAuthenticated} user={user}/>
         <div style={{height:'500px'}}>
             Čia gal rodyti savo įkeltą bilietą/-us, kad būtų kažkiek didesnis puslapis ? Nzn ką dar galima
         </div>
@@ -29,5 +31,12 @@ export class ProfilePage extends Component {
   }
 }
 
-export default ProfilePage
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(ProfilePage);
 

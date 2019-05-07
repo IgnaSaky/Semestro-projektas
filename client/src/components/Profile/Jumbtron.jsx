@@ -3,11 +3,12 @@ import './css/Profile.css';
 
 
 function Jumbtron(props) {
+
   return (
     <div>
       <div className="container-fluid">
         <div className="jumbotron blue">
-            <h1 className="display-4">Sveiki, {props.user.username}</h1>
+            <h1 className="display-4">Sveiki, { "\"username\""}</h1>
             <p className="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
             <hr className="my-4"></hr>
             <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
@@ -22,4 +23,4 @@ function Jumbtron(props) {
   )
 }
 
-export default Jumbtron
+export default Jumbtron;

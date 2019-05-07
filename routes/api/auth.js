@@ -3,7 +3,7 @@ const mysql = require('mysql');
 const router = express.Router({ mergeParams: true });
 const dbconfig = require('../../config/database');
 const db = mysql.createConnection(dbconfig.connection);
-
+var session;
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 //connection.query('USE ' + dbconfig.database); Kodėl reikia?
@@ -23,6 +23,7 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
     res.status(200).json({user: req.user});*/
     const user = JSON.parse(JSON.stringify(req.user)) // hack
     const cleanUser = Object.assign({}, user)
+    session = JSON.parse(JSON.stringify(req.user));
 
     if (cleanUser.password) {
         delete cleanUser.password
@@ -94,26 +95,29 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/ticketSaving', (req, res) => {
-    const { title, description, x1price, whenPosted, file } = req.body;
-
+    const { title, description, price, whenPosted, file } = req.body;
     let errors = [];
-    if (!title || !description || !x1price || !whenPosted || !file) {
+    if (!title || !description || !price || !whenPosted || !file) {
         errors.push('Please enter all fields');
     }
+    //Math.floor(Math.random() * (+50 - +0)) + +0; 
     const today = new Date();
     const newTicket = {
+        fk_usersid: session.id,
         title,
         description,
-        x1price,
-        whenPosted,
-        file,
+        price,
+        posted: today,
+        sold: false,
+        filePath: file,
     }
-    console.log(file);
-    const insertQuery = 'INSERT INTO ticket SET ?';
-    db.query(insertQuery, newTicket, (err, rows) => {
+    console.log(newTicket);
+    const insertQuery = 'INSERT INTO tickets SET ?';
+    db.query(insertQuery, newTicket, (err) => {
         //const success = [];
         if (err) {
-            errors.push('Įvyko klaida. Pabandykite dar kartą');
+            console.log(err.message);
+            errors.push('Ivyko klaida. Pabandykite dar karta');
 
             return res.status(400).json(errors);
         } else {

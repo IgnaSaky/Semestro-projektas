@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/authActions';
 import { clearErrors } from '../../actions/errorActions';
+import { Alert } from  'reactstrap';
 
 
 class Login extends Component {
@@ -75,6 +76,7 @@ class Login extends Component {
               <div className="card card-body fix-logo-translate">
                 <img className="user-logo" src={avatar} alt='user icon' />
                 <h1 className="text-center mb-3"><i className="fas fa-sign-in-alt"></i> Prisijunk!</h1>
+                {this.state.message ? <Alert color='danger'>{this.state.message}</Alert> : null}
                 <form onSubmit={this.onSubmit} method="POST" id="loginForm">
                   <div className="form-group">
                     <label htmlFor="email">El. paštas</label>

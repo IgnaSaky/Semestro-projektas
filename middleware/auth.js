@@ -10,7 +10,7 @@ auth.authenticate = function(req,res,next) {
     const token = req.header('x-auth-token');
     //check if token exist
     if (!token) {
-        res.status(401).json({message: "No token. Authorizations denied"});
+        return res.status(401).json({message: "No token. Authorizations denied"});
     }
     try {
         const decoded = jwt.verify(token, jwtKey.secret);
@@ -19,7 +19,7 @@ auth.authenticate = function(req,res,next) {
         
         next();
     } catch (error) {
-        res.status(400).json({message: 'Token is not valid'});
+        return res.status(400).json({message: 'Token is not valid'});
     }
     //verify token
 

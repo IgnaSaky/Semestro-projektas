@@ -89,9 +89,6 @@ class NavBar extends Component{
                     {isAuthenticated
                     ? <React.Fragment>
                         <Link to='/profile' className='nav-link'>{user.username}</Link>
-                        {/*<form onSubmit={this.onLogoutClick}>
-                            <input type='submit' value="Atsijungti" className='btn btn-outline-light'/>
-                    </form>*/}
                         <Logout/>
                         
                       </React.Fragment>

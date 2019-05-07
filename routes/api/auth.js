@@ -14,7 +14,7 @@ router.get('/user',auth.authenticate, (req, res) => {
     
     const findByID = 'SELECT id,username,email,created FROM users where id = ?';
     db.query(findByID,[userID], (err, rows) => {
-        console.log(rows);
+        console.log('from /api/auth/user',rows);
         if (rows && rows.length > 0) {
             return res.json({user: rows[0]});
         }
@@ -51,7 +51,7 @@ router.post('/logout', (req, res) => {
 router.post('/login', (req,res) => {
     const {email, password} = req.body;
     if (!email || !password) {
-        return res.status(400).json('Užpildykite visus laukelius');
+        return res.status(400).json({message:'Užpildykite visus laukelius'});
     }
     const query = 'SELECT * FROM users WHERE email = ?';
     db.query(query, [email], (err,rows) => {
@@ -83,24 +83,14 @@ router.post('/login', (req,res) => {
 router.post('/register', (req, res) => {
     const { username, email, password1, password2 } = req.body;
     
-    let errors = [];
-    if (!username || !email || !password1 || !password2) {
-      errors.push('Please enter all fields' );
-    } 
-    if (password1 != password2) {
-      errors.push('Passwords do not match');
-    }  
-    if (password1.length < 6) {
-      errors.push('Password must be at least 6 characters');
-    }
-    if (errors && errors.length > 0) {
-      res.json({errors:errors, success: false})
+    if(!username || !email || !password1 || !password2) {
+        return res.status(400).json({ message: 'Užpildykite visus laukelius' });
     } else {
         const query = 'SELECT * FROM users WHERE email = ? OR username = ?';
         db.query(query, [email, username], (err,rows) => {
             if(rows && rows.length > 0) {
-                errors.push('El. pašto adresas arba vartotojo vardas jau naudojamas');
-                res.status(400).json(errors);
+                
+                res.status(400).json({message:"Toks vartotojas neegzistuoja"});
             } else {
                 const today = new Date();
                 let newUser = {
@@ -116,10 +106,8 @@ router.post('/register', (req, res) => {
                     const insertQuery = 'INSERT INTO users SET ?';
                     db.query(insertQuery, newUser, (err, rows) => {
                         
-                        if(err) {
-                            errors.push('Įvyko klaida. Pabandykite dar kartą');
-                            
-                            return res.status(400).json(errors);
+                        if(err) {     
+                            return res.status(400).json({message: 'Įvyko klaida. Pabandykite dar kartą'});
                         } else {
                            
                             const insertedUser = {
@@ -133,7 +121,7 @@ router.post('/register', (req, res) => {
                                 email: insertedUser.email
                             }, jwtKey.secret, {expiresIn: 36000}, (err,token) => {
                                 if (err) throw err;
-                                return res.status(200).json({success: true, user: insertedUser,token, errors:errors});
+                                return res.status(200).json({success: true, user: insertedUser,token});
                             });
                             //console.log(rows)
                             

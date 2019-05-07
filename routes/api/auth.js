@@ -24,30 +24,6 @@ router.get('/user',auth.authenticate, (req, res) => {
     })	
 });
 
-
-/*router.post('/login', passport.authenticate('local'), (req, res) => {
-    // If this function gets called, authentication was successful.
-    // `req.user` contains the authenticated user
-    /*delete req.user.password;
-    res.status(200).json({user: req.user});
-    const user = req.user
-	const cleanUser = Object.assign({}, user)
-	
-	if (cleanUser.password) {
-		delete cleanUser.password
-	}
-    res.json({ user: cleanUser, success: true });
-});
-
-router.post('/logout', (req, res) => {
-    if (req.user) {
-		req.logout();
-		return res.json({ msg: 'Atsijungta' });
-	} else {
-		return res.json({ msg: 'Nesata prisijungęs' });
-	}
-
-});*/
 router.post('/login', (req,res) => {
     const {email, password} = req.body;
     if (!email || !password) {
@@ -90,7 +66,7 @@ router.post('/register', (req, res) => {
         db.query(query, [email, username], (err,rows) => {
             if(rows && rows.length > 0) {
                 
-                res.status(400).json({message:"Toks vartotojas neegzistuoja"});
+                res.status(400).json({message:"Toks vartotojas jau registruotas"});
             } else {
                 const today = new Date();
                 let newUser = {
@@ -104,7 +80,7 @@ router.post('/register', (req, res) => {
                     if (err) throw err;
                     newUser.password = hash;
                     const insertQuery = 'INSERT INTO users SET ?';
-                    db.query(insertQuery, newUser, (err, rows) => {
+                    db.query(insertQuery, [newUser], (err, rows) => {
                         
                         if(err) {     
                             return res.status(400).json({message: 'Įvyko klaida. Pabandykite dar kartą'});
@@ -123,8 +99,7 @@ router.post('/register', (req, res) => {
                                 if (err) throw err;
                                 return res.status(200).json({success: true, user: insertedUser,token});
                             });
-                            //console.log(rows)
-                            
+                            //console.log(rows)               
                         }
                     });
                 });

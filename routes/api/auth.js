@@ -14,7 +14,7 @@ router.get('/user',auth.authenticate, (req, res) => {
     
     const findByID = 'SELECT id,username,email,created FROM users where id = ?';
     db.query(findByID,[userID], (err, rows) => {
-        console.log('from /api/auth/user',rows);
+        //console.log('from /api/auth/user',rows);
         if (rows && rows.length > 0) {
             return res.json({user: rows[0]});
         }

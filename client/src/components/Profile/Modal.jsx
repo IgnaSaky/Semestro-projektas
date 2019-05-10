@@ -26,8 +26,6 @@ export class Modal extends Component {
     handleSubmit(e) {
         const { id } = this.props.user
         e.preventDefault();
-        console.log(this.state);
-        console.log(this.props);
         
         axios.put(`/api/users/${id}`,{
             oldPassword: this.state.oldPassword,

@@ -1,33 +1,27 @@
    
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import { Redirect } from 'react-router-dom';
 import './Navbar.css';
 import Logout from '../Logout/Logout';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 
-class NavBar extends Component{
-
-    static propTypes = {
-        auth: PropTypes.object.isRequired
-    };
+class NavBar extends Component {
+    
     render(){
         const { isAuthenticated, user } = this.props.auth;
-        console.log('navbar props: ', this.props.auth);
+
         const authLinks = (
-            <div>
-                <Link to='/profile' className='nav-link'>{user ? user.name : ''}</Link>
-                <Logout/>
-            </div>      
+            <React.Fragment>
+                <Link to='/profile' className='nav-link'>{user ? user.user.username: ''}</Link>
+                <Logout/>   
+            </React.Fragment>  
         );
-        const guestLinks = (
-            <div>
-                <Link className="btn btn-outline-light" to="/login" role="button">Login</Link>
-            </div>
+        const guestLinks = (          
+                <Link className="btn btn-outline-light" to="/login" role="button">Login</Link>           
         );
-        //console.log('navbar', console.log(isAuthenticated));
+        
         return(
             <React.Fragment>
                 <nav className="navbar navbar-expand-md bg-custom">
@@ -66,6 +60,12 @@ class NavBar extends Component{
         );
     }
 }
+
+
+NavBar.propTypes = {
+    auth: PropTypes.object.isRequired
+};
+
 const mapStateToProps = state => ({
     auth: state.auth
 });

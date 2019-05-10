@@ -30,6 +30,7 @@ export const loadUser = () => (dispatch, getState) => {
       dispatch({
         type: AUTH_ERROR
       });
+      
     });
 };
 

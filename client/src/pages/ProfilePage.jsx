@@ -10,18 +10,14 @@ import PropTypes from 'prop-types';
 
 export class ProfilePage extends Component {
 
-  static propTypes = {
-    auth: PropTypes.object.isRequired
-  };
-
   render() {
-    const { isAuthenticated,user } = this.props.auth;
-    console.log('profile page props', this.props);
+    const { user } = this.props.auth;
+
     return (
       <div>
         <NavBar/>
-        <Jumbotron />
-        <Modal />
+        <Jumbotron user={user.user}/>
+        <Modal user={user.user}/>
         <div style={{height:'500px'}}>
             Čia gal rodyti savo įkeltą bilietą/-us, kad būtų kažkiek didesnis puslapis ? Nzn ką dar galima
         </div>
@@ -30,6 +26,10 @@ export class ProfilePage extends Component {
     )
   }
 }
+
+ProfilePage.propTypes = {
+  auth: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
   auth: state.auth

@@ -4,7 +4,7 @@ import './SearchBar.css';
 class SearchBar extends Component{
     constructor (props){
         super(props);
-        this.items=[
+        /*this.items=[
             "Eurolyga: Zalgiris-Fenerbahce",
             "Eurolyga: Zalgiris-Panathinaikos",
             "Eurolyga: Zalgiris-CSKA",
@@ -14,7 +14,7 @@ class SearchBar extends Component{
             "Barakiada",
             "Teatralas",
             "Auksinis lietus"
-        ];
+        ];*/
         /*fetch('http://localhost:5000/api/autoTextCompletion')
         .then(response => response.json())
         .then(users => {
@@ -23,6 +23,7 @@ class SearchBar extends Component{
         this.state={
             suggestions: [],
             text: '',
+            items: [],
         };
     }
     onTextChanged = (e) => {
@@ -30,7 +31,7 @@ class SearchBar extends Component{
         let suggestions=[];
         if(value.length>0){
             const regex=new RegExp(`^${value}`, 'i');
-            suggestions=this.items.sort().filter(v => regex.test(v)); 
+            suggestions=this.state.items.sort().filter(v => regex.test(v)); 
         }
         this.setState(() => ({suggestions, text:value}));
     }
@@ -41,7 +42,7 @@ class SearchBar extends Component{
         }
         return (
             <ul className="suggestion-container">
-            {suggestions.map((item) => <li className="suggestion" onClick={() => this.suggestionSelected(item)}>{item}</li>)}
+            {suggestions.map((item) => <li className="suggestion" key={item} onClick={() => this.suggestionSelected(item)}>{item}</li>)}
             </ul>    
         );
     }
@@ -51,14 +52,17 @@ class SearchBar extends Component{
             suggestions:[],
         }));
     }
-    /*ComponentDidMount(){
+    componentDidMount(){
         fetch('http://localhost:5000/api/AutoTextCompletion')
         .then(response => response.json())
         .then(users => {
-            this.items=users;
-            //this.setState({suggestions: users})
+            //this.items=users;
+            for(let i = 0; i< users.length; i++){
+                this.state.items.push(users[i].title);
+            }
+
         });
-    }*/
+    }
     render(){
         const {text}=this.state;
         return(

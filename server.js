@@ -6,6 +6,7 @@ const cors = require('cors');
 const customerRoutes = require('./routes/api/customers') //importina routes is routes/api
 const authRoutes = require('./routes/api/auth');
 const autoTextCompletion=require('./routes/api/autoTextCompletion');
+const eventRoutes = require('./routes/api/events');
 
 // Tokiu nesamoniu zinot nereikia. Paimta is express docs. Ju reikia kad butu galima extractint data is formu
 app.use(cors())
@@ -18,6 +19,7 @@ app.use(methodOverride('_method'));  // Kad butu galima i ta pati route siusti G
 app.use('/api/customers', customerRoutes);   // naudoja routes
 app.use('/api/auth', authRoutes);   // naudoja routes
 app.use('/api/autoTextCompletion', autoTextCompletion);
+app.use('/api/events', eventRoutes);
 
 
 

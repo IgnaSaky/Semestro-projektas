@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import './SearchBar.css';
 
-
-
 class SearchBar extends Component{
     constructor (props){
         super(props);
         this.items=[
-            "Žalgiris",
+            "Eurolyga: Zalgiris-Fenerbahce",
+            "Eurolyga: Zalgiris-Panathinaikos",
+            "Eurolyga: Zalgiris-CSKA",
             "Granatos",
             "Eminemas",
             "Auksiniai svogūnai",
@@ -15,18 +15,22 @@ class SearchBar extends Component{
             "Teatralas",
             "Auksinis lietus"
         ];
+        /*fetch('http://localhost:5000/api/autoTextCompletion')
+        .then(response => response.json())
+        .then(users => {
+            this.items=users;
+        });*/
         this.state={
             suggestions: [],
             text: '',
         };
     }
-
     onTextChanged = (e) => {
         const value=e.target.value;
         let suggestions=[];
         if(value.length>0){
             const regex=new RegExp(`^${value}`, 'i');
-            suggestions=this.items.sort().filter(v => regex.test(v));
+            suggestions=this.items.sort().filter(v => regex.test(v)); 
         }
         this.setState(() => ({suggestions, text:value}));
     }
@@ -47,6 +51,14 @@ class SearchBar extends Component{
             suggestions:[],
         }));
     }
+    /*ComponentDidMount(){
+        fetch('http://localhost:5000/api/AutoTextCompletion')
+        .then(response => response.json())
+        .then(users => {
+            this.items=users;
+            //this.setState({suggestions: users})
+        });
+    }*/
     render(){
         const {text}=this.state;
         return(
@@ -57,6 +69,7 @@ class SearchBar extends Component{
                 {this.renderSuggestions()}
             </div>
         </div>
+
         );
     }
 }

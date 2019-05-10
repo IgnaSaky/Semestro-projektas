@@ -11,7 +11,11 @@ import PropTypes from 'prop-types';
 export class ProfilePage extends Component {
 
   render() {
-    const { user } = this.props.auth;
+    const { user , isAuthenticated} = this.props.auth;
+
+    if (!isAuthenticated) {
+      return(<p>Prisijunkite</p>);
+    }
 
     return (
       <div>

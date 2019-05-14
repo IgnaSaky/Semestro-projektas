@@ -6,6 +6,8 @@ const morgan = require('morgan');
 const cors = require('cors');
 const customerRoutes = require('./routes/api/customers') //importina routes is routes/api
 const authRoutes = require('./routes/api/auth');
+const autoTextCompletion=require('./routes/api/autoTextCompletion');
+const eventRoutes = require('./routes/api/events');
 
 
 const passport = require('passport');
@@ -40,6 +42,8 @@ app.use(function(req, res, next){
 
 app.use('/api/customers', customerRoutes);   // naudoja routes
 app.use('/api/auth', authRoutes);   // naudoja routes
+app.use('/api/autoTextCompletion', autoTextCompletion);
+app.use('/api/events', eventRoutes);
 
 
 

@@ -1,6 +1,7 @@
 import React, { Component} from 'react';
 import './MapContainer.css';
 import image from '../../images/Lietuva.png';
+import {Link} from 'react-router-dom';
 
 class MapContainer extends Component{
     render(){
@@ -20,24 +21,24 @@ class MapContainer extends Component{
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="-300 0 1270 1000" preserveAspectRatio="xMidYMin" >
                     <image width="635" height="500" href={image} />
                         <g className="hover_group" opacity="0">
-                            <a href="/">
+                            <Link to="/">
                                 <circle cx="311" cy="302" r="13" opacity="0.2" fill="#FFFFFF"></circle>{/*kaunas */}
-                            </a>
+                            </Link>
                         </g>
                         <g className="hover_group" opacity="0">
-                            <a href="/">
+                            <Link to="/">
                                 <circle cx="462" cy="343" r="13" opacity="0.2" fill="#FFFFFF"></circle>{/*vilnius */}
-                            </a>
+                            </Link>
                         </g>
                         <g className="hover_group" opacity="0">
-                            <a href="/">
+                            <Link to="/">
                                 <circle cx="246" cy="103" r="13" opacity="0.2" fill="#FFFFFF"></circle>{/*siauliai */}
-                            </a>
+                            </Link>
                         </g>
                         <g className="hover_group" opacity="0">
-                            <a href="/">
+                            <Link to="/">
                                 <circle cx="15" cy="140" r="13" opacity="0.2" fill="#FFFFFF"></circle>{/*klaipeda */}
-                            </a>
+                            </Link>
                         </g>
                     </svg>
                 </figure>

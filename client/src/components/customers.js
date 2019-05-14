@@ -8,7 +8,6 @@ class Customers extends Component {
       customers: []
     };
   }
-
   componentDidMount() {
     fetch('/api/customers')
       .then(res => res.json())

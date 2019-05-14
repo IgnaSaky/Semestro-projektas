@@ -1,0 +1,16 @@
+
+.cardStyle:hover > .overlay {
+    width:100%;
+    height:100%;
+    background-color:rgb(46, 40, 40);
+    transition: 0.5s;
+    color:white;
+}
+.overlay{
+    width: 100%;
+    height: 100%;
+}
+.cardStyle{
+    padding: 0px;
+    background-color: white;
+}

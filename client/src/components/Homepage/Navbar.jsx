@@ -14,7 +14,7 @@ class NavBar extends Component {
 
         const authLinks = (
             <React.Fragment>
-                <Link to='/profile' className='nav-link'>{user ? user.user.username: ''}</Link>
+                <Link to='/profile' className='nav-link'>{user ? user.username: ''}</Link>
                 <Logout/>   
             </React.Fragment>  
         );

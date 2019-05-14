@@ -1,8 +1,8 @@
 import React from 'react'
 import './css/Profile.css';
 
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+/*import { connect } from 'react-redux';
+import PropTypes from 'prop-types';*/
 
 function Jumbtron(props) {
   

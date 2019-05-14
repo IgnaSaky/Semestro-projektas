@@ -3,6 +3,7 @@ module.exports = {
      host:'localhost',
      user:'root',
      password:'',
-     database:'semstroprojektas'
-    }
+     database:'semestroprojektas'
+    },
+    database:'semestroprojektas'
 }

@@ -5,11 +5,8 @@ import store from './store';
 import home from './pages/home.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
-<<<<<<< HEAD
 import dashboard from './pages/dashboard.jsx';
-=======
 import ProfilePage from './pages/ProfilePage.jsx';
->>>>>>> TAS12
 import './App.css';
 
 import { loadUser } from './actions/authActions'
@@ -22,17 +19,6 @@ class App extends Component {
 
   render() {
     return (
-<<<<<<< HEAD
-      <Router>
-        <div>
-          <Route exact path="/" component={home} />
-          <Route path="/login" component={LoginPage} />
-          <Route path="/register" component={RegisterPage} />
-          <Route path="/dashboard" component={dashboard} />
-
-        </div>
-      </Router>
-=======
       <Provider store={store}>
         <Router>
           <div>
@@ -40,11 +26,11 @@ class App extends Component {
             <Route path="/login" component={LoginPage} />
             <Route path="/register" component={RegisterPage} />
             <Route path="/profile" component={ProfilePage} />
+            <Route path="/dashboard" component={dashboard} />
           </div>
         </Router>
       </Provider>
       
->>>>>>> TAS12
     );
   }
 }

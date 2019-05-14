@@ -9,6 +9,7 @@ const authRoutes = require('./routes/api/auth');
 const autoTextCompletion=require('./routes/api/autoTextCompletion');
 const eventRoutes = require('./routes/api/events');
 
+const userRoutes = require('./routes/api/users');
 
 const passport = require('passport');
 const session = require('express-session');
@@ -21,24 +22,15 @@ app.use(morgan('dev')); //logger
 //PASSPORT
 require('./config/passport')(passport);
 
-
 app.use(session({
       secret: 'secret',
-      resave: false,
-      saveUninitialized: false
+      resave: true,
+      saveUninitialized: true
     })
 );  
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.use(function(req, res, next){
-    res.locals.currentUser = req.user;
-    next();
-});
-
-
-
 
 app.use('/api/customers', customerRoutes);   // naudoja routes
 app.use('/api/auth', authRoutes);   // naudoja routes
@@ -47,6 +39,7 @@ app.use('/api/events', eventRoutes);
 
 
 
+app.use('/api/users', userRoutes);
 
 // Serveris
 const port = 5000;

@@ -1,11 +1,29 @@
+   
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import './Navbar.css';
+import Logout from '../Logout/Logout';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-class NavBar extends Component{
+
+class NavBar extends Component {
+    
     render(){
+        const { isAuthenticated, user } = this.props.auth;
+
+        const authLinks = (
+            <React.Fragment>
+                <Link to='/profile' className='nav-link'>{user ? user.user.username: ''}</Link>
+                <Logout/>   
+            </React.Fragment>  
+        );
+        const guestLinks = (          
+                <Link className="btn btn-outline-light" to="/login" role="button">Login</Link>           
+        );
+        
         return(
-            <div className="">
+            <React.Fragment>
                 <nav className="navbar navbar-expand-md bg-custom">
                 <Link className="navbar-brand" to="/">Bilietų pardavimas</Link>
                 <button className="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,12 +51,26 @@ class NavBar extends Component{
                     </li>
                     </ul>
 
-                    <Link className="btn btn-outline-light" to="/login" role="button">Login</Link>
+                    {isAuthenticated ? authLinks : guestLinks}
 
                 </div>
                 </nav>
-            </div>
+            </React.Fragment>
+    
         );
     }
 }
-export default NavBar;
+
+
+NavBar.propTypes = {
+    auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+    auth: state.auth
+});
+  
+export default connect(
+    mapStateToProps,
+    null
+)(NavBar);

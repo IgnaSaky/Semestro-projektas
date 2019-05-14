@@ -1,16 +1,25 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Avatar from './images.png';
-import axios from 'axios';
+//import axios from 'axios';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux'
+import { register } from '../../actions/authActions';
+import { clearErrors } from '../../actions/errorActions';
+import { Alert } from 'reactstrap';
 
-export default class Register extends Component {
+class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            
             username: '',
             email: '',
             password1: '',
-            password2: ''
+            password2: '',
+            message: null,
+            success: false,
+            redirect: false
         }
         this.handleUsername = this.handleUsername.bind(this);
         this.handleEmail = this.handleEmail.bind(this);
@@ -19,42 +28,63 @@ export default class Register extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleUsername(e) {
-        this.setState({ username: e.target.value });
+        this.setState({
+            username: e.target.value
+        });
     }
     handleEmail(e) {
-        this.setState({ email: e.target.value });
+        this.setState({
+            email: e.target.value
+        });
     }
     handlePassword1(e) {
-        this.setState({ password1: e.target.value });
+        this.setState({
+            password1: e.target.value
+        })
     }
     handlePassword2(e) {
-        this.setState({ password2: e.target.value });
+        this.setState({ 
+            password2: e.target.value
+        });
     }
+    
     handleSubmit(e) {
-        e.preventDefault();
-        
+        e.preventDefault();    
         const {username, email, password1, password2} = this.state;
-        const data = {
+        const newUser = {
             username,
             email,
             password1,
             password2
         }
-        
-        axios.post('/api/auth/register', data)
-            .catch((err) => console.log(err));
-
-        this.setState({
-            username: '',
-            email: '',
-            password1: '',
-            password2: ''
-        });
-    }
     
-    resetForm = () =>{
-        document.getElementById("registerForm").reset();
+        // Attempt to register
+        this.props.register(newUser);
     }
+    static propTypes = {
+        isAuthenticated: PropTypes.bool,
+        error: PropTypes.object.isRequired,
+        register: PropTypes.func.isRequired,
+        clearErrors: PropTypes.func.isRequired
+    };
+    componentDidUpdate(prevProps) {
+        const {error, isAuthenticated} = this.props;
+        if (error !== prevProps.error) {
+            //check for REgister errors
+            if (error.id === "REGISTER_FAIL") {
+                console.log(error.message);
+                this.setState({message: error.message.message});
+            } else {
+                this.setState({message: null});
+            }
+        }
+        // If authenticated, redirect
+        if (isAuthenticated) {
+            this.setState({redirect:true});
+        }
+        
+    }
+
     render() {
         return (
             <div className="container">
@@ -63,31 +93,73 @@ export default class Register extends Component {
                         <div className="card card-body fix-logo-translate">
                             <img className='user-logo' src={Avatar} alt="avatar" />
                             <h1 className="text-center mb-3">Registruokis!</h1>
-                            <form onSubmit={this.handleSubmit} action="" method="POST" id="registerForm">
+                            {this.state.message ? <Alert color='danger'>{this.state.message}</Alert> : null}
+                            <form onSubmit={this.handleSubmit}  method="POST" id="registerForm">
                                 <div className="form-group">
-                                    <label htmlFor="name">Vartotojo vardas</label>
-                                    <input onChange={this.handleUsername} type="text" name="username" className="form-control" placeholder="Vartotojo vardas" />
+                                    <label htmlFor="username">Vartotojo vardas</label>
+                                    <input
+                                        value={this.state.username}
+                                        onChange={this.handleUsername} 
+                                        type="text" 
+                                        className="form-control" 
+                                        placeholder="Vartotojo vardas" 
+                                        id="username"
+                                    />
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="email">El. pašto adresas</label>
-                                    <input onChange={this.handleEmail} type="email" name="email" className="form-control" placeholder="El. paštas" />
+                                    <input 
+                                        value={this.state.email}
+                                        onChange={this.handleEmail} 
+                                        type="email" 
+                                        className="form-control" 
+                                        placeholder="El. paštas" 
+                                        id="email"
+                                    />
                                     <small id="emailHelp" className="form-text text-muted">Jūsų el. paštas nebus niekur naudojamas</small>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="password">Slaptažodis</label>
-                                    <input onChange={this.handlePassword1} type="password" name="password1" className="form-control" placeholder="Slaptažodis" />
+                                    <input 
+                                        value={this.state.password1}
+                                        onChange={this.handlePassword1} 
+                                        type="password"
+                                        className="form-control"
+                                        placeholder="Slaptažodis" 
+                                        id="password"
+                                    />
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="password2">Patvirtinti slaptažodį</label>
-                                    <input onChange={this.handlePassword2} type="password" id="password2" name="password2" className="form-control" placeholder="Pakartokite slaptažodį" />
+                                    <input 
+                                        value={this.state.password2}
+                                        onChange={this.handlePassword2} 
+                                        type="password" 
+                                        id="password2"  
+                                        placeholder="Pakartokite slaptažodį" 
+                                        className="form-control" 
+                                    />
                                 </div>
-                                <button type="submit" className="btn btn-danger btn-block" onClick={this.resetForm}>Registruotis</button>
+                                <button type="submit" className="btn btn-danger btn-block" onClick={this.handleSubmit}>Registruotis</button>
                             </form>
                             <p style={{ textAlign: 'left' }} className="lead mt-4">Jau užsiregistravęs? <Link to="/login"> Prisijungti</Link></p>
                         </div>
                     </div>
                 </div>
+                {this.state.redirect && (
+                   <Redirect to={'/'} />
+                )}
             </div>
         )
     }
 }
+
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated,
+    error: state.error
+});
+
+export default connect(
+    mapStateToProps,
+    {register, clearErrors}
+)(Register);

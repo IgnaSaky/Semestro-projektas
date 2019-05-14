@@ -7,6 +7,7 @@ import LoginPage from './pages/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 import dashboard from './pages/dashboard.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
+import TicketSavingPage from './pages/TicketSavingPage.jsx';
 import './App.css';
 
 import { loadUser } from './actions/authActions'
@@ -27,6 +28,7 @@ class App extends Component {
             <Route path="/register" component={RegisterPage} />
             <Route path="/profile" component={ProfilePage} />
             <Route path="/dashboard" component={dashboard} />
+            <Route path="/ticketSaving" component={TicketSavingPage} />
           </div>
         </Router>
       </Provider>

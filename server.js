@@ -9,6 +9,7 @@ const authRoutes = require('./routes/api/auth');
 const eventRoutes = require('./routes/api/events');
 const userRoutes = require('./routes/api/users');
 const autoTextCompletion=require('./routes/api/autoTextCompletion');
+const ticketRoutes = require('./routes/api/tickets');
 
 const passport = require('passport');
 const session = require('express-session');
@@ -39,6 +40,8 @@ app.use('/api/autoTextCompletion', autoTextCompletion);
 
 
 app.use('/api/users', userRoutes);
+app.use('/api/tickets', ticketRoutes);
+
 
 // Serveris
 const port = 5000;

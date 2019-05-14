@@ -20,8 +20,8 @@ export class ProfilePage extends Component {
     return (
       <div>
         <NavBar/>
-        <Jumbotron user={user.user}/>
-        <Modal user={user.user}/>
+        <Jumbotron user={user}/>
+        <Modal user={user}/>
         <div style={{height:'500px'}}>
             Čia gal rodyti savo įkeltą bilietą/-us, kad būtų kažkiek didesnis puslapis ? Nzn ką dar galima
         </div>

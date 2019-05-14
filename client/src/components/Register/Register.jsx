@@ -84,10 +84,7 @@ class Register extends Component {
         }
         
     }
-    
-    /*resetForm = () =>{
-        document.getElementById("registerForm").reset();
-    }*/
+
     render() {
         return (
             <div className="container">

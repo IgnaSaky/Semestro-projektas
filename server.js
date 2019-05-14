@@ -35,6 +35,7 @@ app.use('/api/auth', authRoutes);   // naudoja routes
 app.use('/api/users', userRoutes);
 app.use('/api/tickets', ticketRoutes);
 
+
 // Serveris
 const port = 5000;
 app.listen(port, () => `Server running on port ${port}`);

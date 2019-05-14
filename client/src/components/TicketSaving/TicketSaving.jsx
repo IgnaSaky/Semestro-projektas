@@ -9,12 +9,11 @@ export default class TicketSaving extends Component {
             title: '',
             description: '',
             price: '',
-            file: ''
+            selectedFile: null
         }
         this.handleTitle = this.handleTitle.bind(this);
         this.handleDescription = this.handleDescription.bind(this);
         this.handlePrice = this.handlePrice.bind(this);
-        this.handleFile = this.handleFile.bind(this);
     }
     handleTitle(e) {
         this.setState({ title: e.target.value });
@@ -25,20 +24,32 @@ export default class TicketSaving extends Component {
     handlePrice(e) {
         this.setState({ price: e.target.value });
     }
-    handleFile(e) {
-        this.setState({ file: e.target.value });
+    handleFile=event=> {
+        this.setState({ selectedFile: event.target.files[0],
+        loaded: 0, 
+    })
     }
+    
     handleSubmit = (e) => {
         e.preventDefault();
-        const data = {
-            title: this.state.title,
-            description: this.state.description,
-            price: this.state.price,
-            file: this.state.file
-        }
+        let data = new FormData();
+        data.append('file', this.state.selectedFile);
+        data.set('title', this.state.title);
+        data.set('description', this.state.description);
+        data.set('price', this.state.price);
+        console.log(this.state.title);
+        //     title: this.state.title,
+        //     description: this.state.description,
+        //     price: this.state.price,
+        //     file: this.state.file
+        // }
 
-        axios.post('http://localhost:5000/api/tickets/ticketSaving', data)
-            .then(res => console.log(res.data))
+        const config = {     
+            headers: { 'content-type': 'multipart/form-data' }
+        }
+        
+        axios.post('http://localhost:5000/api/tickets/ticketSaving', data, config )
+            .then(res => console.log(res.statusText))
             .catch(err => console.log(err));
 
         this.setState({
@@ -48,6 +59,7 @@ export default class TicketSaving extends Component {
             file: ''
         });
     }
+
     resetForm = () =>{
         document.getElementById("TicketForm").reset();
       }
@@ -78,9 +90,9 @@ export default class TicketSaving extends Component {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="file">Bilietas</label>
-                                <input onChange={this.handleFile} type="file" accept=".pdf" name="file" id="file" className="form-control" placeholder="Bilietas"/>
+                                <input onChange={this.handleFile} type="file" name="file"/>
                             </div>
-                            <button type="submit" className="btn btn-danger btn-block" onClick={this.resetForm}>Įkelti</button>
+                            <button type="button" className="btn btn-danger btn-block" onClick={this.handleSubmit}>Įkelti</button>
                         </form>
                     </div>
                 </div>

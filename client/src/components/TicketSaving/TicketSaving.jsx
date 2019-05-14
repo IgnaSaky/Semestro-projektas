@@ -25,6 +25,7 @@ export default class TicketSaving extends Component {
         this.setState({ price: e.target.value });
     }
     handleFile=event=> {
+        console.log(event.target.files);
         this.setState({ selectedFile: event.target.files[0],
         loaded: 0, 
     })
@@ -37,12 +38,6 @@ export default class TicketSaving extends Component {
         data.set('title', this.state.title);
         data.set('description', this.state.description);
         data.set('price', this.state.price);
-        console.log(this.state.title);
-        //     title: this.state.title,
-        //     description: this.state.description,
-        //     price: this.state.price,
-        //     file: this.state.file
-        // }
 
         const config = {     
             headers: { 'content-type': 'multipart/form-data' }
@@ -52,12 +47,6 @@ export default class TicketSaving extends Component {
             .then(res => console.log(res.statusText))
             .catch(err => console.log(err));
 
-        this.setState({
-            title: '',
-            description: '',
-            price: '',
-            file: ''
-        });
     }
 
     resetForm = () =>{
@@ -70,12 +59,7 @@ export default class TicketSaving extends Component {
                 <div className="col-lg-5 col-md-8 m-auto">
                     <div className="card card-body fix-logo-translate">
                         <h1 className="text-center mb-3">Įkelk Bilietą!</h1>
-                        <form onSubmit={this.handleSubmit} action="" method="POST" id="TicketForm">
-                        {/* <div className="form-group">
-                                <label htmlFor="title">Renginio pavadinimas</label>
-                                <input onChange={this.handleTitle} type="search" name="title" className="form-control" placeholder="Renginio pavadinimas" />
-                                <button>Ieškoti</button>
-                            </div> */}
+                        <form onSubmit={this.handleSubmit} action="" method="POST" id="TicketForm" enctype="multipart/form-data">
                             <div className="form-group">
                                 <label htmlFor="title">Renginio pavadinimas</label>
                                 <input onChange={this.handleTitle} type="text" name="title" className="form-control" placeholder="Renginio pavadinimas" />
@@ -89,8 +73,8 @@ export default class TicketSaving extends Component {
                                 <input onChange={this.handlePrice} type="number" name="price" className="form-control" placeholder="Kaina" />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="file">Bilietas</label>
-                                <input onChange={this.handleFile} type="file" name="file"/>
+                                <label htmlFor="file"></label>
+                                <input onChange={this.handleFile} type="file" name="file" />
                             </div>
                             <button type="button" className="btn btn-danger btn-block" onClick={this.handleSubmit}>Įkelti</button>
                         </form>

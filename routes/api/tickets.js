@@ -12,6 +12,15 @@ var filename;
 var cors = require('cors');
 router.use(cors())
 
+router.get('/ticketSaving', (req, res) => {
+    connection.query("SELECT title FROM categories", function (err, rows){
+        if(err){
+            throw err;
+        }
+        res.send(rows);
+    });
+});
+
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
     cb(null, 'Failai')
@@ -34,13 +43,13 @@ router.post('/ticketSaving',function(req, res) {
         } else if (err) {
             return res.status(500).json(err)
         } else {
-            
+
         if (!req.body.title || !req.body.description || !req.body.price ) {
             errors.push('Please enter all fields');
         }
         const today = new Date();
         const newTicket = {
-            fk_usersid: user.session.id,
+            fk_usersid: user.session,
             title: req.body.title,
             description: req.body.description,
             price: req.body.price,

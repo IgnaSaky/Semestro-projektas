@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 export default class TicketSaving extends Component {
@@ -7,6 +6,7 @@ export default class TicketSaving extends Component {
         super(props);
         this.state = {
             title: '',
+            category: [],
             description: '',
             price: '',
             selectedFile: null
@@ -49,9 +49,20 @@ export default class TicketSaving extends Component {
 
     }
 
+    componentDidMount(){
+        fetch('http://localhost:5000/api/tickets')
+        //.then(res => res.json())
+        .then(categories => {
+            for(let i = 0; i < categories.length; i++){
+                this.state.categories.push(categories[i].title);
+            }
+        });
+    }
+
     resetForm = () =>{
         document.getElementById("TicketForm").reset();
-      }
+      } 
+   // <option value={this.state.categories.title}></option>
     render() {
         return (
             <div className="container">
@@ -63,6 +74,12 @@ export default class TicketSaving extends Component {
                             <div className="form-group">
                                 <label htmlFor="title">Renginio pavadinimas</label>
                                 <input onChange={this.handleTitle} type="text" name="title" className="form-control" placeholder="Renginio pavadinimas" />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="dropdown"></label>
+                                <select>
+                              
+                                </select>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="description">Aprašymas</label>

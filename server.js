@@ -6,12 +6,9 @@ const morgan = require('morgan');
 const cors = require('cors');
 const customerRoutes = require('./routes/api/customers') //importina routes is routes/api
 const authRoutes = require('./routes/api/auth');
-<<<<<<< HEAD
 const eventRoutes = require('./routes/api/events');
 const userRoutes = require('./routes/api/users');
-=======
 const autoTextCompletion=require('./routes/api/autoTextCompletion');
->>>>>>> TAS14
 
 const passport = require('passport');
 const session = require('express-session');

@@ -5,6 +5,9 @@
 
     color: aliceblue;
 }
+.modal.text {
+    color: rgb(44, 44, 44)
+}
 .required:after {
     content:"*";
     color:red;

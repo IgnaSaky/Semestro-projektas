@@ -3,7 +3,14 @@ import {Link} from 'react-router-dom';
 import './EventCard.css';
 
 function EventCard(props) {
-  const {title, description} = props;
+
+  let {title, description} = props;
+  if(typeof title == 'undefined'){
+    title = "";
+  }
+  if(typeof description == 'undefined'){
+    description = "";
+  }
   return (
     <Link to="/dashboard" className="card shadow m-1 cardStyle col-11" style={{width: '18rem', color:'black'}}>
       <div className="overlay">
@@ -18,3 +25,5 @@ function EventCard(props) {
 }
 
 export default EventCard
+
+

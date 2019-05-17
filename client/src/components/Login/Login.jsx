@@ -9,7 +9,7 @@ import { clearErrors } from '../../actions/errorActions';
 import { Alert } from  'reactstrap';
 
 
-class Login extends Component {
+export class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -59,12 +59,12 @@ class Login extends Component {
       this.setState({redirect:true}); 
     }
   }
-  static propTypes = {
+  /*static propTypes = {
     isAuthenticated: PropTypes.bool,
     error: PropTypes.object.isRequired,
     login: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired
-  };
+  };*/
   /*resetForm = () =>{
     document.getElementById("loginForm").reset();
   }*/
@@ -85,6 +85,7 @@ class Login extends Component {
                       onChange={this.onChangeEmail} 
                       type="email" 
                       name="email" 
+                      id='email'
                       className="form-control" 
                       placeholder="El. pašto adresas" 
                     />

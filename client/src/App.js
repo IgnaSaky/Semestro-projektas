@@ -20,6 +20,7 @@ class App extends Component {
 
   render() {
     return (
+      <div>
       <Provider store={store}>
         <Router>
           <div>
@@ -32,7 +33,7 @@ class App extends Component {
           </div>
         </Router>
       </Provider>
-      
+      </div>
     );
   }
 }

@@ -6,7 +6,7 @@ const db = mysql.createConnection(dbconfig.connection);
 var user = require('../api/auth');
 var bodyParser = require('body-parser');
 var multer = require('multer');
-var upload1 = multer({ dest: 'uploads/' })
+var upload1 = multer({ dest: 'uploads/' });
 var filename;
 
 var cors = require('cors');

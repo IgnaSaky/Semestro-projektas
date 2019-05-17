@@ -8,8 +8,7 @@
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "test" : "jest"
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Brad Traversy",
   "license": "MIT",

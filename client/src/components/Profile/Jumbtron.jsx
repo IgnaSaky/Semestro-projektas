@@ -1,11 +1,11 @@
 import React from 'react'
 import './css/Profile.css';
 import Modal from './Modal';
-/*import { connect } from 'react-redux';
-import PropTypes from 'prop-types';*/
+/*import { connect } from 'react-redux';*/
+import PropTypes from 'prop-types';
 
 function Jumbtron(props) {
-  
+  const { user } = props.user;
   return (
     <div>
       <div className="container-fluid">
@@ -22,5 +22,7 @@ function Jumbtron(props) {
     </div>
   )
 }
-
+Jumbtron.propTypes = {
+  user: PropTypes.object.isRequired
+};
 export default Jumbtron;

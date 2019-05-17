@@ -67,7 +67,8 @@
       "src/**/*.{js,jsx,mjs}"
     ],
     "setupFiles": [
-      "<rootDir>/config/polyfills.js", "jest-localstorage-mock"
+      "<rootDir>/config/polyfills.js",
+      "jest-localstorage-mock"
     ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
@@ -106,6 +107,7 @@
     "extends": "react-app"
   },
   "devDependencies": {
+    "fetch-mock": "^7.3.3",
     "jest-localstorage-mock": "^2.4.0"
   }
 }

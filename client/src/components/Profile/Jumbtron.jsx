@@ -5,7 +5,6 @@ import Modal from './Modal';
 import PropTypes from 'prop-types';
 
 function Jumbtron(props) {
-  const { user } = props.user;
   return (
     <div>
       <div className="container-fluid">

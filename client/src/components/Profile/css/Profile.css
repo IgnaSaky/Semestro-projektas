@@ -14,3 +14,6 @@
     display: inline;
     margin-left: 1px;
 }
+.nav-item .nav-link {
+    color: black;
+}

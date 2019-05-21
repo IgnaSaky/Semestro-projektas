@@ -57,7 +57,6 @@ router.post('/ticketSaving',function(req, res) {
             sold: false,
             filePath: filename,
         }
-        console.log(newTicket);
         const insertQuery = 'INSERT INTO tickets SET ?';
         db.query(insertQuery, newTicket, (err) => {
             //const success = [];

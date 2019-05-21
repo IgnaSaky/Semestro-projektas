@@ -74,7 +74,7 @@ export default class TicketSaving extends Component {
                         <form onSubmit={this.handleSubmit} action="" method="POST" id="TicketForm" enctype="multipart/form-data">
                             <div className="form-group">
                                 {/*<label htmlFor="title">Renginio pavadinimas</label>*/}
-                                <input onChange={this.handleTitle} type="text" name="title" className="form-control" placeholder="Renginio pavadinimas" />
+                                <input onChange={this.handleTitle} type="text" id="title" name="title" className="form-control" placeholder="Renginio pavadinimas" />
                             </div>
                             {/*<div className="form-group">
                                 <select id="selectbox" data-selected="">
@@ -88,15 +88,15 @@ export default class TicketSaving extends Component {
         </div>*/}
                             <div className="form-group">
                                 {/*<label htmlFor="description">Aprašymas</label>*/}
-                                <input onChange={this.handleDescription} type="text" name="description" className="form-control" placeholder="Bilieto aprašymas" />
+                                <input onChange={this.handleDescription} type="text" name="description" id="description" className="form-control" placeholder="Bilieto aprašymas" />
                             </div>
                             <div className="form-group">
                                 {/*<label htmlFor="price">Kaina</label>*/}
-                                <input onChange={this.handlePrice} type="number" name="price" className="form-control" placeholder="Kaina" />
+                                <input onChange={this.handlePrice} type="number" name="price" id="price" className="form-control" placeholder="Kaina" />
                             </div>
                             <div className="form-group">
                                 {/*<label htmlFor="file"></label>*/}
-                                <input onChange={this.handleFile} type="file" name="file" />
+                                <input onChange={this.handleFile} type="file" name="file" id="file" />
                             </div>
                             <button type="button" className="btn btn-danger btn-block" onClick={this.handleSubmit}>Įkelti</button>
                         </form>

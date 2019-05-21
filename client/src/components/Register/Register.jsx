@@ -8,7 +8,7 @@ import { register } from '../../actions/authActions';
 import { clearErrors } from '../../actions/errorActions';
 import { Alert } from 'reactstrap';
 
-class Register extends Component {
+export class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -61,12 +61,12 @@ class Register extends Component {
         // Attempt to register
         this.props.register(newUser);
     }
-    static propTypes = {
-        isAuthenticated: PropTypes.bool,
-        error: PropTypes.object.isRequired,
-        register: PropTypes.func.isRequired,
-        clearErrors: PropTypes.func.isRequired
-    };
+    // static propTypes = {
+    //     isAuthenticated: PropTypes.bool,
+    //     error: PropTypes.object.isRequired,
+    //     register: PropTypes.func.isRequired,
+    //     clearErrors: PropTypes.func.isRequired
+    // };
     componentDidUpdate(prevProps) {
         const {error, isAuthenticated} = this.props;
         if (error !== prevProps.error) {

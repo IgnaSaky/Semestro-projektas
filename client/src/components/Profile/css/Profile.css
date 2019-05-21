@@ -5,9 +5,15 @@
 
     color: aliceblue;
 }
+.modal.text {
+    color: rgb(44, 44, 44)
+}
 .required:after {
     content:"*";
     color:red;
     display: inline;
     margin-left: 1px;
+}
+.nav-item .nav-link {
+    color: black;
 }

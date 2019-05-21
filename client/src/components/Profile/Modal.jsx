@@ -24,9 +24,9 @@ export class Modal extends Component {
         });
     }
     handleSubmit(e) {
-        const { id } = this.props.user
+        const { id } = this.props.user.user;
         e.preventDefault();
-        
+        console.log('ok');
         axios.put(`/api/users/${id}`,{
             oldPassword: this.state.oldPassword,
             newPassword1: this.state.newPassword1,
@@ -43,8 +43,11 @@ export class Modal extends Component {
 
   render() {
     return (
-        <div>
-            <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <React.Fragment>
+            <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Keisti slaptažodį
+            </button>
+            <div className="modal fade text" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                     <div className="modal-header">
@@ -93,7 +96,7 @@ export class Modal extends Component {
                                 </div> 
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Uždaryti</button>
-                                    <button type="submit" className="btn btn-primary">Išsaugoti</button>
+                                    <button onClick={this.handleSubmit} className="btn btn-primary">Išsaugoti</button>
                                 </div>
                             </form>
                         </div>
@@ -104,7 +107,7 @@ export class Modal extends Component {
             { this.state.success && (
                    <Redirect to={`/users/${this.props.user.id}`} />
                 )}
-        </div>
+        </React.Fragment>
     )
   }
 }

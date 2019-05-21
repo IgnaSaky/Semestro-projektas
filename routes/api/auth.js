@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const jwtKey = require('../../config/auth');
 const bcrypt = require('bcryptjs');
 const auth = require('../../middleware/auth');
+var session;
 //connection.query('USE ' + dbconfig.database); Kodėl reikia?
 
 router.get('/user',auth.authenticate, (req, res) => {
@@ -40,7 +41,7 @@ router.post('/login', (req,res) => {
         bcrypt.compare(password,rows[0].password)
         .then(isMatch => {
             if (!isMatch) return res.status(400).json({message: "Neteisingas slaptažodis"});
-            
+            module.exports.session = rows[0].id;
             jwt.sign({
                 id: rows[0].id,
                 username: rows[0].username,

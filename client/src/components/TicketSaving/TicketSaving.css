@@ -1,0 +1,18 @@
+body {
+    background-color: #eeee !important;
+}
+.form-group {
+    text-align: left;
+}
+.btn.btn-danger {
+    background-color: #D71820;
+    border-color: #D71820;
+    font-size: 1.05em;
+}
+.btn.btn-danger:hover {
+    background-color: rgb(255, 0, 13);
+    border-color: rgb(255, 0, 13);
+}
+
+
+

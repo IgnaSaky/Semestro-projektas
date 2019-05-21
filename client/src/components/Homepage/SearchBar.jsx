@@ -4,22 +4,6 @@ import './SearchBar.css';
 class SearchBar extends Component{
     constructor (props){
         super(props);
-        /*this.items=[
-            "Eurolyga: Zalgiris-Fenerbahce",
-            "Eurolyga: Zalgiris-Panathinaikos",
-            "Eurolyga: Zalgiris-CSKA",
-            "Granatos",
-            "Eminemas",
-            "Auksiniai svogūnai",
-            "Barakiada",
-            "Teatralas",
-            "Auksinis lietus"
-        ];*/
-        /*fetch('http://localhost:5000/api/autoTextCompletion')
-        .then(response => response.json())
-        .then(users => {
-            this.items=users;
-        });*/
         this.state={
             suggestions: [],
             text: '',
@@ -60,7 +44,6 @@ class SearchBar extends Component{
             for(let i = 0; i< users.length; i++){
                 this.state.items.push(users[i].title);
             }
-
         });
     }
     render(){

@@ -4,7 +4,8 @@ import EventCard from './EventCard.jsx';
 // eslint-disable-next-line
 {/* i props paduodamas events tai eventu objektu listas, sukuriamas cardArray i kuri sudedam eventus*/}
 const CardList = (props) =>{
-    const {events} = props; 
+    let {events} = props;
+    if(typeof events == "undefined"){events = [];} 
     let limit = props.limit;
     if(limit === 0){limit = 10}
 

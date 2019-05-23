@@ -5,6 +5,7 @@ import store from './store';
 import home from './pages/home.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
+import EventPage from './pages/Event.jsx';
 import dashboard from './pages/dashboard.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import TicketSavingPage from './pages/TicketSavingPage.jsx';
@@ -29,6 +30,8 @@ class App extends Component {
             <Route path="/profile" component={ProfilePage} />
             <Route path="/dashboard" component={dashboard} />
             <Route path="/ticketSaving" component={TicketSavingPage} />
+            <Route path="/event/:id" component={EventPage} />
+
           </div>
         </Router>
       </Provider>

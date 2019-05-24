@@ -6,7 +6,7 @@ const connection = mysql.createConnection(dbconfig.connection);
 connection.query('USE ' + dbconfig.database);
 
 router.get('/', (req, res) => {
-    connection.query("SELECT title FROM spectacle", function (err, rows){
+    connection.query("SELECT title, id_spectacle FROM spectacle", function (err, rows){
         if(err){
             throw err;
         }

@@ -37,6 +37,7 @@ import {
           ...state,
           ...action.payload,
           isAuthenticated: true,
+          user: action.payload,
           isLoading: false
         };
       case AUTH_ERROR:

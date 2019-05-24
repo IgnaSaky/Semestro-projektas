@@ -26,7 +26,7 @@ export class Jumbtron extends React.Component {
   
 }
 Jumbtron.propTypes = {
-  user: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired
 };
 
 

@@ -12,20 +12,21 @@ class NavBar extends Component {
     render(){
         
         const { isAuthenticated, user } = this.props.auth;
-        console.log(user);
+        
         let {isDark} = this.props
         if(typeof isDark === "undefined"){
             isDark = false;
+            console.log('dark');
         }
         const authLinks = (
             <React.Fragment>
-                <Link to='/profile' className='nav-link'>{user != null ? (typeof user !== "undefined" ? user.username : ''): ''}</Link>
+                { <Link to='/profile' className='nav-link'>{user != null ? (typeof (user.user) !== "undefined" ? user.user.username : 'fail'): 'fail'}</Link> }         
                 <Logout/>   
             </React.Fragment>  
         );
         const authLinksBlack = (
             <React.Fragment>
-                <Link to='/profile' className='nav-link blackNav'>{user != null ? (typeof user !== "undefined" ? user.username : ''): ''}</Link>
+                <Link to='/profile' className='nav-link blackNav'>{user != null ? (typeof user.user !== "undefined" ? user.user.username : 'fail'): 'fail'}</Link>
                 <div className="blackNav"><Logout/></div>  
             </React.Fragment>  
         );

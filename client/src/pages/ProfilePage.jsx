@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 export class ProfilePage extends Component {
 
   render() {
-    const { user , isAuthenticated} = this.props.auth;
+    const { isAuthenticated} = this.props.auth;
 
     if (!isAuthenticated) {
       return(<p>Prisijunkite</p>);
@@ -26,7 +26,7 @@ export class ProfilePage extends Component {
     return (
       <div>
         <NavBar isDark={true}/>
-        <Jumbotron user={user}/>
+        <Jumbotron/>
         <h1 className='text-center m-5' style={{textShadow: '3px 3px 4px #ccc',letterSpacing:'8px'}}>BILIETAI</h1>
         <CardContainer/>
         <Footer/>

@@ -7,8 +7,23 @@ a{
 a:hover{
     color:#546A76;
 }
+.nav-item .white{
+    color: #DADDD8!important;
+}
+
+.nav-item .white:hover{
+    color:#546A76!important;
+}
+.blackNav, .blackNav .nav-link{
+    color: black!important;
+}
+
+.blackNav:hover, .blackNav:hover .nav-link{
+    color:rgb(124, 124, 124)!important;
+}
+
 .bg-custom1{
-    background-color: #2A4057;
+    background-color: rgba(42, 64, 87, 0.37);
 }
 .custom-toggler.navbar-toggler {
     border-color: rgb(255,102,203);

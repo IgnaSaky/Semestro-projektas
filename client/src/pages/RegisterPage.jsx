@@ -6,7 +6,7 @@ class RegisterPage extends Component{
     render(){
         return(
             <div>
-                <NavBar/>
+                <NavBar isDark={true}/>
                 <Register/>
             </div>
         );

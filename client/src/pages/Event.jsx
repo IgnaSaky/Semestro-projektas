@@ -38,7 +38,7 @@ export class Event extends Component {
     render() {
         return (
             <div>
-                <Navbar />
+                <Navbar isDark={true} />
                 <div className="blackBackground">                
                     <div className="container">
                         <h1 className="text-center font-weight-bold p-3 pt-5"style={{color:"White"}}>{this.state.eventParams.title}</h1>

@@ -8,7 +8,7 @@ class LoginPage extends Component {
     render() {
       return (
         <div>
-            <NavBar/>
+            <NavBar isDark={true}/>
             <Login />
         </div>
       );

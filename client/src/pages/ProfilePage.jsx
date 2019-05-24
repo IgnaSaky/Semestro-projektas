@@ -23,7 +23,7 @@ export class ProfilePage extends Component {
     }
     return (
       <div>
-        <NavBar/>
+        <NavBar isDark={true}/>
         <Jumbotron user={user}/>
         <h1 className='text-center m-5' style={{textShadow: '3px 3px 4px #ccc',letterSpacing:'8px'}}>BILIETAI</h1>
         <CardContainer/>

@@ -10,54 +10,87 @@ import PropTypes from 'prop-types';
 class NavBar extends Component {
     
     render(){
+        
         const { isAuthenticated, user } = this.props.auth;
-
+        let {isDark} = this.props
+        if(typeof isDark === "undefined"){
+            isDark = false;
+        }
         const authLinks = (
             <React.Fragment>
                 <Link to='/profile' className='nav-link'>{user != null ? (typeof user != "undefined" ? user.user.username : ''): ''}</Link>
                 <Logout/>   
             </React.Fragment>  
         );
+        const authLinksBlack = (
+            <React.Fragment>
+                <Link to='/profile' className='nav-link blackNav'>{user != null ? (typeof user != "undefined" ? user.user.username : ''): ''}</Link>
+                <div className="blackNav"><Logout/></div>  
+            </React.Fragment>  
+        );
         const guestLinks = (          
-                <Link className="btn btn-outline-light" to="/login" role="button">Login</Link>           
+            <Link className="btn btn-outline-light" to="/login" role="button">Login</Link>           
+    );
+        const guestLinksBlack = (          
+                <Link className="btn btn-dark" to="/login" role="button">Login</Link>           
         );
         
-        return(
+        if(isDark){return(
             <React.Fragment>
                 <nav className="navbar navbar-expand-md bg-custom">
-                <Link className="navbar-brand" to="/">Bilietų pardavimas</Link>
+                <Link className="navbar-brand blackNav" to="/">Bilietų pardavimas</Link>
                 <button className="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarCollapse">
                     <ul className="navbar-nav mr-auto">
                     <li className="nav-item active">
-                        <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
+                        <Link className="nav-link blackNav" to="/">Home <span className="sr-only">(current)</span></Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/dashboard">Link</Link>
+                        <Link className="nav-link blackNav" to="/dashboard">Renginiai</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/">Renginiai</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/">Link</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/">Link</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link disabled" to="/" tabIndex="-1" aria-disabled="true">Disabled</Link>
+                        <Link className="nav-link blackNav" to="/">Link</Link>
                     </li>
                     </ul>
 
-                    {isAuthenticated ? authLinks : guestLinks}
+                    {isAuthenticated ? authLinksBlack : guestLinksBlack}
 
                 </div>
                 </nav>
             </React.Fragment>
     
-        );
+        );}
+        else{
+            return(
+                <React.Fragment>
+                    <nav className="navbar navbar-expand-md bg-custom">
+                    <Link className="navbar-brand" to="/">Bilietų pardavimas</Link>
+                    <button className="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarCollapse">
+                        <ul className="navbar-nav mr-auto">
+                        <li className="nav-item active">
+                            <Link className="nav-link white" to="/">Home <span className="sr-only">(current)</span></Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link white" to="/dashboard">Renginiai</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link white" to="/">Link</Link>
+                        </li>
+                        </ul>
+    
+                        {isAuthenticated ? authLinks : guestLinks}
+    
+                    </div>
+                    </nav>
+                </React.Fragment>
+        
+            );
+        }
     }
 }
 

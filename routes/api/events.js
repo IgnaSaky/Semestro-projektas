@@ -15,9 +15,10 @@ router.get('/', (req, res) => {
         res.send(rows);
     });
 });
-router.get('/event/:eventid', (req, res) => {
-    connection.query("SELECT * FROM `spectacle` WHERE spectacle.id_spectacle = ?", req.params.eventid ,function (err, rows) {
+router.get('/city/:cityname', (req, res) => {
+    connection.query("SELECT * FROM spectacle WHERE adress = ?",req.params.cityname, function (err, rows) {
         if (err) {
+            console.log("SELECT * FROM spectacle WHERE adress=" + req.params.genreid);
             throw err;
         }
         

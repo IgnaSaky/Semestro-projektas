@@ -28,7 +28,7 @@ class App extends Component {
             <Route path="/login" component={LoginPage} />
             <Route path="/register" component={RegisterPage} />
             <Route path="/profile" component={ProfilePage} />
-            <Route path="/dashboard" component={dashboard} />
+            <Route path="/dashboard/:city" component={dashboard} />
             <Route path="/ticketSaving" component={TicketSavingPage} />
             <Route path="/event/:id" component={EventPage} />
 

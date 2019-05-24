@@ -18,11 +18,21 @@ export class dashboard extends Component {
     }
 }
   componentDidMount(){
-    fetch('http://localhost:5000/api/events')
+    const { match: { params } } = this.props; 
+    const city = params.city;
+    if(city === "all"){
+      fetch('http://localhost:5000/api/events')
     .then(response =>response.json())
     .then( users =>{
         this.setState({events: users})
-    });
+    });}
+    else{
+      fetch('http://localhost:5000/api/events/city/'+city)
+      .then(response =>response.json())
+      .then( users =>{
+          this.setState({events: users})
+      });
+    }
   }
   changeGenre = (genre) => {
     fetch('http://localhost:5000/api/events' + genre)

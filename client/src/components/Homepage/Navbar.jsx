@@ -48,7 +48,7 @@ class NavBar extends Component {
                         <Link className="nav-link blackNav" to="/">Home <span className="sr-only">(current)</span></Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link blackNav" to="/dashboard">Renginiai</Link>
+                        <Link className="nav-link blackNav" to="/dashboard/all">Renginiai</Link>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link blackNav" to="/">Link</Link>
@@ -73,10 +73,10 @@ class NavBar extends Component {
                     <div className="collapse navbar-collapse" id="navbarCollapse">
                         <ul className="navbar-nav mr-auto">
                         <li className="nav-item active">
-                            <Link className="nav-link white" to="/">Home <span className="sr-only">(current)</span></Link>
+                            <Link className="nav-link white" to="/">Home<span className="sr-only">(current)</span></Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link white" to="/dashboard">Renginiai</Link>
+                            <Link className="nav-link white" to="/dashboard/all">Renginiai</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link white" to="/">Link</Link>

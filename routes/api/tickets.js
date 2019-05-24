@@ -9,6 +9,7 @@ var multer = require('multer');
 var upload1 = multer({ dest: 'uploads/' });
 var filename;
 
+
 var cors = require('cors');
 router.use(cors())
 
@@ -37,6 +38,55 @@ var upload = multer({ storage: storage }).single('file');
 router.post('/ticketSaving',function(req, res) {
     upload(req, res, function (err) {
         let errors = [];
+        var session1;
+        if (err instanceof multer.MulterError) {
+            return res.status(500).json(err)
+        } else if (err) {
+            return res.status(500).json(err)
+        } else {
+
+        if (!req.body.title || !req.body.description || !req.body.price ) {
+            errors.push('Please enter all fields');
+        }
+        const findBytitle = 'SELECT * FROM spectacle where title = ?';
+        db.query(findBytitle,[req.body.title], (err, rows) => {
+            if (rows && rows.length > 0) {
+                const today = new Date();
+                const newTicket = {
+                    fk_usersid: user.session,
+                    fk_id_spectacle: rows[0].id_spectacle,
+                    title: req.body.title,
+                    description: req.body.description,
+                    price: req.body.price,
+                    posted: today,
+                    sold: false,
+                    filePath: filename,
+                }
+                const insertQuery = 'INSERT INTO tickets SET ?';
+                db.query(insertQuery, newTicket, (err) => {
+                    if (err) {
+                        console.log(err.message);
+                        errors.push('Ivyko klaida. Pabandykite dar karta');
+                        console.log(err);
+                        return res.status(400).json(errors);
+                    } else {
+                        //res.redirect('/login')
+                        // return res.status(200).json({ success: true, errors: errors });
+                    }
+                })
+                return res.json({fk_id_spectacles: rows[0]});
+            }
+            else {
+                return res.json({message: "Klaida"});
+            }
+        });
+        }
+    })
+});
+
+router.post('/eventSaving',function(req, res) {
+    upload(req, res, function (err) {
+        let errors = [];
     
         if (err instanceof multer.MulterError) {
             return res.status(500).json(err)
@@ -47,18 +97,16 @@ router.post('/ticketSaving',function(req, res) {
         if (!req.body.title || !req.body.description || !req.body.price ) {
             errors.push('Please enter all fields');
         }
-        const today = new Date();
-        const newTicket = {
-            fk_usersid: user.session,
+        const newEvent = {
             title: req.body.title,
-            description: req.body.description,
-            price: req.body.price,
-            posted: today,
-            sold: false,
-            filePath: filename,
+            description: req.body.eventDescription,
+            adress: req.body.address,
+            date: req.body.date,
+            category: req.body.category
         }
-        const insertQuery = 'INSERT INTO tickets SET ?';
-        db.query(insertQuery, newTicket, (err) => {
+        console.log(newEvent);
+        const insertQuery = 'INSERT INTO spectacle SET ?';
+        db.query(insertQuery, newEvent, (err) => {
             //const success = [];
             if (err) {
                 console.log(err.message);
@@ -70,53 +118,8 @@ router.post('/ticketSaving',function(req, res) {
                 return res.status(200).json({ success: true, errors: errors });
             }
         })
-    //        if (err instanceof multer.MulterError) {
-    //            return res.status(500).json(err)
-    //        } else if (err) {
-    //            return res.status(500).json(err)
-    //        }
-    //   return res.status(200).send(req.file)
         }
     })
 });
 
-
-// router.post('/ticketSaving',  function(req, res) {
-//     //console.log(cpUpload.);
-//     //const { title, description, price, whenPosted, file } = req.body;
-//     let errors = [];
-    
-//     if (!req.body.title || !req.body.description || !req.body.price || !req.body.whenPosted || !req.body.file) {
-//         errors.push('Please enter all fields');
-//     }
-
-//     const today = new Date();
-//     console.log(req.get('title'));
-//     console.log(req.file);
-//     console.log(req.body);
-//     const newTicket = {
-//         fk_usersid: user.session.id,
-//         title: req.body.title,
-//         description: req.body.description,
-//         price: req.body.price,
-//         posted: today,
-//         sold: false,
-//         filePath: req.body.file
-//     }
-//     console.log(newTicket);
-//     const insertQuery = 'INSERT INTO tickets SET ?';
-//     db.query(insertQuery, newTicket, (err) => {
-//         //const success = [];
-//         if (err) {
-//             console.log(err.message);
-//             errors.push('Ivyko klaida. Pabandykite dar karta');
-
-//             return res.status(400).json(errors);
-//         } else {
-
-//             //res.redirect('/login')
-//             return res.status(200).json({ success: true, errors: errors });
-//         }
-//     });
-// });
 module.exports = router;

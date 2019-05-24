@@ -13,6 +13,9 @@ body {
     background-color: rgb(255, 0, 13);
     border-color: rgb(255, 0, 13);
 }
+.cardMarginFix{
+    margin-top:0!important;
+}
 
 
 

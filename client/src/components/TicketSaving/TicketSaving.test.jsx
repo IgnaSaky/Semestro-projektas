@@ -5,7 +5,6 @@ global.fetch = require('jest-fetch-mock');
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import TicketSaving from '../TicketSaving/TicketSaving';
-// describe what we are testing
 import ReactDOM from 'react-dom';
 import { exportAllDeclaration } from '@babel/types';
 import { format } from 'util';
@@ -18,7 +17,6 @@ describe('Ticket Component', () => {
      });
    });
 
-  // make our assertion and what we expect to happen 
   it('should render without throwing an error', () => {
     const wrapper = shallow(<TicketSaving/>);
     expect(wrapper.find('#TicketForm').exists()).toBe(true);

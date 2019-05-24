@@ -34,7 +34,7 @@ class SearchBar extends Component{
         }
         return (
             <ul className="suggestion-container">
-            {suggestions.map((item) => <li className="suggestion" key={item.title} onClick={() => this.suggestionSelected(item.title)}>{item.title}</li>)}
+            {suggestions.map((item) => <li className="suggestion" key={item.id} onClick={() => this.suggestionSelected(item.title)}>{item.title}</li>)}
             </ul>    
         );
     }

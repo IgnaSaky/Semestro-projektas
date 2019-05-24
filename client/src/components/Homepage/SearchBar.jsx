@@ -42,7 +42,7 @@ class SearchBar extends Component{
         const {items}=this.state;
         let position=items.find(x => x.title===value);
         console.log(position);
-        return position.id;
+        return position.id - 1;
     }
     suggestionSelected(value){
         let pos=this.RetrieveId(value);

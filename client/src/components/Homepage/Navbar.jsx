@@ -12,6 +12,7 @@ class NavBar extends Component {
     render(){
         
         const { isAuthenticated, user } = this.props.auth;
+        console.log(user);
         let {isDark} = this.props
         if(typeof isDark === "undefined"){
             isDark = false;

@@ -13,7 +13,7 @@ const CardList = (props) =>{
     const cardArray = [];
     for(let i = 0; i<tickets.length;i++){
         if(i+1 > limit){break;}
-        if(tickets[i].sold == 1){continue;}
+        if(tickets[i].sold === 1){continue;}
     cardArray.push(<TicketCard title= {tickets[i].title } price={tickets[i].price}  key={tickets[i].id_tickets}/>);
     }
     if(cardArray.length === 0){

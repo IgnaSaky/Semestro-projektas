@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import NavBar from '../components/Homepage/Navbar';
 import Jumbotron from '../components/Profile/Jumbtron'
+// eslint-disable-next-line
 import Modal from '../components/Profile/Modal';
 import Footer from '../components/Homepage/Footer';
 import CardContainer from '../components/Profile/CardContainer';
@@ -17,6 +18,7 @@ export class ProfilePage extends Component {
     if (!isAuthenticated) {
       return(<p>Prisijunkite</p>);
     }
+    // eslint-disable-next-line
     const titleProps = {
       text: "Dummy",
       description: 'Bacon ipsum dolor amet andouille pastrami filet mignon frankfurter beef ribs strip steak. Bresaola doner landjaeger, turkey shoulder bacon biltong tail corned beef burgdoggen cow. Sausage bacon spare ribs, burgdoggen landjaeger corned beef prosciutto.'

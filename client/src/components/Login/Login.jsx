@@ -3,6 +3,7 @@ import './Login.css';
 import avatar from './man.png';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+// eslint-disable-next-line
 import PropTypes from 'prop-types';
 import { login } from '../../actions/authActions';
 import { clearErrors } from '../../actions/errorActions';

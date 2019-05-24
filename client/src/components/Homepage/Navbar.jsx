@@ -18,13 +18,13 @@ class NavBar extends Component {
         }
         const authLinks = (
             <React.Fragment>
-                <Link to='/profile' className='nav-link'>{user != null ? (typeof user != "undefined" ? user.user.username : ''): ''}</Link>
+                <Link to='/profile' className='nav-link'>{user != null ? (typeof user !== "undefined" ? user.user.username : ''): ''}</Link>
                 <Logout/>   
             </React.Fragment>  
         );
         const authLinksBlack = (
             <React.Fragment>
-                <Link to='/profile' className='nav-link blackNav'>{user != null ? (typeof user != "undefined" ? user.user.username : ''): ''}</Link>
+                <Link to='/profile' className='nav-link blackNav'>{user != null ? (typeof user !== "undefined" ? user.user.username : ''): ''}</Link>
                 <div className="blackNav"><Logout/></div>  
             </React.Fragment>  
         );

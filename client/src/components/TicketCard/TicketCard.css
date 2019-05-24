@@ -1,0 +1,8 @@
+.ticketButton:hover{
+    background: white;
+    color:black;
+    transition: 0.5s;
+}
+.overlay:hover .ticketButton{
+    border-color:white!important;
+}

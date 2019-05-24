@@ -15,10 +15,29 @@ router.get('/', (req, res) => {
         res.send(rows);
     });
 });
+router.get('/event/:eventid', (req, res) => {
+    connection.query("SELECT * FROM `spectacle` WHERE spectacle.id_spectacle = ?", req.params.eventid ,function (err, rows) {
+        if (err) {
+            throw err;
+        }
+        
+        res.send(rows);
+    });
+});
 router.get('/genre/:genreid', (req, res) => {
     connection.query("SELECT * FROM spectacle WHERE category = ?",req.params.genreid, function (err, rows) {
         if (err) {
             console.log("SELECT * FROM spectacle WHERE category=" + req.params.genreid);
+            throw err;
+        }
+        
+        res.send(rows);
+    });
+});
+router.get('/tickets/:ticketid', (req, res) => {
+    connection.query("SELECT * FROM tickets WHERE tickets.fk_id_spectacle = ?",req.params.ticketid, function (err, rows) {
+        if (err) {
+            console.log("SELECT * FROM tickets WHERE tickets.fk_id_spectacle =" + req.params.genreid);
             throw err;
         }
         

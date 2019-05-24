@@ -19,7 +19,7 @@ const CardList = (props) =>{
         <div className="row justify-content-center">
             {cardArray}
         </div>
-      </div>
+    </div>
     );
 }
 export default CardList;

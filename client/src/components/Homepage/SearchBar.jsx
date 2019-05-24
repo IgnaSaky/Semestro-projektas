@@ -4,34 +4,24 @@ import './SearchBar.css';
 class SearchBar extends Component{
     constructor (props){
         super(props);
-        /*this.items=[
-            "Eurolyga: Zalgiris-Fenerbahce",
-            "Eurolyga: Zalgiris-Panathinaikos",
-            "Eurolyga: Zalgiris-CSKA",
-            "Granatos",
-            "Eminemas",
-            "Auksiniai svogūnai",
-            "Barakiada",
-            "Teatralas",
-            "Auksinis lietus"
-        ];*/
-        /*fetch('http://localhost:5000/api/autoTextCompletion')
-        .then(response => response.json())
-        .then(users => {
-            this.items=users;
-        });*/
+        
         this.state={
             suggestions: [],
             text: '',
             items: [],
         };
     }
+    isLetter(str){
+        return /^[0-9a-zA-Z]+$/.test(str);
+    }
     onTextChanged = (e) => {
-        const value=e.target.value;
+        let value=e.target.value;
         let suggestions=[];
         if(value.length>0){
-            const regex=new RegExp(`^${value}`, 'i');
-            suggestions=this.state.items.sort().filter(v => regex.test(v)); 
+            if(this.isLetter(value)){
+                const regex=new RegExp(`^${value}`, 'i');
+                suggestions=this.state.items.sort().filter(v => regex.test(v));
+            } 
         }
         this.setState(() => ({suggestions, text:value}));
     }
@@ -56,7 +46,6 @@ class SearchBar extends Component{
         fetch('http://localhost:5000/api/AutoTextCompletion')
         .then(response => response.json())
         .then(users => {
-            //this.items=users;
             for(let i = 0; i< users.length; i++){
                 this.state.items.push(users[i].title);
             }

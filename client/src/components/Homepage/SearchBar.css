@@ -28,19 +28,31 @@
     padding: 0;
     border-top: 2px solid #d71820;
     width: 100%;
+    display:inline-block;
+    overflow:hidden;
+    left:0px;
+    top : 100%;
+    width:373px;
+    right:auto;
+
 }
 .suggestion-container::before{
     content: "";
 }
 .suggestion{
-    padding: 10px 5px;
+    overflow:auto;
+    max-height: 280px;
     border-top: 1px solid white;
     border-bottom: 1px solid white;
     border-left: 1px solid white;
     border-right: 1px solid white;
     cursor: pointer;
     color: black;
+    padding:10px 10px;
+    position: absolute;
+    z-index: 100;
     background-color: white;
+    display:block;
 }
 .suggestion:hover{
     text-decoration: underline;

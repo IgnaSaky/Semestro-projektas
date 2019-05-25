@@ -12,25 +12,22 @@ export class SideGenres extends Component {
              </div>
             </li>
             <li className=" card shadow col-12">
-                <div onClick={ () =>this.props.genreChange("/genre/lazy")}>Lazy</div>
+                <div onClick={ () =>this.props.genreChange("/genre/Muzika")}>Muzika</div>
             </li>
             <li className=" card shadow col-12">
-               <div  onClick={ () => this.props.genreChange("/genre/Test")}>Test</div>
+               <div onClick={ () => this.props.genreChange("/genre/Kinas")}>Kinas</div>
             </li>
             <li className=" card shadow col-12">
-                <div >Genre</div>
+                <div onClick={ () => this.props.genreChange("/genre/Sportas")}>Sportas</div>
             </li>
             <li className=" card shadow col-12">
-                <div >Genre</div>
+                <div onClick={ () => this.props.genreChange("/genre/Teatras")}>Teatras</div>
             </li>
             <li className=" card shadow col-12">
-                <div >Genre</div>
+                <div onClick={ () => this.props.genreChange("/genre/Parodos")}>Parodos</div>
             </li>
             <li className=" card shadow col-12">
-                <div >Genre</div>
-            </li>
-            <li className=" card shadow col-12">
-                <div >Genre</div>
+                <div onClick={ () => this.props.genreChange("/genre/Festivaliai")}>Festivaliai</div>
             </li>
         </ul>
     </div>

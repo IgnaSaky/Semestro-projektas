@@ -17,7 +17,7 @@ const CardList = (props) =>{
     cardArray.push(<TicketCard title= {tickets[i].title } price={tickets[i].price}  key={tickets[i].id_tickets}/>);
     }
     if(cardArray.length === 0){
-        cardArray.push(<h3>Nėra parduodamų bilietų</h3>);
+        cardArray.push(<h3 key={cardArray.length}>Nėra parduodamų bilietų</h3>);
     }
     return(
 

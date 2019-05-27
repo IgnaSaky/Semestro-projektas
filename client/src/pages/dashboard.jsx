@@ -5,7 +5,6 @@ import Background from '../containers/Background.jsx';
 import CardList from '../components/EventCard/EventCardList';
 import SearchBar from '../components/Homepage/SearchBar.jsx';
 import SideGenres from '../components/SideGenres/SideGenres.jsx';
-import EventCard from '../components/EventCard/EventCard';
 
 
 export class dashboard extends Component {
@@ -60,7 +59,7 @@ export class dashboard extends Component {
               <CardList events={this.state.events} limit={this.state.limit} changeLimit={this.changeLimit}/>
               <div className="container-fluid">
                 <div className="row justify-content-center">
-                <div onClick={ () =>this.changeLimit(this.state.limit + 10)}><EventCard title="Load more" description="........."/></div>
+                <div className="btn btn-dark" style={{cursor:"pointer"}} onClick={ () =>this.changeLimit(this.state.limit + 10)}>Load more</div>
                 </div>
               </div>
              

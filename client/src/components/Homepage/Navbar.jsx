@@ -52,9 +52,6 @@ class NavBar extends Component {
                     <li className="nav-item">
                         <Link className="nav-link blackNav" to="/dashboard/all">Renginiai</Link>
                     </li>
-                    <li className="nav-item">
-                        <Link className="nav-link blackNav" to="/">Link</Link>
-                    </li>
                     </ul>
 
                     {isAuthenticated ? authLinksBlack : guestLinksBlack}
@@ -79,9 +76,6 @@ class NavBar extends Component {
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link white" to="/dashboard/all">Renginiai</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link white" to="/">Link</Link>
                         </li>
                         </ul>
     

@@ -14,6 +14,9 @@ const CardList = (props) =>{
         if(i+1 > limit){break;}
     cardArray.push(<EventCard title= {events[i].title } description={events[i].description}  key={events[i].id_spectacle} id={events[i].id_spectacle}/>);
     }
+    if(cardArray.length === 0){
+        cardArray.push(<h3 key={cardArray.length}>Pagal jūsų kriterijus Bilietu nerasta</h3>);
+    }
     return(
     <div className="container-fluid">
         <div className="row justify-content-center">
